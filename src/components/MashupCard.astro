@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { fmtDate } from '../lib/site';
+interface Props { entry: CollectionEntry<'mashups'>; }
+const { entry } = Astro.props;
+const d = entry.data;
+---
+<a class="card" href={`/mashups/${entry.id}/`}>
+  <div><span class={`status ${d.status}`}>{d.status.replace('-', ' ')}</span></div>
+  <h3>{d.title}</h3>
+  <p>{d.summary}</p>
+  <p class="small">{d.creators.map((c) => c.name).join(', ')} · {fmtDate(d.date)}</p>
+</a>

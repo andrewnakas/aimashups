@@ -1,0 +1,8 @@
+name: Preset or mode idea
+description: Suggest a GameMash preset, synergy or new mode.
+labels: [gamemash]
+body:
+  - type: textarea
+    id: idea
+    attributes: { label: The idea, description: Which modes, and what should happen when they meet? }
+    validations: { required: true }

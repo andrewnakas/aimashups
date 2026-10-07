@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import PresetCard from '../../components/PresetCard.astro';
+import MashupCard from '../../components/MashupCard.astro';
+import Comments from '../../components/Comments.astro';
+import { getCollection, getEntry, getEntries, render, type CollectionEntry } from 'astro:content';
+import { ALL_PRESETS, presetSlug } from '../../data/presets';
+import { fmtDate } from '../../lib/site';
+import { article, faqPage } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return (await getCollection('mashups')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: CollectionEntry<'mashups'> };
+const d = entry.data;
+const { Content } = await render(entry);
+const games = await getEntries(d.games);
+const technique = await getEntry(d.technique);
+const tribute = d.tribute ? ALL_PRESETS.find((p) => presetSlug(p) === d.tribute) : undefined;
+if (d.tribute && !tribute) throw new Error(`${entry.id}: unknown tribute ${d.tribute}`);
+const gameIds = d.games.map((g) => g.id);
+const related = (await getCollection('mashups')).filter((m) => m.id !== entry.id && m.data.games.some((g) => gameIds.includes(g.id))).slice(0, 3);
+const path = `/mashups/${entry.id}/`;
+const statusText = {
+  'downloadable': 'Downloadable',
+  'source-only': 'Source only (build it yourself)',
+  'video-only': 'Video only, no code released',
+  'unreleased': 'Announced, not released',
+}[d.status];
+---
+<Base title={d.title} description={d.summary}
+  crumbs={[{ name: 'Mashups', path: '/mashups/' }, { name: d.title, path }]}
+  jsonld={[article({ headline: d.title, description: d.summary, path, published: d.checked, about: games.map((g) => g.data.name) }), ...(d.faqs.length ? [faqPage(d.faqs)] : [])]}>
+  <h1>{d.title}</h1>
+  <p class="lede">{d.summary}</p>
+  <div class="layout-2">
+    <article class="prose">
+      <Content />
+      {d.faqs.length > 0 && (<><h2>FAQ</h2><dl class="faq">{d.faqs.map((f) => <><dt>{f.q}</dt><dd>{f.a}</dd></>)}</dl></>)}
+      {d.sources.length > 0 && (<>
+        <h2>Sources</h2>
+        <ul class="small">{d.sources.map((s) => <li><a href={s.url} rel="nofollow">{s.title}</a>{s.publisher && <span class="muted"> ({s.publisher})</span>}</li>)}</ul>
+      </>)}
+    </article>
+    <aside>
+      <dl class="facts">
+        <dt>Status</dt><dd><span class={`status ${d.status}`}>{statusText}</span></dd>
+        <dt>Games</dt><dd>{games.map((g, i) => <>{i > 0 && ', '}<a href={`/games/${g.id}/`}>{g.data.name}</a></>)}</dd>
+        <dt>Creator</dt><dd>{d.creators.map((c, i) => <>{i > 0 && ', '}{c.url ? <a href={c.url}>{c.name}</a> : c.name}</>)}</dd>
+        <dt>Technique</dt><dd><a href={`/techniques/${technique.id}/`}>{technique.data.name}</a></dd>
+        <dt>First seen</dt><dd>{fmtDate(d.date)}</dd>
+        {d.repo && <><dt>Repo</dt><dd><a href={d.repo}>{d.repo.replace('https://github.com/', '')}</a></dd></>}
+        {d.license && <><dt>License</dt><dd>{d.license}</dd></>}
+        {d.stars !== undefined && <><dt>Stars</dt><dd>{d.stars.toLocaleString('en-US')}</dd></>}
+        {d.downloads !== undefined && <><dt>Downloads</dt><dd>{d.downloads.toLocaleString('en-US')}</dd></>}
+        <dt>Own copies</dt><dd>{d.needsOwnCopy ? 'Required' : 'Not needed'}</dd>
+        <dt>Checked</dt><dd>{fmtDate(d.checked)}</dd>
+      </dl>
+      {d.builtOn.length > 0 && (<><h3>Built on</h3><ul class="small">{d.builtOn.map((l) => <li><a href={l.url}>{l.label}</a></li>)}</ul></>)}
+      {d.links.length > 0 && (<><h3>Links</h3><ul class="small">{d.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}</ul></>)}
+      {tribute && (<>
+        <h3>Play something like it now</h3>
+        <p class="small muted">A clean-room tribute that runs in your browser, no game files needed.</p>
+        <PresetCard preset={tribute} />
+      </>)}
+    </aside>
+  </div>
+  {related.length > 0 && (
+    <section class="section">
+      <h2>Related mashups</h2>
+      <ul class="grid">{related.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+    </section>
+  )}
+  <p class="small muted section">Something wrong or out of date? <a href={`https://github.com/andrewnakas/aimashups/edit/main/src/content/mashups/${entry.id}.md`}>Edit this page on GitHub</a>.</p>
+  <Comments />
+</Base>

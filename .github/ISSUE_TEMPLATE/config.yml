@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GameMash bugs
+    url: https://github.com/andrewnakas/GameMash/issues
+    about: Bugs in the game itself go to the GameMash repo.

@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const list = (await getCollection('techniques')).sort((a, b) => a.data.order - b.data.order);
+const mashups = await getCollection('mashups');
+---
+<Base title="How AI Game Mashups Are Made" description="The techniques behind AI game mashups: passthrough mods, Rust engine rewrites, character imports and clean-room rebuilds." crumbs={[{ name: 'Techniques', path: '/techniques/' }]}>
+  <h1>How AI game mashups are made</h1>
+  <p class="lede">Almost every mashup uses one of a few techniques. They trade off speed of building, how deeply the games interact, and whether you need the original games.</p>
+  <ul class="grid">{list.map((t) => (
+    <li><a class="card" href={`/techniques/${t.id}/`}><h3>{t.data.name}</h3><p>{t.data.summary}</p><p class="small">{mashups.filter((m) => m.data.technique.id === t.id).length} documented</p></a></li>
+  ))}</ul>
+</Base>

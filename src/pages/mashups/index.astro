@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import MashupCard from '../../components/MashupCard.astro';
+import { getCollection } from 'astro:content';
+
+const all = (await getCollection('mashups')).sort((a, b) => +b.data.date - +a.data.date);
+const groups = [
+  ['downloadable', 'Downloadable', 'Released builds you can install, with your own copies of the games.'],
+  ['source-only', 'Source only', 'Code is public but there is no packaged release: you build it yourself.'],
+  ['video-only', 'Video only', 'Viral clips with no released code.'],
+  ['unreleased', 'Announced, unreleased', 'Promised by their creators, not yet out.'],
+] as const;
+---
+<Base title="Every Notable AI Game Mashup" description="A verified directory of AI game mashups: SkyCraft, the MW2 × Skate 3 × Minecraft rewrite, Mario in Elden Ring, ArkWeb and more, with status, creator, technique and download links." crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
+  <h1>Every notable AI game mashup</h1>
+  <p class="lede">Each entry is checked against its source repository: who made it, how it works, whether you can actually play it, and what you need. Star and download counts are dated.</p>
+  {groups.map(([status, label, blurb]) => {
+    const list = all.filter((m) => m.data.status === status);
+    return list.length > 0 && (
+      <section class="section">
+        <h2>{label} <span class="muted small">({list.length})</span></h2>
+        <p class="muted">{blurb}</p>
+        <ul class="grid">{list.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+      </section>
+    );
+  })}
+</Base>

@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import MashupCard from '../../components/MashupCard.astro';
+import PresetCard from '../../components/PresetCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { PAIRS } from '../../data/presets';
+import { modeBySlug } from '../../data/modes';
+
+export async function getStaticPaths() {
+  return (await getCollection('games')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: CollectionEntry<'games'> };
+const g = entry.data;
+const mashups = (await getCollection('mashups')).filter((m) => m.data.games.some((x) => x.id === entry.id)).sort((a, b) => +a.data.date - +b.data.date);
+const presets = PAIRS.filter((p) => p.modes.some((m) => g.modes.includes(m))).slice(0, 6);
+const others = new Set(mashups.flatMap((m) => m.data.games.map((x) => x.id)).filter((id) => id !== entry.id));
+---
+<Base title={`${g.name} Mashups: Every AI Mashup With ${g.name}`} description={`${g.summary} ${mashups.length} documented AI mashup${mashups.length === 1 ? '' : 's'}.`}
+  crumbs={[{ name: 'Games', path: '/games/' }, { name: g.name, path: `/games/${entry.id}/` }]}>
+  <h1>{g.name} mashups</h1>
+  <p class="lede">{g.summary}</p>
+  <p class="muted small">{g.name} ({g.year}) is a trademark of {g.owner}. This page documents fan projects and isn't affiliated with them.</p>
+
+  <section class="section">
+    <h2>AI mashups with {g.name}</h2>
+    <ul class="grid">{mashups.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+    {others.size > 0 && <p class="muted">Mashed with {others.size} other game{others.size === 1 ? '' : 's'}.</p>}
+  </section>
+
+  {presets.length > 0 && (
+    <section class="section">
+      <h2>Play a clean-room take in your browser</h2>
+      <p class="muted">GameMash's {g.modes.map((m) => modeBySlug(m).name).join(' and ')} mode is inspired by games like this one. No game files needed.</p>
+      <ul class="grid">{presets.map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+    </section>
+  )}
+</Base>

@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Clean-Room Policy" description="What 'clean room' means for games hosted on AI Mashups: original code from behavioural specs, original assets, no game files, decompiled code or likenesses." crumbs={[{ name: 'About', path: '/about/' }, { name: 'Clean-room policy', path: '/about/clean-room/' }]}>
+  <h1>Clean-room policy</h1>
+  <div class="prose">
+    <p class="lede">Every game hosted on AI Mashups can be played by anyone, on any device, without owning anything. This policy is what makes that possible.</p>
+    <h2>What hosted games must be</h2>
+    <ul>
+      <li><strong>Original code</strong>, written from a behavioural spec (observed movement values, timings, rules) and not from original source or decompiled code.</li>
+      <li><strong>Original assets.</strong> Every model, texture, sound, font and level is made new, or comes from a CC0 or compatibly licensed source, with its origin recorded.</li>
+      <li><strong>No game files.</strong> No ROMs, disc images, extracted archives, collision meshes or level data from retail games, and nothing that asks for them.</li>
+      <li><strong>No names or likenesses.</strong> Modes are named for what they do (Skate, Platformer, Shooter), never for the games that inspired them.</li>
+    </ul>
+    <h2>Why</h2>
+    <p>Game mechanics, rules and the numbers that make a jump feel right aren't protected by copyright. Code, art, sound, level data, and characters are. A clean-room game reproduces only the former, which is why it can be hosted openly and played instantly.</p>
+    <h2>What we document but don't host</h2>
+    <p>The <a href="/mashups/">mashup history</a> covers projects built from original games: passthrough mods, rewrites that read your own game files, and character imports. We describe them, link to their creators' repositories and note what you need to own. We don't mirror their builds. Browser builds based on decompilations live on <a href="https://decompgames.com">Decomp Games</a>, under its own policy.</p>
+    <h2>Submissions</h2>
+    <p>Game submissions include a <code>CLEANROOM.md</code> (how the spec was produced and who wrote the code) and an <code>ASSETS.md</code> (the origin and license of every asset). CI rejects builds that contain retail file types.</p>
+  </div>
+</Base>

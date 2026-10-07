@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import PresetCard from '../components/PresetCard.astro';
+import MashupCard from '../components/MashupCard.astro';
+import { getCollection } from 'astro:content';
+import { FEATURED, PAIRS } from '../data/presets';
+import { SITE } from '../lib/site';
+
+const mashups = (await getCollection('mashups')).sort((a, b) => +b.data.date - +a.data.date);
+const playable = mashups.filter((m) => m.data.status === 'downloadable').length;
+const ld = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url,
+  potentialAction: { '@type': 'SearchAction', target: `${SITE.url}/search/?q={q}`, 'query-input': 'required name=q' } };
+---
+<Base title="Play AI Game Mashups Online & Their History" description="AI game mashups put one game inside another: Minecraft in Skyrim, Skate 3 in MW2, Mario in Elden Ring. Play clean-room mashups free in your browser and read how the real ones were made." jsonld={[ld]}>
+  <section class="hero">
+    <h1>AI game mashups</h1>
+    <p class="lede">In late September 2026, modders started using AI coding agents to put one game inside another: Minecraft inside Skyrim, Skate 3's skating inside Modern Warfare 2, Mario inside Elden Ring. Those mods need your own copies of the games. The ones here don't. <strong>Play clean-room mashups right in your browser</strong>, and read the history of the famous ones.</p>
+    <p style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="/play/gamemash/">▶ Play GameMash</a><a class="btn ghost" href="/history/">Read the history</a></p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Play now</h2><a href="/play/">All {PAIRS.length + FEATURED.length} mashups →</a></div>
+    <ul class="grid">{[...FEATURED, PAIRS[1], PAIRS[14]].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>The mashups that started it</h2><a href="/mashups/">All {mashups.length} →</a></div>
+    <p class="muted">{playable} of these are downloadable today. The rest are source-only or exist only as clips.</p>
+    <ul class="grid">{mashups.slice(0, 6).map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+  </section>
+
+  <section class="section prose">
+    <h2>What is an AI game mashup?</h2>
+    <p>An AI game mashup combines the mechanics, and often the worlds, of two or more games into one playable thing, built largely by an AI coding agent. Three techniques dominate:</p>
+    <ul>
+      <li><a href="/techniques/passthrough/">Passthrough mods</a> run both games at once and link them through shared memory. <a href="/mashups/skycraft-minecraft-in-skyrim/">SkyCraft</a> is the classic.</li>
+      <li><a href="/techniques/rust-rewrite/">Rust engine rewrites</a> rebuild a game's engine from scratch so it can be merged with others, as in the <a href="/mashups/2010-rust-rewrite-mashup/">2010 Rust Rewrite Mashup</a>.</li>
+      <li><a href="/techniques/library-import/">Character imports</a> run one game's character inside another, like <a href="/mashups/er-mario-mario-in-elden-ring/">Mario in Elden Ring</a>.</li>
+    </ul>
+    <p>All three read data from games you own. A fourth approach, the <a href="/techniques/clean-room/">clean-room mashup</a>, rebuilds the <em>feel</em> of each game from scratch with original code and art. That's what makes it legal to host and instant to play in a browser, and it's how <a href="/play/gamemash/">GameMash</a> is made.</p>
+  </section>
+</Base>

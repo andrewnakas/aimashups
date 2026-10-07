@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import { SITE, abs } from '../lib/site';
+import { breadcrumbs, type Crumb } from '../lib/schema';
+
+interface Props {
+  title: string; // page title without the site name
+  description: string;
+  crumbs?: Crumb[];
+  jsonld?: object[];
+  image?: string;
+  noindex?: boolean;
+}
+const { title, description, crumbs = [], jsonld = [], image = '/og/default.png', noindex = false } = Astro.props;
+const canonical = abs(Astro.url.pathname);
+const fullTitle = Astro.url.pathname === '/' ? `${SITE.name}: ${title}` : `${title} | ${SITE.name}`;
+const ld = crumbs.length ? [breadcrumbs([{ name: 'Home', path: '/' }, ...crumbs]), ...jsonld] : jsonld;
+const nav = [
+  ['/play/', 'Play'],
+  ['/history/', 'History'],
+  ['/mashups/', 'Mashups'],
+  ['/games/', 'Games'],
+  ['/guides/', 'Guides'],
+];
+const here = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={abs(image)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} history`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="logo" href="/">AI<span>Mashups</span></a>
+        <nav class="nav" aria-label="Main">
+          {nav.map(([href, label]) => <a href={href} aria-current={here.startsWith(href) ? 'page' : undefined}>{label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main class="wrap" data-pagefind-body>
+      {crumbs.length > 0 && (
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          {crumbs.map((c, i) => <> › {i === crumbs.length - 1 ? <span>{c.name}</span> : <a href={c.path}>{c.name}</a>}</>)}
+        </nav>
+      )}
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <nav aria-label="Footer">
+          <a href="/about/">About</a>
+          <a href="/about/clean-room/">Clean-room policy</a>
+          <a href="/techniques/">Techniques</a>
+          <a href="/search/">Search</a>
+          <a href={SITE.repo}>GitHub</a>
+          <a href="/rss.xml">RSS</a>
+        </nav>
+        <p>
+          AI Mashups is an independent fan and documentation project. It isn't affiliated with or endorsed by any
+          game publisher or developer mentioned here. Game names are trademarks of their owners and are used only to
+          describe and document. Playable games on this site are clean-room originals: no game files, decompiled code or
+          retail assets.
+        </p>
+        <p>Sister sites: <a href="https://decompgames.com">Decomp Games</a> · <a href="https://skatemods.com">Skate Mods</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import PresetCard from '../../components/PresetCard.astro';
+import { PAIRS, FEATURED } from '../../data/presets';
+import { MODES } from '../../data/modes';
+---
+<Base title="Play AI Game Mashups Online" description="Play 28 two-game mashups and more in your browser: skate, platformer, shooter, open-world crime, voxel, portals, web-swing and bullet-time, in any combination. Free, no download." crumbs={[{ name: 'Play', path: '/play/' }]}>
+  <h1>Play AI game mashups online</h1>
+  <p class="lede">Every mashup here runs in your browser, free, with no download and no game files. They're all presets of <a href="/play/gamemash/">GameMash</a>: eight clean-room game modes in one world that you can combine any way you like.</p>
+  <p><a class="btn" href="/play/gamemash/">▶ Play GameMash (pick your own modes)</a></p>
+
+  <section class="section">
+    <h2>Featured three-way mashups</h2>
+    <ul class="grid">{FEATURED.map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+  </section>
+
+  {MODES.map((m) => (
+    <section class="section">
+      <h2><span class="chip"><i style={`background:${m.color}`} />{m.name}</span> mashups</h2>
+      <p class="muted">{m.blurb}</p>
+      <ul class="grid">{PAIRS.filter((p) => p.modes.includes(m.slug)).map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+    </section>
+  ))}
+</Base>

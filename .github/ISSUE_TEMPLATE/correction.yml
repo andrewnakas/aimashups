@@ -1,0 +1,15 @@
+name: Correction
+description: Something on the site is wrong or out of date.
+labels: [correction]
+body:
+  - type: input
+    id: page
+    attributes: { label: Page URL }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: What's wrong, and what's right? }
+    validations: { required: true }
+  - type: textarea
+    id: source
+    attributes: { label: Source for the correction }

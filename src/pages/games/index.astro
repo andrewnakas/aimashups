@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const games = await getCollection('games');
+const mashups = await getCollection('mashups');
+const count = (id: string) => mashups.filter((m) => m.data.games.some((g) => g.id === id)).length;
+const sorted = games.sort((a, b) => count(b.id) - count(a.id) || a.data.name.localeCompare(b.data.name));
+---
+<Base title="Games That Have Been Mashed Up" description="Every game that appears in an AI game mashup, from Minecraft and Skate 3 to Elden Ring and GTA, with the mashups that use each one." crumbs={[{ name: 'Games', path: '/games/' }]}>
+  <h1>Games in AI mashups</h1>
+  <p class="lede">Minecraft has ended up inside more AI mashups than any other game, and Skate 3's skating has been dropped into four. Pick a game to see every mashup that uses it.</p>
+  <ul class="grid">{sorted.map((g) => (
+    <li><a class="card" href={`/games/${g.id}/`}><h3>{g.data.name}</h3><p>{g.data.summary}</p><p class="small">{count(g.id)} mashup{count(g.id) === 1 ? '' : 's'}</p></a></li>
+  ))}</ul>
+</Base>

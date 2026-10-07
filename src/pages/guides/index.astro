@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const list = (await getCollection('guides')).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base title="Guides: Build Your Own Game Mashup" description="How to build a clean-room game mashup with an AI coding agent, Rust and Bevy, and ship it to the browser." crumbs={[{ name: 'Guides', path: '/guides/' }]}>
+  <h1>Guides</h1>
+  <ul class="grid">{list.map((g) => <li><a class="card" href={`/guides/${g.id}/`}><h3>{g.data.title}</h3><p>{g.data.summary}</p></a></li>)}</ul>
+</Base>

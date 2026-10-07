@@ -1,0 +1,12 @@
+---
+import { modeBySlug } from '../data/modes';
+import { presetSlug, type Preset } from '../data/presets';
+interface Props { preset: Preset; }
+const { preset } = Astro.props;
+const modes = preset.modes.map(modeBySlug);
+---
+<a class="card" href={`/play/${presetSlug(preset)}/`}>
+  <div class="swatch">{modes.map((m) => <i style={`background:${m.color}`} />)}</div>
+  <h3>{modes.map((m) => m.name).join(' × ')}</h3>
+  <p>{preset.pitch}</p>
+</a>

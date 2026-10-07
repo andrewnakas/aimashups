@@ -1,0 +1,46 @@
+---
+// Click-to-load player. Nothing from the game origin loads until the visitor presses Play,
+// so the page itself stays light. The game runs in a cross-origin iframe.
+import { PLAYER_ORIGIN } from '../lib/site';
+import { modeBySlug, playUrl } from '../data/modes';
+
+interface Props { modes: string[]; title: string; }
+const { modes, title } = Astro.props;
+const src = playUrl(PLAYER_ORIGIN, modes);
+const colors = modes.map((m) => modeBySlug(m).color);
+const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
+---
+<div class="player" data-player data-src={src}>
+  <div class="poster">
+    <div class="bg" style={`background:${bg}`}></div>
+    <h2>{title}</h2>
+    <button class="btn" type="button" data-play>▶ Play in browser</button>
+    <p class="small" style="margin:0;opacity:.85">First load downloads the game (~60–120 MB), then it's cached.<br />Needs a desktop browser with WebGPU or WebGL2. Keyboard + mouse.</p>
+  </div>
+</div>
+<div class="player-bar">
+  <button type="button" data-fullscreen>⛶ Fullscreen</button>
+  <span>Tab opens the mode panel · F1–F8 toggle modes live</span>
+</div>
+<noscript><p>The game needs JavaScript. <a href={src}>Open it directly</a>.</p></noscript>
+
+<script>
+  for (const el of document.querySelectorAll<HTMLElement>('[data-player]')) {
+    const start = () => {
+      if (el.querySelector('iframe')) return;
+      const f = document.createElement('iframe');
+      f.src = el.dataset.src!;
+      f.title = 'GameMash';
+      f.allow = 'fullscreen; gamepad; autoplay; cross-origin-isolated; pointer-lock';
+      f.setAttribute('allowfullscreen', '');
+      el.querySelector('.poster')?.remove();
+      el.append(f);
+      f.focus();
+    };
+    el.querySelector('[data-play]')?.addEventListener('click', start);
+    el.nextElementSibling?.querySelector('[data-fullscreen]')?.addEventListener('click', () => {
+      start();
+      el.requestFullscreen?.();
+    });
+  }
+</script>

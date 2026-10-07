@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import GamePlayer from '../../components/GamePlayer.astro';
+import PresetCard from '../../components/PresetCard.astro';
+import MashupCard from '../../components/MashupCard.astro';
+import Comments from '../../components/Comments.astro';
+import { getCollection } from 'astro:content';
+import { ALL_PRESETS, PAIRS, presetSlug, type Preset } from '../../data/presets';
+import { MODES, modeBySlug } from '../../data/modes';
+import { videoGame, faqPage } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return ALL_PRESETS.map((preset) => ({ params: { slug: presetSlug(preset) }, props: { preset } }));
+}
+const { preset } = Astro.props as { preset: Preset };
+const slug = presetSlug(preset);
+const modes = preset.modes.map(modeBySlug);
+const names = modes.map((m) => m.name).join(' × ');
+const path = `/play/${slug}/`;
+
+// Neighbours: other pairs sharing a mode with this one.
+const related = PAIRS.filter((p) => p !== preset && p.modes.some((m) => preset.modes.includes(m))).slice(0, 6);
+// Real-world mashups whose tribute is this preset, or whose games map to these modes.
+const games = await getCollection('games');
+const gameModes = new Map(games.map((g) => [g.id, g.data.modes]));
+const mashups = (await getCollection('mashups'))
+  .filter((e) => e.data.tribute === slug || e.data.games.some((g) => (gameModes.get(g.id) ?? []).some((m) => preset.modes.includes(m))))
+  .sort((a, b) => Number(b.data.tribute === slug) - Number(a.data.tribute === slug));
+const others = MODES.filter((m) => !preset.modes.includes(m.slug));
+
+const faqs = [
+  { q: `Can I play ${names} online for free?`, a: `Yes. This is a GameMash preset that runs in your browser with WebGPU or WebGL2. It's free, there's no account, and you don't need any game files.` },
+  { q: 'Can I add more modes?', a: `Yes. Press Tab to open the mode panel, or F1–F8 to switch modes live. You can add ${others.slice(0, 3).map((m) => m.name).join(', ')} and more without losing your momentum.` },
+  { q: 'Is it made from the original games?', a: `No. Every mechanic is a clean-room implementation written from observed behaviour and published values, with original code and assets. The modes are inspired by ${modes.map((m) => m.inspiredBy).join(' and ')}.` },
+];
+---
+<Base
+  title={`${preset.title}: Play ${names} Online`}
+  description={`${preset.pitch} Free, in your browser, no download.`}
+  crumbs={[{ name: 'Play', path: '/play/' }, { name: names, path }]}
+  jsonld={[videoGame({ name: `GameMash: ${names}`, description: preset.pitch, path, genres: modes.map((m) => m.noun) }), faqPage(faqs)]}
+>
+  <h1>{preset.title}</h1>
+  <p class="lede">{preset.pitch}</p>
+  <GamePlayer modes={preset.modes} title={preset.name ?? names} />
+
+  <div class="layout-2 section">
+    <div class="prose">
+      <h2>What happens when {names} collide</h2>
+      <ul>{preset.combos.map((c) => <li>{c}</li>)}</ul>
+
+      <h2>The modes</h2>
+      {modes.map((m) => (
+        <>
+          <h3><span class="chip"><i style={`background:${m.color}`} />{m.name}</span></h3>
+          <p>{m.blurb} <span class="muted">Inspired by {m.inspiredBy}.</span></p>
+          <p class="small muted"><strong>Controls:</strong> {m.controls}</p>
+        </>
+      ))}
+
+      <h2>FAQ</h2>
+      <dl class="faq">{faqs.map((f) => <><dt>{f.q}</dt><dd>{f.a}</dd></>)}</dl>
+    </div>
+    <aside>
+      <dl class="facts">
+        <dt>Game</dt><dd><a href="/play/gamemash/">GameMash</a></dd>
+        {preset.name && <><dt>Preset</dt><dd>{preset.name}</dd></>}
+        <dt>Modes</dt><dd>{modes.length} of {MODES.length}</dd>
+        <dt>Engine</dt><dd>Rust + Bevy → WebAssembly</dd>
+        <dt>Renderer</dt><dd>WebGPU, WebGL2 fallback</dd>
+        <dt>Price</dt><dd>Free</dd>
+        <dt>Build</dt><dd><a href="/about/clean-room/">Clean room</a></dd>
+      </dl>
+      <p class="small muted">Press Tab in-game to add any of the other {others.length} modes.</p>    </aside>
+  </div>
+
+  {mashups.length > 0 && (
+    <section class="section">
+      <h2>Real AI mashups like this</h2>
+      <p class="muted">These were built from the original games and need your own copies. Their stories are below.</p>
+      <ul class="grid">{mashups.slice(0, 6).map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+    </section>
+  )}
+
+  <section class="section">
+    <h2>More mashups to play</h2>
+    <ul class="grid">{related.map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+  </section>
+  <Comments />
+</Base>

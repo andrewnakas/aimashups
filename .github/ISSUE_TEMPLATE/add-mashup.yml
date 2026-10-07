@@ -1,0 +1,27 @@
+name: Add a mashup to the history
+description: Suggest an AI game mashup we haven't documented yet.
+labels: [history]
+body:
+  - type: input
+    id: title
+    attributes: { label: What is it?, placeholder: "Minecraft in Outer Wilds" }
+    validations: { required: true }
+  - type: input
+    id: repo
+    attributes: { label: Repository or release URL, description: Leave empty if it's video-only. }
+  - type: textarea
+    id: sources
+    attributes: { label: Sources, description: The original clip, posts and any press coverage. One URL per line. }
+    validations: { required: true }
+  - type: input
+    id: creator
+    attributes: { label: Creator (handle and link) }
+    validations: { required: true }
+  - type: dropdown
+    id: technique
+    attributes:
+      label: Technique
+      options: [Passthrough mod, Rust engine rewrite, Character import, Clean-room, Unknown / video only]
+  - type: textarea
+    id: story
+    attributes: { label: How it was made, description: Anything you know about the creation story. Link primary sources where you can. }

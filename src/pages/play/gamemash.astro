@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import GamePlayer from '../../components/GamePlayer.astro';
+import PresetCard from '../../components/PresetCard.astro';
+import Comments from '../../components/Comments.astro';
+import { MODES } from '../../data/modes';
+import { FEATURED, PAIRS } from '../../data/presets';
+import { videoGame } from '../../lib/schema';
+
+const desc = 'Eight game mechanics in one procedural city: skate, platform, shoot, steal cars, build with blocks, shoot portals, web-swing and bend time. Switch any combination on live. Free in your browser.';
+const synergies = [
+  ['KICKFLIP KILL', 'A kill within 1.5 s of a trick. Scores double the trick plus 200.'],
+  ['AIRBORNE KILL', 'A kill while in the air. +250.'],
+  ['THROUGH THE PORTAL', 'A kill within 2 s of going through a portal. +500.'],
+  ['AERIAL JACK', 'Stealing a car within 2.5 s of a swing release. +800.'],
+  ['SWING BOOST', 'A trick within 3 s of a swing release, scaled by release speed.'],
+  ['PORTAL TRICK', 'A trick within 2 s of a portal. Scores the trick again.'],
+];
+---
+<Base title="GameMash: Play 8 Games Mashed Into One" description={desc} crumbs={[{ name: 'Play', path: '/play/' }, { name: 'GameMash', path: '/play/gamemash/' }]}
+  jsonld={[videoGame({ name: 'GameMash', description: desc, path: '/play/gamemash/', genres: MODES.map((m) => m.noun) })]}>
+  <h1>GameMash</h1>
+  <p class="lede">{desc}</p>
+  <GamePlayer modes={['skate', 'shooter']} title="GameMash" />
+
+  <div class="layout-2 section">
+    <div class="prose">
+      <h2>Eight modes, any combination</h2>
+      <p>Press <strong>Tab</strong> for the mode panel, or <strong>F1–F8</strong> to flip a mode on or off without stopping. Your momentum carries across every switch: turn on Web-Swing mid-kickflip, or Portals mid-car-chase, and keep your speed.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Key</th><th>Mode</th><th>What it does</th></tr></thead>
+        <tbody>{MODES.map((m, i) => <tr><td><code>F{i + 1}</code></td><td><span class="chip"><i style={`background:${m.color}`} />{m.name}</span></td><td>{m.blurb}</td></tr>)}</tbody>
+      </table></div>
+
+      <h2>Synergies</h2>
+      <p>Moves that cross modes score bonuses:</p>
+      <dl class="faq">{synergies.map(([k, v]) => <><dt>{k}</dt><dd>{v}</dd></>)}</dl>
+      <p>The world reacts across modes too. Ground pounds smash blocks, explosions carve the voxel layer and wreck cars, rail blocks are grindable, and bullets, cars and boards all pass through portals.</p>
+
+      <h2>How it's built</h2>
+      <p>GameMash is written in Rust on the Bevy engine with Rapier physics. Each mode's feel comes from a written spec of observed behaviour (push speed, ollie height, flip timing, landing angles) rather than from any original code or data. The simulations are engine-free and unit-tested, and the same source builds for the browser (WebAssembly, WebGPU or WebGL2) and for Windows, macOS and Linux. <a href="/about/clean-room/">Read the clean-room policy</a> or the <a href="/guides/build-a-clean-room-mashup/">build guide</a>.</p>
+    </div>
+    <aside>
+      <dl class="facts">
+        <dt>Modes</dt><dd>{MODES.length}</dd>
+        <dt>Pairs</dt><dd>{PAIRS.length}</dd>
+        <dt>Engine</dt><dd>Rust · Bevy 0.19 · Rapier</dd>
+        <dt>Web</dt><dd>WebGPU / WebGL2</dd>
+        <dt>Desktop</dt><dd>Windows · macOS · Linux</dd>
+        <dt>Price</dt><dd>Free</dd>
+      </dl>
+    </aside>
+  </div>
+
+  <section class="section">
+    <h2>Jump straight into a mashup</h2>
+    <ul class="grid">{[...FEATURED, ...PAIRS.slice(0, 8)].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+    <p><a href="/play/">All {PAIRS.length + FEATURED.length} mashups →</a></p>
+  </section>
+  <Comments />
+</Base>
