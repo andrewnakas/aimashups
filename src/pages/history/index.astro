@@ -6,12 +6,13 @@ import { article } from '../../lib/schema';
 
 const mashups = (await getCollection('mashups')).sort((a, b) => +a.data.date - +b.data.date);
 const desc = 'How AI game mashups went from two Rust rewrites to a viral trend in two weeks: the timeline, the techniques, the creators, and the backlash.';
-const events = [
-  { date: new Date('2026-07-24'), text: <>benilla, a from-scratch Rust/Bevy World of Warcraft 1.12 client, is published. It's an early sign that AI-assisted full-engine rewrites are practical. <a href="https://github.com/samwhosung/benilla">repo</a></> },
-  { date: new Date('2026-09-08'), text: <>skate-3-rust-engine, a Rust/Bevy skating engine from Skate 3 reverse-engineering research, is published. It becomes the most reused engine of the wave. <a href="https://github.com/SK8-ENGINE/skate-3-rust-engine">repo</a></> },
-  { date: new Date('2026-09-13'), text: <>IW4L, a Rust/Bevy runtime for Modern Warfare 2, is published by vladtrc. <a href="https://github.com/vladtrc/iw4L">repo</a></> },
-  ...mashups.map((m) => ({ date: m.data.date, text: <><a href={`/mashups/${m.id}/`}>{m.data.title}</a>: {m.data.summary}</> })),
-  { date: new Date('2026-10-05'), text: <>VGC reports a growing backlash, with modders calling the trend "slop" and one saying it may be their last project. <a href="https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/">VGC</a></> },
+const link = (href: string, text: string) => `<a href="${href}">${text}</a>`;
+const events: { date: Date; html: string }[] = [
+  { date: new Date('2026-07-24'), html: `benilla, a from-scratch Rust/Bevy World of Warcraft 1.12 client, is published. It's an early sign that AI-assisted full-engine rewrites are practical. ${link('https://github.com/samwhosung/benilla', 'repo')}` },
+  { date: new Date('2026-09-08'), html: `skate-3-rust-engine, a Rust/Bevy skating engine from Skate 3 reverse-engineering research, is published. It becomes the most reused engine of the wave. ${link('https://github.com/SK8-ENGINE/skate-3-rust-engine', 'repo')}` },
+  { date: new Date('2026-09-13'), html: `IW4L, a Rust/Bevy runtime for Modern Warfare 2, is published by vladtrc. ${link('https://github.com/vladtrc/iw4L', 'repo')}` },
+  ...mashups.map((m) => ({ date: m.data.date, html: `${link(`/mashups/${m.id}/`, m.data.title)}: ${m.data.summary}` })),
+  { date: new Date('2026-10-05'), html: `VGC reports a growing backlash, with modders calling the trend "slop" and one saying it may be their last project. ${link('https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/', 'VGC')}` },
 ].sort((a, b) => +a.date - +b.date);
 ---
 <Base title="The History of AI Game Mashups" description={desc} crumbs={[{ name: 'History', path: '/history/' }]}
@@ -40,7 +41,7 @@ const events = [
 
   <section class="section">
     <h2 id="timeline">Timeline</h2>
-    <ol class="timeline prose">{events.map((e) => <li><time datetime={isoDate(e.date)}>{fmtDate(e.date)}</time>{e.text}</li>)}</ol>
+    <ol class="timeline prose">{events.map((e) => <li><time datetime={isoDate(e.date)}>{fmtDate(e.date)}</time><span set:html={e.html} /></li>)}</ol>
     <p class="small muted">Missing something? <a href="https://github.com/andrewnakas/aimashups/issues/new?template=add-mashup.yml">Add a mashup</a> on GitHub.</p>
   </section>
 </Base>
