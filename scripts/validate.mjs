@@ -12,7 +12,9 @@ const checkLinks = process.argv.includes('--links');
 // Preset slugs: both orderings of every pair, plus featured triples, from src/data.
 const modes = [...readFileSync(join(root, 'src/data/modes.ts'), 'utf8').matchAll(/slug: '([a-z-]+)', gm:/g)].map((m) => m[1]);
 const presetSrc = readFileSync(join(root, 'src/data/presets.ts'), 'utf8');
-const presets = new Set([...presetSrc.matchAll(/P\(\[([^\]]+)\]/g)].map((m) => {
+// A preset is `P([modes], { slug?: '...', ... })`: an explicit slug wins over the mode pair.
+const presets = new Set([...presetSrc.matchAll(/P\(\[([^\]]+)\], \{\s*(?:slug: '([a-z0-9-]+)')?/g)].map((m) => {
+  if (m[2]) return m[2];
   const slugs = m[1].split(',').map((s) => s.trim().replace(/'/g, ''));
   return slugs.sort((a, b) => modes.indexOf(a) - modes.indexOf(b)).join('-x-');
 }));

@@ -4,7 +4,7 @@ import GamePlayer from '../../components/GamePlayer.astro';
 import PresetCard from '../../components/PresetCard.astro';
 import MashupCard from '../../components/MashupCard.astro';
 import Comments from '../../components/Comments.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { ALL_PRESETS, PAIRS, presetSlug, type Preset } from '../../data/presets';
 import { MODES, modeBySlug } from '../../data/modes';
 import { videoGame, faqPage } from '../../lib/schema';
@@ -17,6 +17,9 @@ const slug = presetSlug(preset);
 const modes = preset.modes.map(modeBySlug);
 const names = modes.map((m) => m.name).join(' × ');
 const path = `/play/${slug}/`;
+const tributeOf = preset.tributeTo ? await getEntry('mashups', preset.tributeTo) : undefined;
+if (preset.tributeTo && !tributeOf) throw new Error(`${slug}: unknown mashup ${preset.tributeTo}`);
+const launch = { world: preset.world, night: preset.night };
 
 // Neighbours: other pairs sharing a mode with this one.
 const related = PAIRS.filter((p) => p !== preset && p.modes.some((m) => preset.modes.includes(m))).slice(0, 6);
@@ -31,22 +34,24 @@ const others = MODES.filter((m) => !preset.modes.includes(m.slug));
 const faqs = [
   { q: `Can I play ${names} online for free?`, a: `Yes. This is a GameMash preset that runs in your browser with WebGPU or WebGL2. It's free, there's no account, and you don't need any game files.` },
   { q: 'Can I add more modes?', a: `Yes. Press Tab to open the mode panel, or F1–F8 to switch modes live. You can add ${others.slice(0, 3).map((m) => m.name).join(', ')} and more without losing your momentum.` },
-  { q: 'Is it made from the original games?', a: `No. Every mechanic is a clean-room implementation written from observed behaviour and published values, with original code and assets. The modes are inspired by ${modes.map((m) => m.inspiredBy).join(' and ')}.` },
+  { q: 'Is it made from the original games?', a: `No. Every mechanic is a clean-room implementation written from observed behaviour and published values, with original code and CC0 or self-made assets. The modes are inspired by ${modes.map((m) => m.inspiredBy).join(' and ')}.` },
+  ...(tributeOf ? [{ q: `How is this different from ${tributeOf.data.title.replace(/ \(.*\)$/, '')}?`, a: `${tributeOf.data.title} links or rewrites the original games, so you need to own them and run it on a PC. This tribute recreates the same mechanics from scratch, so it runs instantly in a browser with no game files.` }] : []),
 ];
 ---
 <Base
-  title={`${preset.title}: Play ${names} Online`}
+  title={preset.slug ? `${preset.title} (Play Free Online)` : `${preset.title}: Play ${names} Online`}
   description={`${preset.pitch} Free, in your browser, no download.`}
   crumbs={[{ name: 'Play', path: '/play/' }, { name: names, path }]}
   jsonld={[videoGame({ name: `GameMash: ${names}`, description: preset.pitch, path, genres: modes.map((m) => m.noun) }), faqPage(faqs)]}
 >
   <h1>{preset.title}</h1>
   <p class="lede">{preset.pitch}</p>
-  <GamePlayer modes={preset.modes} title={preset.name ?? names} />
+  {tributeOf && <p class="muted">A clean-room tribute to <a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a> by {tributeOf.data.creators.map((c) => c.name).join(', ')}.</p>}
+  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} />
 
   <div class="layout-2 section">
     <div class="prose">
-      <h2>What happens when {names} collide</h2>
+      <h2>{preset.slug ? 'What you can do' : <>What happens when {names} collide</>}</h2>
       <ul>{preset.combos.map((c) => <li>{c}</li>)}</ul>
 
       <h2>The modes</h2>
@@ -65,6 +70,8 @@ const faqs = [
       <dl class="facts">
         <dt>Game</dt><dd><a href="/play/gamemash/">GameMash</a></dd>
         {preset.name && <><dt>Preset</dt><dd>{preset.name}</dd></>}
+        {preset.worldName && <><dt>World</dt><dd>{preset.worldName}</dd></>}
+        {tributeOf && <><dt>Tribute to</dt><dd><a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a></dd></>}
         <dt>Modes</dt><dd>{modes.length} of {MODES.length}</dd>
         <dt>Engine</dt><dd>Rust + Bevy → WebAssembly</dd>
         <dt>Renderer</dt><dd>WebGPU, WebGL2 fallback</dd>

@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PresetCard from '../components/PresetCard.astro';
 import MashupCard from '../components/MashupCard.astro';
 import { getCollection } from 'astro:content';
-import { FEATURED, PAIRS } from '../data/presets';
+import { FEATURED, PAIRS, TRIBUTES, ALL_PRESETS } from '../data/presets';
 import { SITE } from '../lib/site';
 
 const mashups = (await getCollection('mashups')).sort((a, b) => +b.data.date - +a.data.date);
@@ -19,8 +19,8 @@ const ld = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.na
   </section>
 
   <section class="section">
-    <div class="section-head"><h2>Play now</h2><a href="/play/">All {PAIRS.length + FEATURED.length} mashups →</a></div>
-    <ul class="grid">{[...FEATURED, PAIRS[1], PAIRS[14]].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+    <div class="section-head"><h2>Play now</h2><a href="/play/">All {ALL_PRESETS.length} mashups →</a></div>
+    <ul class="grid">{[...TRIBUTES, FEATURED[0], PAIRS[1], PAIRS[14]].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
   </section>
 
   <section class="section">

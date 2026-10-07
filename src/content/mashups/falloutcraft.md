@@ -13,7 +13,7 @@ license: MIT
 checked: 2026-10-06
 builtOn:
   - { label: "SkyCraft (chasmlol)", url: "https://github.com/chasmlol/SkyCraft" }
-tribute: shooter-x-voxel
+tribute: blockrealm
 ---
 FalloutCraft takes [SkyCraft](/mashups/skycraft-minecraft-in-skyrim/)'s design and moves it to Fallout 4 with an F4SE plugin. You walk Sanctuary with Minecraft's physics, build a base out of blocks on top of Red Rocket, and fight raiders with a diamond sword, a bow and a shield. Your S.P.E.C.I.A.L. stats make Steve faster, stronger or tougher.
 

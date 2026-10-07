@@ -4,7 +4,7 @@ import GamePlayer from '../../components/GamePlayer.astro';
 import PresetCard from '../../components/PresetCard.astro';
 import Comments from '../../components/Comments.astro';
 import { MODES } from '../../data/modes';
-import { FEATURED, PAIRS } from '../../data/presets';
+import { FEATURED, PAIRS, ALL_PRESETS } from '../../data/presets';
 import { videoGame } from '../../lib/schema';
 
 const desc = 'Eight game mechanics in one procedural city: skate, platform, shoot, steal cars, build with blocks, shoot portals, web-swing and bend time. Switch any combination on live. Free in your browser.';
@@ -55,7 +55,7 @@ const synergies = [
   <section class="section">
     <h2>Jump straight into a mashup</h2>
     <ul class="grid">{[...FEATURED, ...PAIRS.slice(0, 8)].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
-    <p><a href="/play/">All {PAIRS.length + FEATURED.length} mashups →</a></p>
+    <p><a href="/play/">All {ALL_PRESETS.length} mashups →</a></p>
   </section>
   <Comments />
 </Base>

@@ -15,7 +15,7 @@ links:
   - { label: "Releases", url: "https://github.com/chasmlol/SkyCraft/releases" }
 sources:
   - { title: "How AI game mashups work: what's real and what you can download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
-tribute: platformer-x-voxel
+tribute: blockrealm
 faqs:
   - { q: "Is Minecraft in Skyrim a real mod?", a: "Yes. SkyCraft is an open-source mod on GitHub with Windows releases. It links a Skyrim SKSE plugin to a Minecraft Fabric mod." }
   - { q: "Do I need both games?", a: "Yes, you need to own Skyrim and Minecraft Java Edition. Both run at the same time." }

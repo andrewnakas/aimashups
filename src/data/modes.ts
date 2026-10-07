@@ -81,5 +81,13 @@ export const modeBySlug = (slug: string) => {
 export const pairSlug = (slugs: string[]) =>
   [...slugs].sort((a, b) => MODES.findIndex((m) => m.slug === a) - MODES.findIndex((m) => m.slug === b)).join('-x-');
 
-export const playUrl = (playerOrigin: string, slugs: string[], panel = false) =>
-  `${playerOrigin}/gamemash/?modes=${slugs.map((s) => modeBySlug(s).gm).join(',')}${panel ? '' : '&panel=0'}`;
+export interface Launch {
+  world?: 'realm' | 'arena'; // GameMash `?world=`; default is the city
+  night?: boolean; // GameMash `?time=night`
+}
+
+export const playUrl = (playerOrigin: string, slugs: string[], launch: Launch = {}, panel = false) =>
+  `${playerOrigin}/gamemash/?modes=${slugs.map((s) => modeBySlug(s).gm).join(',')}` +
+  (launch.world ? `&world=${launch.world}` : '') +
+  (launch.night ? '&time=night' : '') +
+  (panel ? '' : '&panel=0');

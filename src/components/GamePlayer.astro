@@ -2,11 +2,11 @@
 // Click-to-load player. Nothing from the game origin loads until the visitor presses Play,
 // so the page itself stays light. The game runs in a cross-origin iframe.
 import { PLAYER_ORIGIN } from '../lib/site';
-import { modeBySlug, playUrl } from '../data/modes';
+import { modeBySlug, playUrl, type Launch } from '../data/modes';
 
-interface Props { modes: string[]; title: string; }
-const { modes, title } = Astro.props;
-const src = playUrl(PLAYER_ORIGIN, modes);
+interface Props { modes: string[]; title: string; launch?: Launch; }
+const { modes, title, launch = {} } = Astro.props;
+const src = playUrl(PLAYER_ORIGIN, modes, launch);
 const colors = modes.map((m) => modeBySlug(m).color);
 const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
 ---

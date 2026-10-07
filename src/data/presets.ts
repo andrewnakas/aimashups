@@ -2,10 +2,13 @@
 // Copy describes only mechanics GameMash actually has: the synergy rules in
 // GameMash src/core/score.rs and the cross-mode interactions listed in its README.
 
-import { MODES, pairSlug } from './modes';
+import { MODES, pairSlug, type Launch } from './modes';
 
-export interface Preset {
+export interface Preset extends Launch {
   modes: string[]; // mode slugs
+  slug?: string; // overrides the mode-pair slug (tributes)
+  tributeTo?: string; // mashups collection id this recreates
+  worldName?: string; // shown in the facts box
   name?: string; // in-game preset name, when GameMash ships one
   title: string; // H1 / search phrasing
   pitch: string; // one-sentence description (meta description)
@@ -190,8 +193,56 @@ export const FEATURED: Preset[] = [
   }),
 ];
 
-export const ALL_PRESETS = [...PAIRS, ...FEATURED];
-export const presetSlug = (p: Preset) => pairSlug(p.modes);
+// Clean-room recreations of the most-starred real mashups: same mechanics, original code and CC0 assets.
+export const TRIBUTES: Preset[] = [
+  P(['voxel'], {
+    slug: 'blockrealm',
+    world: 'realm',
+    tributeTo: 'skycraft-minecraft-in-skyrim',
+    worldName: 'The Realm (voxel countryside)',
+    name: 'Blockrealm',
+    title: 'Blockrealm: a Block-Builder in an Open-World RPG',
+    pitch: 'Play an open-world fantasy RPG as a block-sandbox player: mine and place anything, blow craters with TNT, and fight raiders with block-game melee. A browser tribute to SkyCraft.',
+    combos: [
+      'The whole countryside is blocks: hills, a river, three villages and a hilltop keep. Dig through any of it.',
+      'Block-game melee: 3.2 m reach, a 0.6 s swing cooldown, knock-back that grows when you sprint, and critical hits while falling.',
+      'Raiders patrol the villages and the keep. They spot you, close in and swing; step back out of the wind-up.',
+      'TNT carves the terrain and chain-reacts. Build walls, dig in, or tunnel under a raider camp.',
+    ],
+  }),
+  P(['platformer'], {
+    slug: 'plumber-vs-warden',
+    world: 'arena',
+    tributeTo: 'er-mario-mario-in-elden-ring',
+    worldName: 'The Ruined Arena',
+    name: 'Plumber vs. the Hollow Warden',
+    title: 'Plumber vs. the Hollow Warden: 3D Platformer Meets Soulslike Boss',
+    pitch: 'Triple jumps, wall kicks and ground pounds against a soulslike boss: jump its sweeps, hop its shockwaves, break its posture, then grab it and spin-throw it. A browser tribute to ER Mario.',
+    combos: [
+      'The full platformer moveset: triple jump, long jump, backflip, side flip, wall kick, dive and ground pound.',
+      'The boss telegraphs a sweep you jump, a leap slam with a shockwave you hop, and a charge you sidestep. It gets faster below half health.',
+      'Punches, dives, ground pounds and head stomps fill its posture meter. Break it and press E to grab, spin and throw.',
+      'An eight-wedge health meter, with coins around the ring that refill a wedge each.',
+    ],
+  }),
+  P(['open-world', 'web-swing'], {
+    slug: 'web-swing-night-city',
+    night: true,
+    tributeTo: 'arkweb',
+    worldName: 'The city at night',
+    name: 'Night Swing',
+    title: 'Night Swing: Web-Swinging Through a Dark City',
+    pitch: 'Swing across a moonlit city lit by street lamps, steal cars out of the air, and lose the police in the dark. A browser tribute to ArkWeb.',
+    combos: [
+      'Pendulum web-swinging with release flings off any building or lamp post.',
+      'Carjack within 2.5 s of a swing release for an AERIAL JACK (+800).',
+      'Moonlight, fog and glowing street lamps; the police chase you through it.',
+    ],
+  }),
+];
+
+export const ALL_PRESETS = [...PAIRS, ...FEATURED, ...TRIBUTES];
+export const presetSlug = (p: Preset) => p.slug ?? pairSlug(p.modes);
 
 // Every pair of modes must be covered exactly once.
 if (PAIRS.length !== (MODES.length * (MODES.length - 1)) / 2) throw new Error(`expected 28 pairs, have ${PAIRS.length}`);
