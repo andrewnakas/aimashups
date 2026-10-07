@@ -4,13 +4,14 @@
 import { PLAYER_ORIGIN } from '../lib/site';
 import { modeBySlug, playUrl, type Launch } from '../data/modes';
 
-interface Props { modes: string[]; title: string; launch?: Launch; }
+interface Props { modes: string[]; title: string; launch?: Launch; src?: string; }
 const { modes, title, launch = {} } = Astro.props;
-const src = playUrl(PLAYER_ORIGIN, modes, launch);
+// Standalone games pass their own URL; presets boot GameMash with their modes.
+const src = Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(PLAYER_ORIGIN, modes, launch);
 const colors = modes.map((m) => modeBySlug(m).color);
 const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
 ---
-<div class="player" data-player data-src={src}>
+<div class="player" data-player data-src={src} data-title={title}>
   <div class="poster">
     <div class="bg" style={`background:${bg}`}></div>
     <h2>{title}</h2>
@@ -20,7 +21,7 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
 </div>
 <div class="player-bar">
   <button type="button" data-fullscreen>⛶ Fullscreen</button>
-  <span>Tab opens the mode panel · F1–F8 toggle modes live</span>
+  <span>{Astro.props.src ? 'Tab shows the controls' : 'Tab opens the mode panel · F1–F8 toggle modes live'}</span>
 </div>
 <noscript><p>The game needs JavaScript. <a href={src}>Open it directly</a>.</p></noscript>
 
@@ -30,7 +31,7 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
       if (el.querySelector('iframe')) return;
       const f = document.createElement('iframe');
       f.src = el.dataset.src!;
-      f.title = 'GameMash';
+      f.title = el.dataset.title || 'Game';
       f.allow = 'fullscreen; gamepad; autoplay; cross-origin-isolated; pointer-lock';
       f.setAttribute('allowfullscreen', '');
       el.querySelector('.poster')?.remove();

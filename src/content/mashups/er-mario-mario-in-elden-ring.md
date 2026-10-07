@@ -16,7 +16,7 @@ builtOn:
   - { label: "me3 mod loader", url: "https://me3.help" }
 sources:
   - { title: "How AI game mashups work: what's real and what you can download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
-tribute: plumber-vs-warden
+tribute: hollow-warden
 faqs:
   - { q: "Is Mario in Elden Ring downloadable?", a: "Yes. ER Mario has Windows releases on GitHub and loads through the me3 mod loader. You need Elden Ring on Steam and your own Super Mario 64 (US) ROM." }
 ---

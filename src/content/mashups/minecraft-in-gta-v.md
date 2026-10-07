@@ -12,7 +12,7 @@ license: MIT
 checked: 2026-10-06
 sources:
   - { title: "How AI game mashups work: what's real and what you can download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
-tribute: open-world-x-voxel
+tribute: block-city
 ---
 The Minecraft-in-GTA V clips (an elytra glide through Los Santos, the Nether spreading over the city, Minecraft mobs fighting the LSPD) came out of **universal-modder**, the most-starred repository of the wave.
 

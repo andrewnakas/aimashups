@@ -32,8 +32,8 @@ const mashups = (await getCollection('mashups'))
 const others = MODES.filter((m) => !preset.modes.includes(m.slug));
 
 const faqs = [
-  { q: `Can I play ${names} online for free?`, a: `Yes. This is a GameMash preset that runs in your browser with WebGPU or WebGL2. It's free, there's no account, and you don't need any game files.` },
-  { q: 'Can I add more modes?', a: `Yes. Press Tab to open the mode panel, or F1–F8 to switch modes live. You can add ${others.slice(0, 3).map((m) => m.name).join(', ')} and more without losing your momentum.` },
+  { q: `Can I play ${names} online for free?`, a: preset.game ? `Yes. ${preset.name} runs in your browser with WebGPU or WebGL2. It's free, there's no account, and you don't need any game files. Desktop builds come from its GitHub releases.` : `Yes. This is a GameMash preset that runs in your browser with WebGPU or WebGL2. It's free, there's no account, and you don't need any game files.` },
+  ...(preset.game ? [] : [{ q: 'Can I add more modes?', a: `Yes. Press Tab to open the mode panel, or F1–F8 to switch modes live. You can add ${others.slice(0, 3).map((m) => m.name).join(', ')} and more without losing your momentum.` }]),
   { q: 'Is it made from the original games?', a: `No. Every mechanic is a clean-room implementation written from observed behaviour and published values, with original code and CC0 or self-made assets. The modes are inspired by ${modes.map((m) => m.inspiredBy).join(' and ')}.` },
   ...(tributeOf ? [{ q: `How is this different from ${tributeOf.data.title.replace(/ \(.*\)$/, '')}?`, a: `${tributeOf.data.title} links or rewrites the original games, so you need to own them and run it on a PC. This tribute recreates the same mechanics from scratch, so it runs instantly in a browser with no game files.` }] : []),
 ];
@@ -42,12 +42,12 @@ const faqs = [
   title={preset.slug ? `${preset.title} (Play Free Online)` : `${preset.title}: Play ${names} Online`}
   description={`${preset.pitch} Free, in your browser, no download.`}
   crumbs={[{ name: 'Play', path: '/play/' }, { name: names, path }]}
-  jsonld={[videoGame({ name: `GameMash: ${names}`, description: preset.pitch, path, genres: modes.map((m) => m.noun) }), faqPage(faqs)]}
+  jsonld={[videoGame({ name: preset.game ? preset.name! : `GameMash: ${names}`, description: preset.pitch, path, genres: modes.map((m) => m.noun) }), faqPage(faqs)]}
 >
   <h1>{preset.title}</h1>
   <p class="lede">{preset.pitch}</p>
   {tributeOf && <p class="muted">A clean-room tribute to <a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a> by {tributeOf.data.creators.map((c) => c.name).join(', ')}.</p>}
-  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} />
+  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} src={preset.game?.url} />
 
   <div class="layout-2 section">
     <div class="prose">
@@ -68,17 +68,18 @@ const faqs = [
     </div>
     <aside>
       <dl class="facts">
-        <dt>Game</dt><dd><a href="/play/gamemash/">GameMash</a></dd>
-        {preset.name && <><dt>Preset</dt><dd>{preset.name}</dd></>}
+        {preset.game
+          ? <><dt>Game</dt><dd>{preset.name}</dd><dt>Source</dt><dd><a href={`https://github.com/${preset.game.repo}`}>{preset.game.repo}</a></dd></>
+          : <><dt>Game</dt><dd><a href="/play/gamemash/">GameMash</a></dd>{preset.name && <><dt>Preset</dt><dd>{preset.name}</dd></>}</>}
         {preset.worldName && <><dt>World</dt><dd>{preset.worldName}</dd></>}
         {tributeOf && <><dt>Tribute to</dt><dd><a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a></dd></>}
-        <dt>Modes</dt><dd>{modes.length} of {MODES.length}</dd>
+        {!preset.game && <><dt>Modes</dt><dd>{modes.length} of {MODES.length}</dd></>}
         <dt>Engine</dt><dd>Rust + Bevy → WebAssembly</dd>
         <dt>Renderer</dt><dd>WebGPU, WebGL2 fallback</dd>
         <dt>Price</dt><dd>Free</dd>
         <dt>Build</dt><dd><a href="/about/clean-room/">Clean room</a></dd>
       </dl>
-      <p class="small muted">Press Tab in-game to add any of the other {others.length} modes.</p>    </aside>
+      <p class="small muted">{preset.game ? 'Press Tab in-game for the controls.' : `Press Tab in-game to add any of the other ${others.length} modes.`}</p>    </aside>
   </div>
 
   {mashups.length > 0 && (

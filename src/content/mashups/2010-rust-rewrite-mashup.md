@@ -19,11 +19,11 @@ links:
 sources:
   - { title: "The Skate and Minecraft Modern Warfare 2 videos are real", publisher: "Held Games", url: "https://heldgames.com/guides/mw2-skate-minecraft-rust-rewrite" }
   - { title: "AI game mashup videos on social media spark debate and backlash", publisher: "VGC", url: "https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/" }
-tribute: skate-x-shooter-x-voxel
+tribute: kickflip-ops
 faqs:
   - { q: "Is the MW2 Skate 3 Minecraft mashup real?", a: "Yes. It's an open-source Rust program on GitHub with Windows releases from late September 2026. It isn't a video edit." }
   - { q: "Do I need to own the games?", a: "Yes. It reads Modern Warfare 2 from your own Steam install and, for skating, your own Skate 3 files. Minecraft's files are downloaded from Mojang on first launch rather than redistributed." }
-  - { q: "Can I play it in a browser?", a: "No, the mashup is a desktop program. GameMash's Skate × Shooter × Voxel preset is a clean-room tribute you can play in a browser with no game files." }
+  - { q: "Can I play it in a browser?", a: "No, the mashup is a desktop program. Kickflip Ops is a clean-room tribute you can play in a browser with no game files." }
 ---
 The clip that put "AI game mashups" on everyone's timeline showed a Modern Warfare 2 soldier dropping onto a skateboard mid-match, kickflipping across Rust and then fighting through a Minecraft world with MW2 guns. It looked like a video edit. It wasn't.
 

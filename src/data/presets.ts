@@ -7,6 +7,7 @@ import { MODES, pairSlug, type Launch } from './modes';
 export interface Preset extends Launch {
   modes: string[]; // mode slugs
   slug?: string; // overrides the mode-pair slug (tributes)
+  game?: { repo: string; url: string }; // a standalone game (tributes), not a GameMash preset
   tributeTo?: string; // mashups collection id this recreates
   worldName?: string; // shown in the facts box
   name?: string; // in-game preset name, when GameMash ships one
@@ -170,8 +171,8 @@ export const FEATURED: Preset[] = [
   P(['skate', 'shooter', 'voxel'], {
     name: 'Block Ops (with board)',
     title: 'Skate × Shooter × Voxel',
-    pitch: 'Kickflip kills on a map you can dig, build and grind: the closest match to the MW2 × Skate 3 × Minecraft mashup.',
-    combos: ['KICKFLIP KILL and AIRBORNE KILL from Skate × Shooter.', 'Grindable rail blocks and explosions that carve the world.', 'Inspired by the 2010 Rust Rewrite Mashup.'],
+    pitch: 'Kickflip kills on a map you can dig, build and grind, with every other GameMash mode one key away.',
+    combos: ['KICKFLIP KILL and AIRBORNE KILL from Skate × Shooter.', 'Grindable rail blocks and explosions that carve the world.', 'Want it as its own game? Play Kickflip Ops.'],
   }),
   P(['skate', 'portals', 'web-swing'], {
     name: 'Web Skater',
@@ -193,11 +194,12 @@ export const FEATURED: Preset[] = [
   }),
 ];
 
-// Clean-room recreations of the most-starred real mashups: same mechanics, original code and CC0 assets.
+// Standalone clean-room games recreating the most-starred real mashups: same mechanics, original code and CC0 assets.
+// Each is its own repo and build; `modes` only drives colours and related links here.
 export const TRIBUTES: Preset[] = [
   P(['voxel'], {
     slug: 'blockrealm',
-    world: 'realm',
+    game: { repo: 'andrewnakas/blockrealm', url: 'https://andrewnakas.github.io/blockrealm/' },
     tributeTo: 'skycraft-minecraft-in-skyrim',
     worldName: 'The Realm (voxel countryside)',
     name: 'Blockrealm',
@@ -211,12 +213,12 @@ export const TRIBUTES: Preset[] = [
     ],
   }),
   P(['platformer'], {
-    slug: 'plumber-vs-warden',
-    world: 'arena',
+    slug: 'hollow-warden',
+    game: { repo: 'andrewnakas/hollow-warden', url: 'https://andrewnakas.github.io/hollow-warden/' },
     tributeTo: 'er-mario-mario-in-elden-ring',
     worldName: 'The Ruined Arena',
-    name: 'Plumber vs. the Hollow Warden',
-    title: 'Plumber vs. the Hollow Warden: 3D Platformer Meets Soulslike Boss',
+    name: 'Hollow Warden',
+    title: 'Hollow Warden: a 3D Platformer Hero vs. a Soulslike Boss',
     pitch: 'Triple jumps, wall kicks and ground pounds against a soulslike boss: jump its sweeps, hop its shockwaves, break its posture, then grab it and spin-throw it. A browser tribute to ER Mario.',
     combos: [
       'The full platformer moveset: triple jump, long jump, backflip, side flip, wall kick, dive and ground pound.',
@@ -226,8 +228,8 @@ export const TRIBUTES: Preset[] = [
     ],
   }),
   P(['open-world', 'web-swing'], {
-    slug: 'web-swing-night-city',
-    night: true,
+    slug: 'night-swing',
+    game: { repo: 'andrewnakas/night-swing', url: 'https://andrewnakas.github.io/night-swing/' },
     tributeTo: 'arkweb',
     worldName: 'The city at night',
     name: 'Night Swing',
@@ -240,6 +242,38 @@ export const TRIBUTES: Preset[] = [
     ],
   }),
 ];
+
+TRIBUTES.push(
+  P(['skate', 'shooter', 'voxel'], {
+    slug: 'kickflip-ops',
+    game: { repo: 'andrewnakas/kickflip-ops', url: 'https://andrewnakas.github.io/kickflip-ops/' },
+    tributeTo: '2010-rust-rewrite-mashup',
+    worldName: 'The city: skate plaza, combat compound, block quarry',
+    name: 'Kickflip Ops',
+    title: 'Kickflip Ops: a Military Shooter You Can Skate',
+    pitch: 'Drop onto a skateboard mid-firefight, kickflip over cover for a KICKFLIP KILL, and dig or blast through a block quarry. A browser tribute to the 2010 Rust Rewrite Mashup.',
+    combos: [
+      'Aim down sights, recoil, bots that flank, health regen, and killstreaks: UAV, care package, airstrike.',
+      'Press G to hop on the board any time: pushes, charged ollies, flips, grinds and manuals.',
+      'A kill within 1.5 s of a trick scores <TRICK> KILL; kills in the air score AIRBORNE KILL.',
+      'The block quarry can be dug for cover; explosions carve it and rail blocks are grindable.',
+    ],
+  }),
+  P(['open-world', 'voxel'], {
+    slug: 'block-city',
+    game: { repo: 'andrewnakas/block-city', url: 'https://andrewnakas.github.io/block-city/' },
+    tributeTo: 'minecraft-in-gta-v',
+    worldName: 'The city, with a block quarry',
+    name: 'Block City',
+    title: 'Block City: Block-Sandbox Chaos in an Open-World Crime City',
+    pitch: 'Steal cars, outrun a five-star wanted level, then dig in, build walls across the street or blow it all up with TNT. A browser tribute to the Minecraft-in-GTA V mods.',
+    combos: [
+      'Traffic, carjacking, a five-star wanted level and police that chase and shoot.',
+      'Break and place blocks anywhere; TNT carves the block layer and wrecks cars.',
+      'Wall off a street to stop a chase, or dig in while your stars climb.',
+    ],
+  }),
+);
 
 export const ALL_PRESETS = [...PAIRS, ...FEATURED, ...TRIBUTES];
 export const presetSlug = (p: Preset) => p.slug ?? pairSlug(p.modes);
