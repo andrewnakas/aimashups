@@ -3,6 +3,7 @@
 // GameMash src/core/score.rs and the cross-mode interactions listed in its README.
 
 import { MODES, pairSlug, type Launch } from './modes';
+import { PLAYER_ORIGIN } from '../lib/site'; // tribute games are served next to GameMash: <origin>/<game>/
 
 export interface Preset extends Launch {
   modes: string[]; // mode slugs
@@ -199,7 +200,7 @@ export const FEATURED: Preset[] = [
 export const TRIBUTES: Preset[] = [
   P(['voxel'], {
     slug: 'blockrealm',
-    game: { repo: 'andrewnakas/blockrealm', url: 'https://andrewnakas.github.io/blockrealm/' },
+    game: { repo: 'andrewnakas/blockrealm', url: `${PLAYER_ORIGIN}/blockrealm/` },
     tributeTo: 'skycraft-minecraft-in-skyrim',
     worldName: 'The Realm (voxel countryside)',
     name: 'Blockrealm',
@@ -214,7 +215,7 @@ export const TRIBUTES: Preset[] = [
   }),
   P(['platformer'], {
     slug: 'hollow-warden',
-    game: { repo: 'andrewnakas/hollow-warden', url: 'https://andrewnakas.github.io/hollow-warden/' },
+    game: { repo: 'andrewnakas/hollow-warden', url: `${PLAYER_ORIGIN}/hollow-warden/` },
     tributeTo: 'er-mario-mario-in-elden-ring',
     worldName: 'The Ruined Arena',
     name: 'Hollow Warden',
@@ -229,7 +230,7 @@ export const TRIBUTES: Preset[] = [
   }),
   P(['open-world', 'web-swing'], {
     slug: 'night-swing',
-    game: { repo: 'andrewnakas/night-swing', url: 'https://andrewnakas.github.io/night-swing/' },
+    game: { repo: 'andrewnakas/night-swing', url: `${PLAYER_ORIGIN}/night-swing/` },
     tributeTo: 'arkweb',
     worldName: 'The city at night',
     name: 'Night Swing',
@@ -246,7 +247,7 @@ export const TRIBUTES: Preset[] = [
 TRIBUTES.push(
   P(['skate', 'shooter', 'voxel'], {
     slug: 'kickflip-ops',
-    game: { repo: 'andrewnakas/kickflip-ops', url: 'https://andrewnakas.github.io/kickflip-ops/' },
+    game: { repo: 'andrewnakas/kickflip-ops', url: `${PLAYER_ORIGIN}/kickflip-ops/` },
     tributeTo: '2010-rust-rewrite-mashup',
     worldName: 'The city: skate plaza, combat compound, block quarry',
     name: 'Kickflip Ops',
@@ -261,7 +262,7 @@ TRIBUTES.push(
   }),
   P(['open-world', 'voxel'], {
     slug: 'block-city',
-    game: { repo: 'andrewnakas/block-city', url: 'https://andrewnakas.github.io/block-city/' },
+    game: { repo: 'andrewnakas/block-city', url: `${PLAYER_ORIGIN}/block-city/` },
     tributeTo: 'minecraft-in-gta-v',
     worldName: 'The city, with a block quarry',
     name: 'Block City',
