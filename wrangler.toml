@@ -1,9 +1,22 @@
-name = "aimashups"
-pages_build_output_dir = "dist"
-compatibility_date = "2026-10-06"
-
+# aigamemashups.com: the built Astro site (dist/) served by a Worker with static
+# assets. Custom domains make Cloudflare create the DNS records itself.
+#   npm run build && npx wrangler deploy
 # R2 for game binaries (play.aigamemashups.com) comes later; games are served from
-# GitHub Pages until then (PUBLIC_PLAYER_ORIGIN). Add the binding back with the bucket:
-# [[r2_buckets]]
-# binding = "GAME_ASSETS"
-# bucket_name = "aimashups-games"
+# GitHub Pages until then (PUBLIC_PLAYER_ORIGIN).
+name = "aigamemashups"
+main = "worker.js"
+compatibility_date = "2026-10-06"
+workers_dev = true
+
+routes = [
+  { pattern = "aigamemashups.com", custom_domain = true },
+  { pattern = "www.aigamemashups.com", custom_domain = true },
+]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+# The worker only acts on www (redirect to the apex), but has to run first to see it.
+run_worker_first = true
