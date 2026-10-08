@@ -169,5 +169,5 @@
   title: "Clean-room tributes you can play in a browser"
   text: "Five tributes to the best-known mashups (Blockrealm, Hollow Warden, Night Swing, Kickflip Ops and Block City) go live on this site. They rebuild the mechanics from observation with original code and CC0 assets, so they need no game files and run in a browser tab. Disclosure: this site made them."
   links:
-    - { label: "Play the tributes", url: "https://aimashups.com/play/" }
+    - { label: "Play the tributes", url: "https://aigamemashups.com/play/" }
     - { label: "andrewnakas/GameMash", url: "https://github.com/andrewnakas/GameMash" }

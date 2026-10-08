@@ -7,7 +7,7 @@ desc=$2
 dir="$(dirname "$0")/out/$r"
 cd "$dir" || exit 1
 
-gh repo view "andrewnakas/$r" >/dev/null 2>&1 || gh repo create "andrewnakas/$r" --public --description "$desc" --homepage "https://aimashups.com/play/$r/" >/dev/null || exit 1
+gh repo view "andrewnakas/$r" >/dev/null 2>&1 || gh repo create "andrewnakas/$r" --public --description "$desc" --homepage "https://aigamemashups.com/play/$r/" >/dev/null || exit 1
 
 rm -rf .git
 git init -q -b main

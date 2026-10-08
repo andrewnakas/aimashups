@@ -3,7 +3,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 
 const KEY = '85867e419f060b6de65f4b72feacebef';
-const HOST = 'aimashups.com';
+const HOST = 'aigamemashups.com';
 const dist = new URL('../dist/', import.meta.url);
 const urls = readdirSync(dist)
   .filter((f) => /^sitemap-\d+\.xml$/.test(f))

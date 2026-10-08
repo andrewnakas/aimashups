@@ -250,7 +250,7 @@ fn lock_modes(mut modes: ResMut<ActiveModes>) {
         sub(h, r'<meta name="description" content=".*?" />', f'<meta name="description" content="{g["tagline"]}" />')
         sub(h, r"<h1>GAME<span>MASH</span></h1>", f"<h1>{g['title'].upper()}</h1>")
         sub(h, r"<p>8 mechanics, one city\..*?</p>", f"<p>{g['tagline']}  Tab: controls.</p>")
-        sub(h, r"<footer>All mechanics are original clean-room recreations.*?<br>", f'<footer>A clean-room tribute to {g["tribute"][0]}: original code, no game files, names or likenesses. Not affiliated with any publisher. <a href="https://aimashups.com/play/{g["site_slug"]}/">aimashups.com</a><br>')
+        sub(h, r"<footer>All mechanics are original clean-room recreations.*?<br>", f'<footer>A clean-room tribute to {g["tribute"][0]}: original code, no game files, names or likenesses. Not affiliated with any publisher. <a href="https://aigamemashups.com/play/{g["site_slug"]}/">aigamemashups.com</a><br>')
     sub(out / "web" / "loader.html", r"<title>.*?</title>", f"<title>{g['title']}</title>")
 
     # 6. CI: the site is the game at the Pages root; packages named after the game.
@@ -283,7 +283,7 @@ fn lock_modes(mut modes: ResMut<ActiveModes>) {
 
 {g['tagline']}
 
-**Play in your browser:** https://andrewnakas.github.io/{g['repo']}/ · [aimashups.com/play/{g['site_slug']}/](https://aimashups.com/play/{g['site_slug']}/)
+**Play in your browser:** https://andrewnakas.github.io/{g['repo']}/ · [aigamemashups.com/play/{g['site_slug']}/](https://aigamemashups.com/play/{g['site_slug']}/)
 
 {g['about']}
 
