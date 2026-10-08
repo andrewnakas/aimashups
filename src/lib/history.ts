@@ -38,6 +38,8 @@ const mashupKind = (m: Mashup): Kind => (m.data.status === 'video-only' || m.dat
 
 export async function timeline(): Promise<Item[]> {
   const [mashups, events] = await Promise.all([getCollection('mashups'), getCollection('events')]);
+  // Astro only logs a YAML error and carries on with an empty collection; fail the build instead.
+  if (events.length === 0) throw new Error('history: src/content/events.yaml is empty or failed to parse');
   return [
     ...events.map((e: Event): Item => ({
       id: e.id,
