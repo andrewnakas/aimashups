@@ -62,4 +62,4 @@ jobs:
         run: node scripts/indexnow.mjs
       - name: Skip notice
         if: ${{ env.CF_TOKEN == '' }}
-        run: echo "::notice::CLOUDFLARE_API_TOKEN not set; skipping deploy (deploy locally: npx wrangler deploy)."
+        run: echo "::notice::CLOUDFLARE_API_TOKEN not set; skipping deploy. Deploy locally with npx wrangler deploy."
