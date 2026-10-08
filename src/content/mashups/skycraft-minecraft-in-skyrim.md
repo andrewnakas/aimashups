@@ -7,10 +7,11 @@ technique: passthrough
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/chasmlol/SkyCraft"
-stars: 1022
-downloads: 22640
+stars: 1065
+downloads: 23961
 license: MIT
-checked: 2026-10-06
+parents: [skse, fabric]
+checked: 2026-10-08
 links:
   - { label: "Releases", url: "https://github.com/chasmlol/SkyCraft/releases" }
 sources:
@@ -20,7 +21,7 @@ faqs:
   - { q: "Is Minecraft in Skyrim a real mod?", a: "Yes. SkyCraft is an open-source mod on GitHub with Windows releases. It links a Skyrim SKSE plugin to a Minecraft Fabric mod." }
   - { q: "Do I need both games?", a: "Yes, you need to own Skyrim and Minecraft Java Edition. Both run at the same time." }
 ---
-SkyCraft has the most release downloads of any mashup documented here (over 22,000 by 6 October 2026), and several other passthrough mods are built directly on it.
+SkyCraft has the most release downloads of any mashup documented here (nearly 24,000 by 8 October 2026), and several other passthrough mods are built directly on it.
 
 ## What it does
 You play Skyrim as a Minecraft player. You move with Minecraft's physics on Skyrim's terrain, carry Minecraft's inventory and HUD, place and break blocks anywhere, and fight Skyrim's NPCs with Minecraft weapons. Digging works on Skyrim itself: roads, rocks and the ground drop the blocks they're made of, and TNT and creepers blow real craters. Minecraft's torches and lava light up Skyrim.

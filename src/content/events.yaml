@@ -1,0 +1,173 @@
+# Everything on the /history/ timeline that isn't a mashup entry (those come from
+# src/content/mashups/ automatically). Dates are first public appearance, in UTC.
+# X post dates are decoded from the post ID. Every entry needs a link or a source.
+
+- id: benilla
+  date: 2026-07-24
+  kind: engine
+  title: benilla, a World of Warcraft client rewritten in Rust
+  text: A complete World of Warcraft 1.12.1 client, written from scratch in Rust on Bevy and loading data from your own install. It was an early sign that AI-assisted full-engine rewrites had become practical.
+  who: [{ name: samwhosung, url: "https://github.com/samwhosung" }]
+  links: [{ label: "samwhosung/benilla", url: "https://github.com/samwhosung/benilla" }]
+
+- id: nexus-ai-tags
+  date: 2026-07-30
+  kind: platform
+  title: Nexus Mods expands its AI disclosure tags
+  text: Two months before the wave, the largest mod host split its generative-AI tag into three (AI-Generated Content, AI Media and AI Assisted) and said undisclosed AI use could lead to moderation. Its guidance asks modders to avoid AI tools unless they have permission for every asset, which is one reason the mashups never appeared there.
+  sources:
+    - { title: "Nexus Mods Officially Responds To Complaints About AI Content", publisher: "TheGamer", url: "https://www.thegamer.com/nexus-mods-generative-ai-guidelines-update/" }
+    - { title: "Nexus Mods finally tightens the screws on AI", publisher: "PC Gamer", url: "https://www.pcgamer.com/gaming-industry/nexus-mods-finally-tightens-the-screws-on-ai-though-its-still-playing-softball-with-the-tide-of-slop/" }
+
+- id: skate-3-rust-engine
+  date: 2026-09-08
+  kind: engine
+  title: skate-3-rust-engine is published
+  text: A Rust/Bevy skating engine built from Skate 3 reverse-engineering research, with game assets loaded from your own copy. It became the most reused engine of the wave, behind the MW2 mashup and every GTA and Bully skate mod.
+  who: [{ name: SK8-ENGINE, url: "https://github.com/SK8-ENGINE" }]
+  links: [{ label: "SK8-ENGINE/skate-3-rust-engine", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }]
+
+- id: iw4l
+  date: 2026-09-13
+  kind: engine
+  title: IW4L, a Modern Warfare 2 runtime in Rust
+  text: vladtrc publishes a standalone, experimental Call of Duty runtime in Rust on Bevy and wgpu. Because it and the Skate 3 engine were both Bevy codebases, they could be merged two weeks later.
+  who: [{ name: vladtrc, url: "https://github.com/vladtrc" }]
+  links: [{ label: "vladtrc/iw4L", url: "https://github.com/vladtrc/iw4L" }]
+
+- id: chasm-skate-rust-clip
+  date: 2026-09-19
+  kind: clip
+  title: "chasm: \"I rewrote Skate 3 in Rust\""
+  text: The earliest known viral post of the trend. chasm (chasmlol on GitHub) shows Skate 3's skating running in a Rust rewrite, built with what they called a human-and-AI development loop. It passed 6,000 likes within a month.
+  who: [{ name: chasm, url: "https://github.com/chasmlol" }]
+  sources:
+    - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
+
+- id: opus-5-5
+  date: 2026-09-22
+  kind: model
+  title: Claude Opus 5.5 is released
+  text: Anthropic's new flagship launches at about 40% lower cost than Opus 5 for typical workloads. Nearly every mashup of the next two weeks credits it. Cheaper long agent sessions made it affordable to point a model at a game's compiled code for hours.
+  sources:
+    - { title: "Anthropic Releases Claude Opus 5.5 With Lower Pricing and New Safeguards", publisher: "Unite.AI", url: "https://www.unite.ai/anthropic-releases-claude-opus-5-5-with-lower-pricing-and-new-safeguards/" }
+
+- id: banjo-tooie-recomp
+  date: 2026-09-28
+  kind: port
+  title: An AI-generated Banjo-Tooie PC port appears
+  text: A native Windows recompilation of Banjo-Tooie whose README says AI tools generated substantial portions of the code. Within a week it was at the centre of the "slopcomp" fight (see 5 October).
+  links: [{ label: "some-scurvy-dog/banjo-tooie-scurvy-dog-port", url: "https://github.com/some-scurvy-dog/banjo-tooie-scurvy-dog-port" }]
+
+- id: cod-minecraft-youtube
+  date: 2026-09-28
+  kind: clip
+  title: Call of Duty × Minecraft hits YouTube
+  text: A video of Call of Duty merged with Minecraft passes 619,000 views in its first week, the first mashup clip to break out on YouTube.
+  sources:
+    - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
+
+- id: modding-changed-forever
+  date: 2026-09-30
+  kind: clip
+  title: "\"Modding has Changed FOREVER…\""
+  text: chasm's YouTube round-up of the first mashups reaches 2.4 million views in a week. Compilation videos like it spread the clips far beyond X, often without crediting the original makers.
+  who: [{ name: chasm, url: "https://github.com/chasmlol" }]
+  sources:
+    - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
+    - { title: "The Wild AI Mashups That Broke the Internet: What's Real and What You Can Download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
+
+- id: ludocow-analysis
+  date: 2026-09-30
+  kind: press
+  title: The first explainers
+  text: YouTuber LudocowTV's analysis of what the mashups mean for the industry passes 150,000 views in a week, as commentary channels start covering the trend.
+  sources:
+    - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
+
+- id: halo-browser
+  date: 2026-09-30
+  kind: port
+  title: Halo: Combat Evolved runs in a browser
+  text: Mitchell Hynes puts the original Xbox Halo in a browser tab, with the campaign, split-screen co-op and 128-player online rooms, built on a community decompilation. It's not a mashup, but it showed the same week how far AI-assisted ports had come, and that a browser could host them.
+  who: [{ name: Mitchell Hynes }]
+  links: [{ label: "OpenCommunityEdition/OpenCE", url: "https://github.com/OpenCommunityEdition/OpenCE" }]
+  sources:
+    - { title: "You can now play Halo: Combat Evolved in a web browser, and it even has multiplayer", publisher: "PC Gamer", url: "https://www.pcgamer.com/hardware/you-can-now-play-halo-combat-evolved-in-a-web-browser-and-it-even-has-multiplayer/" }
+    - { title: "Free Halo: Combat Evolved browser version adds 128-player multiplayer", publisher: "Generation Amiga", url: "https://www.generationamiga.com/2026/09/30/free-halo-combat-evolved-browser-version-adds-128-player-multiplayer/" }
+
+- id: videocardz
+  date: 2026-10-01
+  kind: press
+  title: Tech press picks it up
+  text: VideoCardz runs one of the first news write-ups, collecting the X clips from Minecraft in Elden Ring to Mario Kart in CoD Zombies. TweakTown and others follow within days.
+  sources:
+    - { title: "Modders are now merging entire games, from Minecraft in Elden Ring to Mario Kart in COD Zombies", publisher: "VideoCardz", url: "https://videocardz.com/newz/modders-are-now-merging-entire-games-from-minecraft-in-elden-ring-to-mario-kart-in-cod-zombies" }
+    - { title: "Minecraft runs inside Elden Ring as modders mash up entire games", publisher: "TweakTown", url: "https://www.tweaktown.com/news/113855/minecraft-runs-inside-elden-ring-as-modders-mash-up-entire-games/index.html" }
+
+- id: kotaku-stop
+  date: 2026-10-02
+  kind: backlash
+  title: "Kotaku: \"Modders, please stop\""
+  text: Amelia Zollner argues the mashups are made for social feeds, not for playing, and that none of the combined mechanics actually synergize. It was the first major outlet to push back.
+  who: [{ name: Amelia Zollner }]
+  sources:
+    - { title: "Modders, Please Stop Putting Games Inside Other Games With AI", publisher: "Kotaku", url: "https://kotaku.com/i-dont-want-to-play-your-ai-generated-mod-that-puts-skate-3-inside-of-modern-warfare-2-inside-of-minecraft-2000738660" }
+
+- id: mario-clip-removed
+  date: 2026-10-03
+  kind: platform
+  title: The Mario in Elden Ring clip is taken down
+  text: Deltaroo3D's clip of Super Mario 64's Mario in Elden Ring, at 2.9 million views and 60,000 likes, is removed after a copyright claim. The mod's code stays up on GitHub.
+  mashup: er-mario-mario-in-elden-ring
+  who: [{ name: deltarooo, url: "https://github.com/deltarooo" }]
+  sources:
+    - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
+
+- id: vgtimes-real
+  date: 2026-10-04
+  kind: press
+  title: "What's real and what you can download"
+  text: VGTimes goes through the viral clips one by one. Only a handful have code behind them (Mario in Elden Ring, SkyCraft, the MW2 skate mashup, the GTA and Bully skate mods). Most of the most-viewed clips have no release, and some no named creator.
+  sources:
+    - { title: "Minecraft in Elden Ring and TNT in RDR2: The Wild AI Mashups That Broke the Internet", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
+    - { title: "Vibe-Coded AI Game Mods: Claude Opus Mashups Flood X", publisher: "Everything Edinburgh", url: "https://everythingedinburgh.com/games/news/vibe-coded-ai-mashup-mods-gaming-twitter/" }
+
+- id: melty
+  date: 2026-10-05
+  kind: tool
+  title: Melty, a launcher for mashups
+  text: A free Windows launcher that installs mashups of games you own in one click, with multiplayer lobbies. New mashups are written by coding agents from instructions you paste into Claude Code or Codex. Melty is in Y Combinator's Fall 2026 batch, founded by David Miller. Some viewers questioned whether its demo clips came from other projects.
+  who: [{ name: David Miller }]
+  links: [{ label: "melty.gg", url: "https://melty.gg/" }]
+  sources:
+    - { title: "Melty: Mashup any game", publisher: "Y Combinator", url: "https://www.ycombinator.com/companies/melty-gg" }
+    - { title: "Melty Game Mashups: How Claude Code Builds Them", publisher: "Developers Digest", url: "https://www.developersdigest.tech/blog/melty-game-mashups-claude-code-2026" }
+
+- id: vgc-backlash
+  date: 2026-10-05
+  kind: backlash
+  title: Modders push back
+  text: VGC collects the reaction from established modders. A Kingdom Hearts modder says that if this becomes the permanent state of modding, their current project may be their last. Another calls the click-winning clips "jingling keys". The Banjo-Kazooie PC port lead says their project will never use AI.
+  sources:
+    - { title: "AI game mashup videos on social media spark debate and backlash among players and modders", publisher: "VGC", url: "https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/" }
+    - { title: "The trend of AI generating mashup mods has angered mod creators", publisher: "GIGAZINE", url: "https://gigazine.net/gsc_news/en/20261005-modders-furious-claude-powered-mashup-mods/" }
+
+- id: slopcomps
+  date: 2026-10-05
+  kind: backlash
+  title: "The \"slopcomp\" fight"
+  text: The human teams behind Zelda and Banjo Recompiled disown the AI-generated Banjo-Tooie port, calling vibe-coded recompilations "slopcomps". They say it patches recompiled code from the wrong side, which makes it unmaintainable, and that building on their research by throwing AI at it is disrespectful.
+  who: [{ name: DarioSamo }]
+  sources:
+    - { title: "Zelda and Banjo Recompiled Devs Go To War With AI Vibe-Coded 'Slopcomps'", publisher: "Kotaku", url: "https://kotaku.com/zelda-and-banjo-recompiled-devs-go-to-war-with-ai-vibe-coded-slopcomps-2000739936" }
+    - { title: "Zelda and Banjo PC port devs slam new vibe-coded Banjo-Tooie recompilation", publisher: "GamesRadar+", url: "https://www.gamesradar.com/games/platformer/zelda-and-banjo-pc-port-devs-slam-new-vibe-coded-banjo-tooie-recompilation-throwing-ai-at-it-is-just-disrespectful/" }
+
+- id: clean-room-tributes
+  date: 2026-10-07
+  kind: counter
+  title: Clean-room tributes you can play in a browser
+  text: Five tributes to the best-known mashups (Blockrealm, Hollow Warden, Night Swing, Kickflip Ops and Block City) go live on this site. They rebuild the mechanics from observation with original code and CC0 assets, so they need no game files and run in a browser tab. Disclosure: this site made them.
+  links:
+    - { label: "Play the tributes", url: "https://aimashups.com/play/" }
+    - { label: "andrewnakas/GameMash", url: "https://github.com/andrewnakas/GameMash" }

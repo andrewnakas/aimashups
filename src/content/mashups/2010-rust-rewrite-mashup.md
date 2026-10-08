@@ -7,16 +7,19 @@ technique: rust-rewrite
 date: 2026-09-27
 status: downloadable
 repo: "https://github.com/chasmlol/2010-rust-rewrite-mashup"
-stars: 783
-downloads: 12664
+stars: 812
+downloads: 13130
 license: Apache-2.0
-checked: 2026-10-06
+reach: "29,000+ likes on the launch post on X (Know Your Meme)"
+parents: [iw4l, skate-3-rust-engine, minecraftoss]
+checked: 2026-10-08
 builtOn:
   - { label: "IW4L (vladtrc): Rust/Bevy MW2 runtime", url: "https://github.com/vladtrc/iw4L" }
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
 links:
   - { label: "Releases", url: "https://github.com/chasmlol/2010-rust-rewrite-mashup/releases" }
 sources:
+  - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
   - { title: "The Skate and Minecraft Modern Warfare 2 videos are real", publisher: "Held Games", url: "https://heldgames.com/guides/mw2-skate-minecraft-rust-rewrite" }
   - { title: "AI game mashup videos on social media spark debate and backlash", publisher: "VGC", url: "https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/" }
 tribute: kickflip-ops

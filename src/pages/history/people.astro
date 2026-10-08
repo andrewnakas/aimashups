@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import { fmtDate } from '../../lib/site';
+import { article } from '../../lib/schema';
+import { people } from '../../lib/history';
+
+const all = await people();
+const makers = all.filter((p) => p.mashups.length > 0);
+const others = all.filter((p) => p.mashups.length === 0);
+const desc = `The people behind the 2026 AI game mashup wave: ${makers.length} creators of mashups and clips, plus the engine authors, journalists and modders who shaped the story.`;
+---
+<Base title="Who Made the AI Game Mashups: Creators and People" description={desc}
+  crumbs={[{ name: 'History', path: '/history/' }, { name: 'People', path: '/history/people/' }]}
+  jsonld={[article({ headline: 'The people behind AI game mashups', description: desc, path: '/history/people/', published: new Date('2026-10-08') })]}>
+  <h1>The people behind the mashups</h1>
+  <p class="lede">{desc}</p>
+
+  <h2>Creators</h2>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Creator</th><th>Mashups and clips</th><th>Also in the timeline</th></tr></thead>
+      <tbody>
+        {makers.map((p) => (
+          <tr id={p.key}>
+            <th scope="row">{p.url ? <a href={p.url} rel="nofollow">{p.name}</a> : p.name}</th>
+            <td>{p.mashups.sort((a, b) => +a.data.date - +b.data.date).map((m, i) => <>{i > 0 && <br />}<a href={`/mashups/${m.id}/`}>{m.data.title}</a> <span class="small muted">{fmtDate(m.data.date)}</span></>)}</td>
+            <td class="small">{p.events.map((e, i) => <>{i > 0 && <br />}<a href={`/history/#t-${e.id}`}>{e.data.title}</a></>)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Others who shaped the story</h2>
+  <ul>
+    {others.map((p) => (
+      <li id={p.key}>{p.url ? <a href={p.url} rel="nofollow">{p.name}</a> : <strong>{p.name}</strong>}: {p.events.map((e, i) => <>{i > 0 && '; '}<a href={`/history/#t-${e.id}`}>{e.data.title}</a></>)}</li>
+    ))}
+  </ul>
+  <p class="small muted section">Names are as each person presents themselves publicly. Back to <a href="/history/">the history</a>.</p>
+</Base>

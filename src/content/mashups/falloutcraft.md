@@ -8,9 +8,10 @@ date: 2026-10-01
 status: downloadable
 repo: "https://github.com/zeyvu/FalloutCraft"
 stars: 5
-downloads: 223
+downloads: 242
 license: MIT
-checked: 2026-10-06
+parents: [skycraft-minecraft-in-skyrim]
+checked: 2026-10-08
 builtOn:
   - { label: "SkyCraft (chasmlol)", url: "https://github.com/chasmlol/SkyCraft" }
 tribute: blockrealm

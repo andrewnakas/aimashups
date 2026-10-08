@@ -7,9 +7,10 @@ technique: rust-rewrite
 date: 2026-10-02
 status: downloadable
 repo: "https://github.com/ryglizzy/GTA-San-AnSkateas"
-stars: 8
-downloads: 52
-checked: 2026-10-06
+stars: 11
+downloads: 131
+parents: [skate-3-rust-engine, 2010-rust-rewrite-mashup, gta-reversed]
+checked: 2026-10-08
 builtOn:
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
 tribute: skate-x-open-world

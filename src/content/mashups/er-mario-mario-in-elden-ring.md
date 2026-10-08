@@ -7,10 +7,11 @@ technique: library-import
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/deltarooo/er-mario"
-stars: 152
-downloads: 1605
+stars: 164
+downloads: 1787
 license: MIT
-checked: 2026-10-06
+parents: [libsm64]
+checked: 2026-10-08
 builtOn:
   - { label: "libsm64", url: "https://github.com/libsm64/libsm64" }
   - { label: "me3 mod loader", url: "https://me3.help" }

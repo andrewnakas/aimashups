@@ -1,0 +1,21 @@
+---
+// One branch of the history family tree. A mashup built on several things appears
+// under each of them, with the others named so the duplication reads as intended.
+import type { Node } from '../lib/history';
+import { fmtDate } from '../lib/site';
+
+interface Props { node: Node; children: (id: string) => Node[]; parentsOf: (id: string) => Node[]; from?: string; }
+const { node, children, parentsOf, from } = Astro.props;
+const kids = children(node.id);
+const m = node.mashup;
+const others = from ? parentsOf(node.id).filter((p) => p.id !== from) : [];
+---
+<li class={m ? 'is-mashup' : 'is-base'}>
+  <span class="node">
+    {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
+    {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
+    <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
+    {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
+  </span>
+  {kids.length > 0 && <ul>{kids.map((k) => <Astro.self node={k} children={children} parentsOf={parentsOf} from={node.id} />)}</ul>}
+</li>

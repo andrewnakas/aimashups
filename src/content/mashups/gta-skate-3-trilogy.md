@@ -8,8 +8,9 @@ date: 2026-09-30
 status: downloadable
 repo: "https://github.com/irregularnetwork/GTA-Skate-3-Trilogy"
 stars: 11
-downloads: 414
-checked: 2026-10-06
+downloads: 440
+parents: [skate-3-rust-engine, revc]
+checked: 2026-10-08
 builtOn:
   - { label: "reVC", url: "https://github.com/mrxenginner/reVC" }
   - { label: "re3", url: "https://github.com/Cai1Hsu/re3" }

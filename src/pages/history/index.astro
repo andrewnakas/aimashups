@@ -1,47 +1,157 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import LineageTree from '../../components/LineageTree.astro';
 import { fmtDate, isoDate } from '../../lib/site';
-import { article } from '../../lib/schema';
+import { article, faqPage } from '../../lib/schema';
+import { KINDS, timeline, stats, lineage, type Kind } from '../../lib/history';
 
-const mashups = (await getCollection('mashups')).sort((a, b) => +a.data.date - +b.data.date);
-const desc = 'How AI game mashups went from two Rust rewrites to a viral trend in two weeks: the timeline, the techniques, the creators, and the backlash.';
-const link = (href: string, text: string) => `<a href="${href}">${text}</a>`;
-const events: { date: Date; html: string }[] = [
-  { date: new Date('2026-07-24'), html: `benilla, a from-scratch Rust/Bevy World of Warcraft 1.12 client, is published. It's an early sign that AI-assisted full-engine rewrites are practical. ${link('https://github.com/samwhosung/benilla', 'repo')}` },
-  { date: new Date('2026-09-08'), html: `skate-3-rust-engine, a Rust/Bevy skating engine from Skate 3 reverse-engineering research, is published. It becomes the most reused engine of the wave. ${link('https://github.com/SK8-ENGINE/skate-3-rust-engine', 'repo')}` },
-  { date: new Date('2026-09-13'), html: `IW4L, a Rust/Bevy runtime for Modern Warfare 2, is published by vladtrc. ${link('https://github.com/vladtrc/iw4L', 'repo')}` },
-  ...mashups.map((m) => ({ date: m.data.date, html: `${link(`/mashups/${m.id}/`, m.data.title)}: ${m.data.summary}` })),
-  { date: new Date('2026-10-05'), html: `VGC reports a growing backlash, with modders calling the trend "slop" and one saying it may be their last project. ${link('https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/', 'VGC')}` },
-].sort((a, b) => +a.date - +b.date);
+const items = await timeline();
+const s = await stats();
+const tree = await lineage();
+const n = (x: number) => x.toLocaleString('en-US');
+const first = items[0].date;
+const desc = 'The complete history of AI game mashups: the Rust rewrites that made them possible, the Opus 5.5 launch, every released mashup and viral clip, the tools, the press, the backlash and what came next. Dated and sourced.';
+
+// Timeline grouped by month, newest month last so it reads as a story.
+const months = new Map<string, typeof items>();
+for (const it of items) {
+  const k = it.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  months.set(k, [...(months.get(k) ?? []), it]);
+}
+const usedKinds = (Object.keys(KINDS) as Kind[]).filter((k) => items.some((i) => i.kind === k));
+
+const faqs = [
+  { q: 'What is an AI game mashup?', a: 'A mod or program that combines the mechanics, and often the worlds, of two or more games, built largely by an AI coding agent. Examples are SkyCraft (Minecraft in Skyrim), the 2010 Rust Rewrite Mashup (Modern Warfare 2, Skate 3 and Minecraft) and ER Mario (Mario in Elden Ring).' },
+  { q: 'When did AI game mashups start?', a: 'The wave started in late September 2026. The engine rewrites it grew from were published in July to mid-September, Claude Opus 5.5 launched on 22 September, the first mashup was released on 27 September, and the most-viewed clips appeared between 28 September and 5 October.' },
+  { q: 'Who started the AI game mashup trend?', a: 'chasm (chasmlol on GitHub). Their 19 September clip of Skate 3 rewritten in Rust is the earliest known viral post, and they released both the 2010 Rust Rewrite Mashup (27 September) and SkyCraft (30 September), the template for most passthrough mods that followed.' },
+  { q: 'Which AI model was used to make them?', a: 'Mostly Claude Opus 5.5, which launched on 22 September 2026 at a much lower price than Opus 5. Creators also credited Astra, DeepSeek V4 Pro and Codex.' },
+  { q: 'Which AI game mashups can I actually download?', a: `As of ${fmtDate(s.checked)}, ${s.playable} of the ${s.mashups} documented here have downloadable releases, including SkyCraft, the 2010 Rust Rewrite Mashup and ER Mario. All of them need your own copies of the original games. The most-viewed clips, like Minecraft in Elden Ring, were never released.` },
+  { q: 'Are AI game mashups legal?', a: 'The released ones ship only code and load the games from copies you own, the way most mods do. Clips built from decompiled code or extracted assets are harder to share, which is one reason so few were released, why none appeared on Nexus Mods, and why the Mario in Elden Ring clip was taken down after a copyright claim. Clean-room mashups avoid the question by using no original code or assets.' },
+  { q: 'Why was there a backlash?', a: 'Established modders and outlets including Kotaku and VGC argued that most viral clips were made for engagement rather than play, that the combined mechanics rarely interact, and that AI ports built on years of human reverse-engineering work were unmaintainable "slopcomps".' },
+];
 ---
-<Base title="The History of AI Game Mashups" description={desc} crumbs={[{ name: 'History', path: '/history/' }]}
-  jsonld={[article({ headline: 'The history of AI game mashups', description: desc, path: '/history/', published: new Date('2026-10-06') })]}>
+<Base title="The History of AI Game Mashups (2026): Complete Timeline" description={desc} crumbs={[{ name: 'History', path: '/history/' }]}
+  jsonld={[article({ headline: 'The history of AI game mashups', description: desc, path: '/history/', published: new Date('2026-10-06'), modified: s.checked }), faqPage(faqs)]}>
   <h1>The history of AI game mashups</h1>
-  <p class="lede">{desc}</p>
+  <p class="lede">How putting one game inside another went from two Rust rewrites to the biggest modding story of 2026 in about two weeks. Every entry is dated and sourced, and repository facts are re-checked (last on {fmtDate(s.checked)}).</p>
+
+  <ul class="stats" aria-label="By the numbers">
+    <li><strong>{s.mashups}</strong><span>mashups and clips documented</span></li>
+    <li><strong>{s.playable}</strong><span>you can download today</span></li>
+    <li><strong>{n(s.downloads)}</strong><span>release downloads</span></li>
+    <li><strong>{n(s.stars)}</strong><span>GitHub stars</span></li>
+    <li><strong>{s.sources}</strong><span>sources cited, from {s.publishers} publishers</span></li>
+  </ul>
+
+  <nav class="toc" aria-label="Contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#rewrites">Before the wave: rewrites</a></li>
+      <li><a href="#model">The model</a></li>
+      <li><a href="#first">The first mashups</a></li>
+      <li><a href="#viral">The viral week</a></li>
+      <li><a href="#forks">Forks, tools and ports</a></li>
+      <li><a href="#backlash">The backlash</a></li>
+      <li><a href="#after">What came next</a></li>
+      <li><a href="#family">Family tree</a></li>
+      <li><a href="#timeline">Full timeline</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </nav>
 
   <div class="prose">
-    <h2>Before the wave: rewrites</h2>
-    <p>The mashup trend didn't start with a mashup. It started with <a href="/techniques/rust-rewrite/">rewrites</a>. Through the summer of 2026, a handful of developers used AI coding agents to rebuild whole game runtimes in Rust on the Bevy engine, loading data from their own copies of the originals. By mid-September there were two that mattered: a Skate 3 skating engine and a Modern Warfare 2 runtime called IW4L.</p>
+    <h2 id="rewrites">1. Before the wave: rewrites</h2>
+    <p>The mashup trend didn't start with a mashup. It started with <a href="/techniques/rust-rewrite/">rewrites</a>. Through summer 2026, a few developers used AI coding agents to rebuild whole game runtimes in Rust on the <a href="https://bevyengine.org">Bevy</a> engine, loading the original data from their own copies. <a href="https://github.com/samwhosung/benilla">benilla</a>, a World of Warcraft 1.12 client, came first in July. By mid-September two more mattered: <a href="https://github.com/SK8-ENGINE/skate-3-rust-engine">skate-3-rust-engine</a> (8 September) and vladtrc's Modern Warfare 2 runtime <a href="https://github.com/vladtrc/iw4L">IW4L</a> (13 September).</p>
+    <p>On 19 September chasm, the skate engine's top contributor, posted a clip captioned along the lines of <em>I rewrote Skate 3 in Rust</em>. It's the earliest known viral post of the trend.</p>
 
-    <h2>Late September: the first mashups</h2>
-    <p>Because both rewrites were Rust/Bevy codebases, they could be merged. On 27 September chasmlol published the <a href="/mashups/2010-rust-rewrite-mashup/">2010 Rust Rewrite Mashup</a>: MW2 multiplayer, press J to drop onto a Skate 3 board, and an endless Minecraft world to fight through. Three days later the same developer released <a href="/mashups/skycraft-minecraft-in-skyrim/">SkyCraft</a>, which took the opposite approach. Instead of rewriting anything, it runs Minecraft and Skyrim side by side and links them through shared memory: the <a href="/techniques/passthrough/">passthrough</a> mod.</p>
-    <p>The same week, the launch of more capable coding models brought a flood of attempts. <a href="/mashups/er-mario-mario-in-elden-ring/">Mario in Elden Ring</a> used libsm64 to embed Super Mario 64's real movement, and <a href="/mashups/minecraft-in-gta-v/">universal-modder</a> published a whole toolkit for pointing an agent at any game you own.</p>
+    <h2 id="model">2. The model</h2>
+    <p>On 22 September Anthropic released <strong>Claude Opus 5.5</strong>, about 40% cheaper to run than Opus 5. Nearly every mashup of the next fortnight credits it. Cheap, long agent sessions made it affordable to point a model at a game's compiled code for hours, which is the step every technique below depends on.</p>
 
-    <h2>Early October: forks, ports and clips</h2>
-    <p>Within days, SkyCraft's design was ported to <a href="/mashups/falloutcraft/">Fallout 4</a> and <a href="/mashups/owcraft/">Outer Wilds</a>, and the Skate 3 engine was dropped into <a href="/mashups/bullyskate/">Bully</a>, <a href="/mashups/gta-san-anskateas/">San Andreas</a> and <a href="/mashups/gta-skate-3-trilogy/">Vice City</a>. <a href="/mashups/arkweb/">ArkWeb</a> brought Spider-Man's web-swinging to Gotham, with Claude itself as the installer.</p>
-    <p>At the same time, clips with no code behind them were reaching tens of millions of views. The most-shared, <a href="/mashups/minecraft-in-elden-ring/">Minecraft in Elden Ring</a>, has never been released.</p>
+    <h2 id="first">3. The first mashups</h2>
+    <p>Because IW4L and the skate engine were both Rust/Bevy codebases, they could be merged. On 27 September chasm released the <a href="/mashups/2010-rust-rewrite-mashup/">2010 Rust Rewrite Mashup</a>: MW2 multiplayer where pressing J drops you onto a board with Skate 3's physics, inside an endless Minecraft world from a third Rust engine. Three days later came <a href="/mashups/skycraft-minecraft-in-skyrim/">SkyCraft</a>, which took the opposite approach. Instead of rewriting anything, it runs Minecraft and Skyrim side by side and links them through shared memory. It's the <a href="/techniques/passthrough/">passthrough</a> mod, and it has the most downloads of anything here.</p>
+    <p>The same day, <a href="/mashups/er-mario-mario-in-elden-ring/">ER Mario</a> used <a href="https://github.com/libsm64/libsm64">libsm64</a> to put Super Mario 64's real movement into Elden Ring (a <a href="/techniques/library-import/">library import</a>), and Rehan Sheikh published <a href="/mashups/minecraft-in-gta-v/">universal-modder</a>, a skill pack that lets an agent mod almost any game you own. It became the most-starred repository of the wave.</p>
 
-    <h2>The backlash</h2>
-    <p>By the first week of October the trend had a counter-trend. Coverage in VGC, Kotaku and elsewhere quoted established modders who called the viral clips low-effort "slop", worried about IP and piracy, and questioned whether the mashups integrated anything beyond the visuals. The projects that held up to that scrutiny were the ones with code you could read and builds you could run.</p>
+    <h2 id="viral">4. The viral week</h2>
+    <p>Between 28 September and 5 October the clips outran the code. <a href="/mashups/minecraft-in-elden-ring/">Minecraft in Elden Ring</a> by Tobyn Jacobs became the trend's defining image (reported at 22.5 million views), and has never been released. <a href="/mashups/tarkov-in-skyrim/">Tarkov in Skyrim</a>, P.E. Cooper's <a href="/mashups/cod-zombies-in-the-browser/">World at War Zombies in a browser</a> and its crossovers, and later <a href="/mashups/elden-ring-shooter/">Elden Ring as an eight-game shooter</a> followed, along with clips whose creators were never identified, like TNT in Red Dead Redemption 2. chasm's YouTube round-up, <em>Modding has Changed FOREVER…</em>, reached 2.4 million views in a week.</p>
+    <p>The clips with code were the minority. When VGTimes went through them one by one on 4 October, only a handful could actually be downloaded.</p>
 
-    <h2>Clean-room mashups</h2>
-    <p>Every mashup above needs the original games. The next step is mashups that don't: mechanics rebuilt from observation with original code and art, playable instantly in a browser. That's what this site hosts. <a href="/play/gamemash/">Play GameMash</a> or read <a href="/techniques/clean-room/">how clean-room mashups work</a>.</p>
+    <h2 id="forks">5. Forks, tools and ports</h2>
+    <p>The released projects were forked almost immediately. SkyCraft's design was ported to <a href="/mashups/falloutcraft/">Fallout 4</a> and <a href="/mashups/owcraft/">Outer Wilds</a>, and <a href="/mashups/arkweb/">ArkWeb</a> borrowed it to bring Spider-Man's web-swinging to Gotham. The skate engine went into <a href="/mashups/gta-skate-3-trilogy/">Vice City and GTA III</a>, <a href="/mashups/bullyskate/">Bully</a> and <a href="/mashups/gta-san-anskateas/">San Andreas</a>, the last of them also building on the MW2 mashup.</p>
+    <p>Tools followed the forks. On 5 October <a href="https://melty.gg/">Melty</a>, a Y Combinator-backed Windows launcher, offered one-click installs of mashups for games you own, with new ones written by coding agents. The same agents were producing full ports: <a href="https://www.pcgamer.com/hardware/you-can-now-play-halo-combat-evolved-in-a-web-browser-and-it-even-has-multiplayer/">Halo: Combat Evolved in a browser</a> with 128-player rooms, and an <a href="/techniques/decompile-port/">AI-generated Banjo-Tooie recompilation</a>.</p>
+
+    <h2 id="backlash">6. The backlash</h2>
+    <p>The counter-trend arrived within a week. On 2 October Kotaku asked modders to <a href="https://kotaku.com/i-dont-want-to-play-your-ai-generated-mod-that-puts-skate-3-inside-of-modern-warfare-2-inside-of-minecraft-2000738660">stop putting games inside other games</a>, arguing the combined mechanics never actually interact. On 3 October the Mario in Elden Ring clip, at 2.9 million views, was taken down after a copyright claim. On 5 October <a href="https://www.videogameschronicle.com/news/ai-game-mashup-videos-on-social-media-spark-debate-and-backlash-among-players-and-modders/">VGC</a> quoted modders calling the trend an "AI slop factory", and the human teams behind Zelda and Banjo Recompiled <a href="https://kotaku.com/zelda-and-banjo-recompiled-devs-go-to-war-with-ai-vibe-coded-slopcomps-2000739936">disowned the AI Banjo-Tooie port</a> as a "slopcomp". Nexus Mods had already required AI disclosure since July, and no mashup appeared there.</p>
+    <p>The projects that held up were the ones with code you could read and builds you could run.</p>
+
+    <h2 id="after">7. What came next</h2>
+    <p>The best-received project of the second week wasn't a two-game clip. It was a careful rewrite: Funny-Bones' <a href="/mashups/elden-ring-combat-in-skyrim/">Elden Ring combat controller</a>, rebuilt in Rust from the game's own timing data and shown running in Skyrim. It earned "holy peak" replies in the same week as the backlash.</p>
+    <p>Every mashup above needs the original games. The next step is mashups that don't: mechanics rebuilt from observation with original code and CC0 art, playable instantly in a browser. That's what this site makes. <a href="/play/">Play the clean-room tributes</a>, or read <a href="/techniques/clean-room/">how clean-room mashups work</a>.</p>
   </div>
 
   <section class="section">
-    <h2 id="timeline">Timeline</h2>
-    <ol class="timeline prose">{events.map((e) => <li><time datetime={isoDate(e.date)}>{fmtDate(e.date)}</time><span set:html={e.html} /></li>)}</ol>
-    <p class="small muted">Missing something? <a href="https://github.com/andrewnakas/aimashups/issues/new?template=add-mashup.yml">Add a mashup</a> on GitHub.</p>
+    <h2 id="family">Family tree</h2>
+    <p class="muted prose">What each mashup was built on, as credited in its own repository. A project built on several things appears under each of them.</p>
+    <ul class="tree">{tree.roots.map((r) => <LineageTree node={r} children={tree.children} parentsOf={tree.parentsOf} />)}</ul>
+    <h3>Built alone, or method undisclosed</h3>
+    <ul class="tree"><li class="is-base"><span class="node muted small">No credited parent on the tree</span><ul>{tree.standalone.map((m) => (
+      <li class="is-mashup"><span class="node"><a href={`/mashups/${m.id}/`}><strong>{m.data.title}</strong></a> <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span> <span class="small muted">{fmtDate(m.data.date)}</span></span></li>
+    ))}</ul></li></ul>
   </section>
+
+  <section class="section">
+    <h2 id="timeline">Full timeline</h2>
+    <p class="muted">{items.length} events from {fmtDate(first)} to {fmtDate(items[items.length - 1].date)}. Filter by type:</p>
+    <div class="chips filters" role="group" aria-label="Filter the timeline">
+      <button type="button" class="chip" aria-pressed="true" data-kind="all">All</button>
+      {usedKinds.map((k) => <button type="button" class="chip" aria-pressed="false" data-kind={k}><i style={`background:${KINDS[k].color}`} />{KINDS[k].label}</button>)}
+    </div>
+    {[...months].map(([month, list]) => (
+      <>
+        <h3 class="month">{month}</h3>
+        <ol class="timeline prose">
+          {list.map((it) => (
+            <li id={`t-${it.id}`} data-kind={it.kind} style={`--dot:${KINDS[it.kind].color}`}>
+              <time datetime={isoDate(it.date)}>{fmtDate(it.date)} · <span class="kind">{KINDS[it.kind].label}</span></time>
+              <strong>{it.href ? <a href={it.href}>{it.title}</a> : it.title}</strong>
+              <p>{it.text}</p>
+              {(it.links.length > 0 || it.sources.length > 0) && (
+                <p class="small">
+                  {it.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url}>{l.label}</a></>)}
+                  {it.links.length > 0 && it.sources.length > 0 && ' · '}
+                  {it.sources.length > 0 && <span class="muted">Sources: {it.sources.map((x, i) => <>{i > 0 && ', '}<a href={x.url} rel="nofollow">{x.publisher ?? x.title}</a></>)}</span>}
+                </p>
+              )}
+            </li>
+          ))}
+        </ol>
+      </>
+    ))}
+    <p class="small muted">Missing something, or got a date wrong? <a href="https://github.com/andrewnakas/aimashups/issues/new?template=add-mashup.yml">Add a mashup</a> or <a href="https://github.com/andrewnakas/aimashups/edit/main/src/content/events.yaml">edit the timeline</a> on GitHub. See also <a href="/history/press/">all press coverage</a> and <a href="/history/people/">the people behind the mashups</a>.</p>
+  </section>
+
+  <section class="section prose">
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">{faqs.map((f) => <><dt>{f.q}</dt><dd>{f.a}</dd></>)}</dl>
+    <h2>How this history is kept</h2>
+    <p>Dates are first public appearance, in UTC. Dates of X posts are decoded from the post ID rather than taken from reposts. Repository facts (stars, downloads, licences, what a project credits) are read from GitHub and dated. View counts are attributed to the outlet that reported them, since they can't be checked independently. Clips without released code are marked <em>video only</em> and stay listed for the record.</p>
+  </section>
+
+  <script>
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('.filters [data-kind]')];
+    const rows = [...document.querySelectorAll<HTMLElement>('.timeline [data-kind]')];
+    const months = [...document.querySelectorAll<HTMLElement>('.month')];
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        const kind = b.dataset.kind!;
+        for (const x of buttons) x.setAttribute('aria-pressed', String(x === b));
+        for (const r of rows) r.hidden = kind !== 'all' && r.dataset.kind !== kind;
+        // Hide a month heading when every row under it is filtered out.
+        for (const m of months) {
+          const list = m.nextElementSibling as HTMLElement;
+          const any = [...list.children].some((c) => !(c as HTMLElement).hidden);
+          m.hidden = list.hidden = !any;
+        }
+      });
+    }
+  </script>
 </Base>

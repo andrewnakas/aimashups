@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { fmtDate } from '../../lib/site';
+import { article } from '../../lib/schema';
+
+// Every source cited anywhere in the history, merged by URL, with what it was cited for.
+const [events, mashups] = await Promise.all([getCollection('events'), getCollection('mashups')]);
+type Row = { url: string; title: string; publisher: string; date?: Date; about: { label: string; href: string }[] };
+const rows = new Map<string, Row>();
+const add = (s: { url: string; title: string; publisher?: string }, about: { label: string; href: string }, date?: Date) => {
+  const r = rows.get(s.url) ?? { url: s.url, title: s.title, publisher: s.publisher ?? new URL(s.url).hostname.replace(/^www\./, ''), about: [] };
+  if (date && (!r.date || date < r.date)) r.date = date;
+  if (!r.about.some((a) => a.href === about.href)) r.about.push(about);
+  rows.set(s.url, r);
+};
+for (const e of events) for (const s of e.data.sources) add(s, { label: e.data.title, href: `/history/#t-${e.id}` }, e.data.kind === 'press' || e.data.kind === 'backlash' ? e.data.date : undefined);
+for (const m of mashups) for (const s of m.data.sources) add(s, { label: m.data.title, href: `/mashups/${m.id}/` });
+const list = [...rows.values()].sort((a, b) => a.publisher.localeCompare(b.publisher) || a.title.localeCompare(b.title));
+const byPublisher = new Map<string, Row[]>();
+for (const r of list) byPublisher.set(r.publisher, [...(byPublisher.get(r.publisher) ?? []), r]);
+const desc = `Every article, video and post about the 2026 AI game mashup trend cited on this site: ${list.length} sources from ${byPublisher.size} publishers, from Kotaku and VGC to Know Your Meme, with what each one covered.`;
+---
+<Base title="AI Game Mashups in the Press: Every Source" description={desc}
+  crumbs={[{ name: 'History', path: '/history/' }, { name: 'Press', path: '/history/press/' }]}
+  jsonld={[article({ headline: 'AI game mashups in the press', description: desc, path: '/history/press/', published: new Date('2026-10-08') })]}>
+  <h1>AI game mashups in the press</h1>
+  <p class="lede">{list.length} sources from {byPublisher.size} publishers, each linked to the part of the history it supports. Dates are shown for coverage that was itself part of the story.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Publisher</th><th>Headline</th><th>Cited for</th></tr></thead>
+      <tbody>
+        {[...byPublisher].map(([pub, rs]) => rs.map((r, i) => (
+          <tr>
+            {i === 0 && <th scope="row" rowspan={rs.length}>{pub}</th>}
+            <td><a href={r.url} rel="nofollow">{r.title}</a>{r.date && <span class="small muted"> · {fmtDate(r.date)}</span>}</td>
+            <td class="small">{r.about.map((a, j) => <>{j > 0 && ' · '}<a href={a.href}>{a.label}</a></>)}</td>
+          </tr>
+        )))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted section">Know of coverage that's missing? <a href="https://github.com/andrewnakas/aimashups/issues/new?template=correction.yml">Tell us on GitHub</a>. Back to <a href="/history/">the history</a>.</p>
+</Base>
