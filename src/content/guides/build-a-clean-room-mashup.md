@@ -42,4 +42,4 @@ Generate or make every model, texture, sound and font yourself, or use CC0 sourc
 Bevy builds to WebAssembly with [Trunk](https://trunkrs.dev). Build twice, once with the `webgpu` feature and once for WebGL2, and serve a tiny loader page that picks one based on `navigator.gpu`. Read launch options (like which modes start on) from the URL, so one build can serve many presets. That's how every [/play/](/play/) page on this site works.
 
 ## Share it
-When it runs, [submit it to AI Mashups](https://github.com/andrewnakas/aimashups/blob/main/CONTRIBUTING.md).
+When it runs, [submit it to AI Game Mashups](https://github.com/andrewnakas/aimashups/blob/main/CONTRIBUTING.md).

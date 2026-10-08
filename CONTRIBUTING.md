@@ -13,7 +13,7 @@ History entries live in `src/content/mashups/<slug>.md`. Copy an existing entry.
 New source games go in `src/content/games/`.
 
 ## Add a playable game
-Hosted games must follow the [clean-room policy](https://aimashups.com/about/clean-room/): original code written from a behavioural spec, original or CC0 assets, no game files, decompiled code, names or likenesses. Include:
+Hosted games must follow the [clean-room policy](https://aigamemashups.com/about/clean-room/): original code written from a behavioural spec, original or CC0 assets, no game files, decompiled code, names or likenesses. Include:
 
 - `CLEANROOM.md`: how the spec was produced and who wrote the code
 - `ASSETS.md`: the origin and license of every asset

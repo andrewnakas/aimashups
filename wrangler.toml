@@ -2,6 +2,8 @@ name = "aimashups"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-10-06"
 
-[[r2_buckets]]
-binding = "GAME_ASSETS"
-bucket_name = "aimashups-games"
+# R2 for game binaries (play.aigamemashups.com) comes later; games are served from
+# GitHub Pages until then (PUBLIC_PLAYER_ORIGIN). Add the binding back with the bucket:
+# [[r2_buckets]]
+# binding = "GAME_ASSETS"
+# bucket_name = "aimashups-games"

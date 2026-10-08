@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://aimashups.com',
+  site: 'https://aigamemashups.com',
   output: 'static',
   trailingSlash: 'always',
   devToolbar: { enabled: false },

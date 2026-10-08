@@ -1,12 +1,12 @@
 export const SITE = {
-  name: 'AI Mashups',
-  url: 'https://aimashups.com',
+  name: 'AI Game Mashups',
+  url: 'https://aigamemashups.com',
   repo: 'https://github.com/andrewnakas/aimashups',
   tagline: 'Play AI game mashups in your browser, and read how the famous ones were made.',
 };
 
-// Game binaries are served from a separate origin (R2 behind play.aimashups.com).
-export const PLAYER_ORIGIN = (import.meta.env.PUBLIC_PLAYER_ORIGIN ?? 'https://play.aimashups.com').replace(/\/$/, '');
+// Game binaries are served from a separate origin (R2 behind play.aigamemashups.com).
+export const PLAYER_ORIGIN = (import.meta.env.PUBLIC_PLAYER_ORIGIN ?? 'https://play.aigamemashups.com').replace(/\/$/, '');
 
 export const GISCUS = {
   repo: import.meta.env.PUBLIC_GISCUS_REPO as string | undefined,
