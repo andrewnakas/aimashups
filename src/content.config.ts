@@ -1,5 +1,5 @@
 import { defineCollection, reference } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const link = z.object({ label: z.string(), url: z.url() });
@@ -26,6 +26,8 @@ const mashups = defineCollection({
     builtOn: z.array(link).default([]),
     links: z.array(link).default([]),
     sources: z.array(source).default([]),
+    reach: z.string().optional(), // for clips: "22.5M views on X", as reported by the cited source
+    parents: z.array(z.string()).default([]), // lineage ids (src/data/lineage.ts) this was built on
     tribute: z.string().optional(), // preset slug on /play/
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   }),
@@ -53,4 +55,20 @@ const guides = defineCollection({
   schema: z.object({ title: z.string(), summary: z.string(), date: z.coerce.date() }),
 });
 
-export const collections = { mashups, games, techniques, guides };
+// Everything else that shaped the history: engines, model launches, tools, clips,
+// press coverage and platform responses. One YAML file, rendered on /history/.
+const events = defineCollection({
+  loader: file('src/content/events.yaml'),
+  schema: z.object({
+    date: z.coerce.date(),
+    kind: z.enum(['engine', 'model', 'clip', 'tool', 'port', 'press', 'backlash', 'platform', 'counter']),
+    title: z.string(),
+    text: z.string(),
+    who: z.array(person).default([]),
+    mashup: reference('mashups').optional(),
+    links: z.array(link).default([]),
+    sources: z.array(source).default([]),
+  }),
+});
+
+export const collections = { mashups, games, techniques, guides, events };

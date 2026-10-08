@@ -7,6 +7,7 @@ import { getCollection, getEntry, getEntries, render, type CollectionEntry } fro
 import { ALL_PRESETS, presetSlug } from '../../data/presets';
 import { fmtDate } from '../../lib/site';
 import { article, faqPage } from '../../lib/schema';
+import { lineage } from '../../lib/history';
 
 export async function getStaticPaths() {
   return (await getCollection('mashups')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
@@ -21,6 +22,14 @@ if (d.tribute && !tribute) throw new Error(`${entry.id}: unknown tribute ${d.tri
 const gameIds = d.games.map((g) => g.id);
 const related = (await getCollection('mashups')).filter((m) => m.id !== entry.id && m.data.games.some((g) => gameIds.includes(g.id))).slice(0, 3);
 const path = `/mashups/${entry.id}/`;
+// Lineage, timeline mentions, and neighbours in time.
+const tree = await lineage();
+const builtOn = tree.parentsOf(entry.id);
+const ledTo = tree.children(entry.id);
+const mentions = (await getCollection('events')).filter((e) => e.data.mashup?.id === entry.id).sort((a, b) => +a.data.date - +b.data.date);
+const chrono = (await getCollection('mashups')).sort((a, b) => +a.data.date - +b.data.date || a.id.localeCompare(b.id));
+const at = chrono.findIndex((m) => m.id === entry.id);
+const [prev, next] = [chrono[at - 1], chrono[at + 1]];
 const statusText = {
   'downloadable': 'Downloadable',
   'source-only': 'Source only (build it yourself)',
@@ -36,6 +45,16 @@ const statusText = {
   <div class="layout-2">
     <article class="prose">
       <Content />
+      {(builtOn.length > 0 || ledTo.length > 0) && (<>
+        <h2>Lineage</h2>
+        {builtOn.length > 0 && <p><strong>Built on:</strong> {builtOn.map((n, i) => <>{i > 0 && ', '}<a href={n.url}>{n.name}</a></>)}.</p>}
+        {ledTo.length > 0 && <p><strong>Led to:</strong> {ledTo.map((n, i) => <>{i > 0 && ', '}<a href={n.url}>{n.name}</a></>)}.</p>}
+        <p class="small muted">See the whole <a href="/history/#family">family tree</a>.</p>
+      </>)}
+      {mentions.length > 0 && (<>
+        <h2>In the timeline</h2>
+        <ul>{mentions.map((e) => <li><a href={`/history/#t-${e.id}`}>{fmtDate(e.data.date)}: {e.data.title}</a>. {e.data.text}</li>)}</ul>
+      </>)}
       {d.faqs.length > 0 && (<><h2>FAQ</h2><dl class="faq">{d.faqs.map((f) => <><dt>{f.q}</dt><dd>{f.a}</dd></>)}</dl></>)}
       {d.sources.length > 0 && (<>
         <h2>Sources</h2>
@@ -53,6 +72,7 @@ const statusText = {
         {d.license && <><dt>License</dt><dd>{d.license}</dd></>}
         {d.stars !== undefined && <><dt>Stars</dt><dd>{d.stars.toLocaleString('en-US')}</dd></>}
         {d.downloads !== undefined && <><dt>Downloads</dt><dd>{d.downloads.toLocaleString('en-US')}</dd></>}
+        {d.reach && <><dt>Reach</dt><dd>{d.reach}</dd></>}
         <dt>Own copies</dt><dd>{d.needsOwnCopy ? 'Required' : 'Not needed'}</dd>
         <dt>Checked</dt><dd>{fmtDate(d.checked)}</dd>
       </dl>
@@ -71,6 +91,11 @@ const statusText = {
       <ul class="grid">{related.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
     </section>
   )}
+  <nav class="section prevnext" aria-label="Previous and next in the history">
+    {prev ? <a href={`/mashups/${prev.id}/`}>← {fmtDate(prev.data.date)}: {prev.data.title}</a> : <span />}
+    <a href={`/history/#t-${entry.id}`}>On the timeline</a>
+    {next ? <a href={`/mashups/${next.id}/`}>{fmtDate(next.data.date)}: {next.data.title} →</a> : <span />}
+  </nav>
   <p class="small muted section">Something wrong or out of date? <a href={`https://github.com/andrewnakas/aimashups/edit/main/src/content/mashups/${entry.id}.md`}>Edit this page on GitHub</a>.</p>
   <Comments />
 </Base>

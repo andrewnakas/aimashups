@@ -7,10 +7,11 @@ technique: rust-rewrite
 date: 2026-09-27
 status: downloadable
 repo: "https://github.com/chasmlol/2010-rust-rewrite-mashup"
-stars: 783
-downloads: 12664
+stars: 812
+downloads: 13130
 license: Apache-2.0
-checked: 2026-10-06
+parents: [iw4l, skate-3-rust-engine, minecraftoss]
+checked: 2026-10-08
 builtOn:
   - { label: "IW4L (vladtrc): Rust/Bevy MW2 runtime", url: "https://github.com/vladtrc/iw4L" }
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }

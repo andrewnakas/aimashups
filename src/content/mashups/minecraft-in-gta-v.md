@@ -7,9 +7,9 @@ technique: passthrough
 date: 2026-09-30
 status: source-only
 repo: "https://github.com/rehan-remade/universal-modder"
-stars: 4662
+stars: 5368
 license: MIT
-checked: 2026-10-06
+checked: 2026-10-08
 sources:
   - { title: "How AI game mashups work: what's real and what you can download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
 tribute: block-city

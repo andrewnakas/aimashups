@@ -29,6 +29,14 @@ for (const f of readdirSync(mashupDir)) {
   for (const m of src.matchAll(/https?:\/\/[^\s"')\]]+/g)) urls.add(m[0]);
 }
 
+// Timeline events: every one needs a link or a source, and their URLs are checked too.
+const eventsSrc = readFileSync(join(root, 'src/content/events.yaml'), 'utf8');
+for (const block of eventsSrc.split(/^- id: /m).slice(1)) {
+  const id = block.split('\n')[0].trim();
+  if (!/^\s+(links|sources):/m.test(block)) errors.push(`events.yaml ${id}: needs links or sources`);
+}
+for (const m of eventsSrc.matchAll(/https?:\/\/[^\s"')\]]+/g)) urls.add(m[0]);
+
 const BANNED = new Set(['.iso', '.xex', '.z64', '.n64', '.v64', '.nds', '.gba', '.sfc', '.smc', '.nes', '.wad', '.pak', '.ff', '.iwd', '.ipak', '.bsa', '.ba2', '.esm', '.psarc', '.big', '.rpf', '.xcp']);
 const walk = (dir) => {
   for (const name of readdirSync(dir)) {

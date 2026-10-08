@@ -100,8 +100,26 @@ a.card:hover { border-color: var(--accent); color: var(--ink); }
 /* timeline */
 .timeline { list-style: none; padding: 0; border-left: 2px solid var(--line); margin-left: 6px; }
 .timeline li { position: relative; padding: 0 0 18px 20px; }
-.timeline li::before { content: ''; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.timeline li::before { content: ''; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--dot, var(--accent)); }
 .timeline time { font-weight: 700; font-size: .875rem; color: var(--muted); display: block; }
+.timeline li p { margin: .2em 0 0; }
+.timeline .kind { font-weight: 600; }
+.month { font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 1.6em 0 .8em; }
+button.chip { border: 1px solid transparent; cursor: pointer; font-family: inherit; }
+button.chip[aria-pressed='true'] { border-color: var(--ink); }
+
+/* history: numbers, contents, family tree */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; padding: 0; margin: 24px 0; list-style: none; }
+.stats li { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+.stats strong { font-family: var(--display); font-size: 1.7rem; line-height: 1.1; }
+.stats span { color: var(--muted); font-size: .875rem; }
+.toc { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; max-width: 70ch; }
+.toc ol { margin: .4em 0 0; padding-left: 1.3em; columns: 2 220px; }
+.tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+.tree ul { margin-left: 10px; padding-left: 18px; border-left: 2px solid var(--line); }
+.tree li { padding: 5px 0; }
+.tree .node { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.tree .is-base > .node > a { color: var(--ink); font-weight: 600; }
 
 .crumbs { font-size: .85rem; color: var(--muted); margin: 18px 0 0; }
 .crumbs a { color: var(--muted); }
@@ -114,3 +132,4 @@ a.card:hover { border-color: var(--accent); color: var(--ink); }
 table { border-collapse: collapse; width: 100%; font-size: .95rem; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .table-scroll { overflow-x: auto; }
+.prevnext { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .9rem; border-top: 1px solid var(--line); padding-top: 16px; }
