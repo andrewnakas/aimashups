@@ -88,7 +88,7 @@
 - id: halo-browser
   date: 2026-09-30
   kind: port
-  title: Halo: Combat Evolved runs in a browser
+  title: "Halo: Combat Evolved runs in a browser"
   text: Mitchell Hynes puts the original Xbox Halo in a browser tab, with the campaign, split-screen co-op and 128-player online rooms, built on a community decompilation. It's not a mashup, but it showed the same week how far AI-assisted ports had come, and that a browser could host them.
   who: [{ name: Mitchell Hynes }]
   links: [{ label: "OpenCommunityEdition/OpenCE", url: "https://github.com/OpenCommunityEdition/OpenCE" }]
