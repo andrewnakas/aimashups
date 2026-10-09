@@ -35,6 +35,8 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
       f.allow = 'fullscreen; gamepad; autoplay; cross-origin-isolated; pointer-lock';
       f.setAttribute('allowfullscreen', '');
       el.querySelector('.poster')?.remove();
+      // Which games actually get played, not just viewed.
+      (window as any).gtag?.('event', 'game_start', { game: el.dataset.title, page: location.pathname });
       el.append(f);
       f.focus();
     };

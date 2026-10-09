@@ -8,6 +8,9 @@ export const SITE = {
 // Game binaries are served from a separate origin (R2 behind play.aigamemashups.com).
 export const PLAYER_ORIGIN = (import.meta.env.PUBLIC_PLAYER_ORIGIN ?? 'https://play.aigamemashups.com').replace(/\/$/, '');
 
+// Google Analytics 4 (treesixty account). Empty means no tag is rendered.
+export const GA_ID: string = import.meta.env.PUBLIC_GA_ID || '';
+
 export const GISCUS = {
   repo: import.meta.env.PUBLIC_GISCUS_REPO as string | undefined,
   repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID as string | undefined,
