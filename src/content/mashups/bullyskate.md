@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-01
 status: downloadable
 repo: "https://github.com/Faiqie/BullySkate"
-stars: 9
-downloads: 455
+stars: 10
+downloads: 496
 parents: [skate-3-rust-engine]
-checked: 2026-10-08
+checked: 2026-10-09
 builtOn:
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
   - { label: "skate3-audio research (Andrew Nakas)", url: "https://github.com/andrewnakas/skate3-audio" }

@@ -8,7 +8,7 @@ origin: unverified
 date: 2026-10-05
 status: video-only
 reach: "270,000 views"
-checked: 2026-10-08
+checked: 2026-10-09
 sources:
   - { title: "The Wild AI Mashups That Broke the Internet: What's Real and What You Can Download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }
 ---
