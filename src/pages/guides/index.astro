@@ -1,9 +1,18 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-const list = (await getCollection('guides')).sort((a, b) => +b.data.date - +a.data.date);
+const list = (await getCollection('guides')).sort((a, b) => +(b.data.updated ?? b.data.date) - +(a.data.updated ?? a.data.date));
+const play = list.filter((g) => g.data.mashup);
+const other = list.filter((g) => !g.data.mashup);
+const meta = (g: (typeof list)[number]) => [g.data.difficulty, g.data.time && `about ${g.data.time}`].filter(Boolean).join(' · ');
 ---
-<Base title="Guides: Build Your Own Game Mashup" description="How to build a clean-room game mashup with an AI coding agent, Rust and Bevy, and ship it to the browser." crumbs={[{ name: 'Guides', path: '/guides/' }]}>
+<Base title="Guides: Install and Play Game Mashups, or Build Your Own" description="Step-by-step guides to installing and playing every downloadable game mashup, from SkyCraft to ER Mario, plus how to build a clean-room mashup with an AI coding agent." crumbs={[{ name: 'Guides', path: '/guides/' }]}>
   <h1>Guides</h1>
-  <ul class="grid">{list.map((g) => <li><a class="card" href={`/guides/${g.id}/`}><h3>{g.data.title}</h3><p>{g.data.summary}</p></a></li>)}</ul>
+  <p class="lede">Step-by-step instructions for every mashup you can download, built from each project's own README and release notes, plus how to make your own.</p>
+  {[['How to play', play], ['Make your own and get started', other]].map(([label, gs]) => (gs as typeof list).length > 0 && (
+    <section class="section">
+      <h2>{label as string}</h2>
+      <ul class="grid">{(gs as typeof list).map((g) => <li><a class="card" href={`/guides/${g.id}/`}><h3>{g.data.title}</h3><p>{g.data.summary}</p>{meta(g) && <p class="small">{meta(g)}</p>}</a></li>)}</ul>
+    </section>
+  ))}
 </Base>

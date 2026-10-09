@@ -1,0 +1,21 @@
+---
+import OriginBadge from './OriginBadge.astro';
+import type { FeedItem } from '../lib/feed';
+import { isoDate } from '../lib/site';
+interface Props { items: FeedItem[]; }
+const { items } = Astro.props;
+const short = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<ul class="feed">
+  {items.map((i) => (
+    <li>
+      <time datetime={isoDate(i.date)}>{short(i.date)}</time>
+      <div>
+        <span class="kind">{i.label}</span><br />
+        <a class="t" href={i.href} rel={i.href.startsWith('/') ? undefined : 'nofollow'}>{i.title}</a>
+        <p>{i.text}</p>
+        {i.origin && <div class="badges"><OriginBadge origin={i.origin} /></div>}
+      </div>
+    </li>
+  ))}
+</ul>

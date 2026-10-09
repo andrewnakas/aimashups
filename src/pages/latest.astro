@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Feed from '../components/Feed.astro';
+import { feed } from '../lib/feed';
+import { fmtDate } from '../lib/site';
+const items = await feed();
+---
+<Base title="Latest Game Mashups, Clips and Guides" description="Everything new in game mashups, newest first: released mods, viral clips, crossovers, tools, coverage and how-to-play guides. Dated and sourced." crumbs={[{ name: 'Latest', path: '/latest/' }]}>
+  <h1>Latest</h1>
+  <p class="lede">Every new mashup, clip, crossover, tool, news story and guide, newest first. Last entry {fmtDate(items[0].date)}. Follow along with the <a href="/rss.xml">RSS feed</a>.</p>
+  <Feed items={items} />
+</Base>

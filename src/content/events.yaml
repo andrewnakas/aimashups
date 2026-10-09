@@ -171,3 +171,47 @@
   links:
     - { label: "Play the tributes", url: "https://aigamemashups.com/play/" }
     - { label: "andrewnakas/GameMash", url: "https://github.com/andrewnakas/GameMash" }
+
+- id: passthrough-spreads
+  date: 2026-10-04
+  kind: port
+  title: "Passthrough mods spread past Minecraft-in-X"
+  text: "In the week after SkyCraft, the same design is pointed at new hosts and guests almost daily: ULTRAKILL inside Minecraft (ULTRACRAFT), Minecraft in Half-Life 2, World of Warcraft 1.12, Arknights: Endfield, Granny Legacy and GTA San Andreas, DOOM in Skyrim, and Team Fortress 2 in Minecraft. ULTRACRAFT passes 5,600 release downloads by 9 October."
+  links:
+    - { label: "alfr0762/ultracraft", url: "https://github.com/alfr0762/ultracraft" }
+    - { label: "over825hp/wowcraft", url: "https://github.com/over825hp/wowcraft" }
+    - { label: "whiskydumb/halfcraft", url: "https://github.com/whiskydumb/halfcraft" }
+
+- id: iw4l-forks
+  date: 2026-10-05
+  kind: engine
+  title: "IW4L becomes a platform"
+  text: "Forks of the Rust Modern Warfare 2 runtime turn it into a base for other games' movement: Mirrorwarfare adds Mirror's Edge Catalyst's parkour, a fan mod runs Black Ops II-style Zombies in the 2010 mashup's Minecraft world, and SK8V carries the mashup's skate engine into GTA V Legacy (9 October)."
+  links:
+    - { label: "r614/mirrorwarfare", url: "https://github.com/r614/mirrorwarfare" }
+    - { label: "becaring/SK8V", url: "https://github.com/becaring/SK8V" }
+
+- id: galaxycraft-release
+  date: 2026-10-07
+  kind: port
+  title: "Minecraft on Super Mario Galaxy 2's planets"
+  text: "GalaxyCraft releases a launcher that runs real Minecraft inside Super Mario Galaxy 2 through a patched Dolphin, generating terrain as spherical planets. It's the first mashup to bridge a PC game into an emulated console game, and its commits credit Claude on hundreds of changes."
+  mashup: galaxycraft
+  links:
+    - { label: "M0uidev/GalaxyCraft", url: "https://github.com/M0uidev/GalaxyCraft" }
+
+- id: crossover-clips-week
+  date: 2026-10-08
+  kind: clip
+  title: "Crossover clips without a source"
+  text: "Clips of Sora in Borderlands 2, portals in Skate 3, Devil May Cry 5 in Minecraft, God of War in GTA and Nine Sols in Hollow Knight circulate on Instagram and YouTube accounts like @recompiledgames. None comes with a creator credit or code we could find, so they're listed as unverified clips."
+  links:
+    - { label: "@recompiledgames on Instagram", url: "https://www.instagram.com/recompiledgames/" }
+
+- id: play-guides
+  date: 2026-10-09
+  kind: counter
+  title: "Step-by-step guides for every downloadable mashup"
+  text: "This site publishes install-and-play guides for SkyCraft, FalloutCraft, OWCraft, the 2010 Rust Rewrite Mashup, ER Mario, BullySkate, GTA San AnSkateas and GTA Skate, built from each project's own README and release notes, plus a start-here page on game versions, loaders and checking downloads. Disclosure: this site wrote them."
+  links:
+    - { label: "Guides", url: "https://aigamemashups.com/guides/" }

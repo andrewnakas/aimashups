@@ -4,13 +4,14 @@ summary: "Skate 3's skating inside GTA: San Andreas through a C++ ASI plugin and
 games: [skate-3, gta-san-andreas]
 creators: [{ name: ryglizzy, url: "https://github.com/ryglizzy" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-10-02
 status: downloadable
 repo: "https://github.com/ryglizzy/GTA-San-AnSkateas"
-stars: 11
-downloads: 131
+stars: 14
+downloads: 194
 parents: [skate-3-rust-engine, 2010-rust-rewrite-mashup, gta-reversed]
-checked: 2026-10-08
+checked: 2026-10-09
 builtOn:
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
 tribute: skate-x-open-world

@@ -16,6 +16,7 @@ const canonical = abs(Astro.url.pathname);
 const fullTitle = Astro.url.pathname === '/' ? `${SITE.name}: ${title}` : `${title} | ${SITE.name}`;
 const ld = crumbs.length ? [breadcrumbs([{ name: 'Home', path: '/' }, ...crumbs]), ...jsonld] : jsonld;
 const nav = [
+  ['/latest/', 'Latest'],
   ['/play/', 'Play'],
   ['/history/', 'History'],
   ['/mashups/', 'Mashups'],
@@ -29,6 +30,12 @@ const here = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a saved theme before first paint so the page never flashes the wrong one.
+      try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+    </script>
+    <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1014" media="(prefers-color-scheme: dark)" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -41,7 +48,7 @@ const here = Astro.url.pathname;
     <meta property="og:image" content={abs(image)} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} history`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name}: latest`} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -69,6 +76,13 @@ const here = Astro.url.pathname;
         <nav class="nav" aria-label="Main">
           {nav.map(([href, label]) => <a href={href} aria-current={here.startsWith(href) ? 'page' : undefined}>{label}</a>)}
         </nav>
+        <div class="header-tools">
+          <a class="icon-btn" href="/search/" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+          <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme">
+            <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg>
+            <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="currentColor"/></svg>
+          </button>
+        </div>
       </div>
     </header>
     <main class="wrap" data-pagefind-body>
@@ -99,5 +113,13 @@ const here = Astro.url.pathname;
         <p>Sister sites: <a href="https://decompgames.com">Decomp Games</a> · <a href="https://skatemods.com">Skate Mods</a></p>
       </div>
     </footer>
+    <script is:inline>
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+      });
+    </script>
   </body>
 </html>

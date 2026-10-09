@@ -4,14 +4,15 @@ summary: "A port of SkyCraft's passthrough design to Fallout 4: Minecraft moveme
 games: [minecraft, fallout-4]
 creators: [{ name: zeyvu, url: "https://github.com/zeyvu" }]
 technique: passthrough
+origin: ai-built
 date: 2026-10-01
 status: downloadable
 repo: "https://github.com/zeyvu/FalloutCraft"
-stars: 5
-downloads: 242
+stars: 6
+downloads: 267
 license: MIT
 parents: [skycraft-minecraft-in-skyrim]
-checked: 2026-10-08
+checked: 2026-10-09
 builtOn:
   - { label: "SkyCraft (chasmlol)", url: "https://github.com/chasmlol/SkyCraft" }
 tribute: blockrealm

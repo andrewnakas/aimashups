@@ -91,6 +91,7 @@ const faqs = [
   <section class="section">
     <h2 id="family">Family tree</h2>
     <p class="muted prose">What each mashup was built on, as credited in its own repository. A project built on several things appears under each of them.</p>
+    <div class="tree-tools"><button type="button" data-tree="open">Expand all</button><button type="button" data-tree="close">Collapse all</button></div>
     <ul class="tree">{tree.roots.map((r) => <LineageTree node={r} children={tree.children} parentsOf={tree.parentsOf} />)}</ul>
     <h3>Built alone, or method undisclosed</h3>
     <ul class="tree"><li class="is-base"><span class="node muted small">No credited parent on the tree</span><ul>{tree.standalone.map((m) => (
@@ -137,6 +138,11 @@ const faqs = [
   </section>
 
   <script>
+    for (const b of document.querySelectorAll<HTMLButtonElement>('[data-tree]')) {
+      b.addEventListener('click', () => {
+        for (const d of document.querySelectorAll('.tree details')) (d as HTMLDetailsElement).open = b.dataset.tree === 'open';
+      });
+    }
     const buttons = [...document.querySelectorAll<HTMLButtonElement>('.filters [data-kind]')];
     const rows = [...document.querySelectorAll<HTMLElement>('.timeline [data-kind]')];
     const months = [...document.querySelectorAll<HTMLElement>('.month')];

@@ -11,11 +11,23 @@ const m = node.mashup;
 const others = from ? parentsOf(node.id).filter((p) => p.id !== from) : [];
 ---
 <li class={m ? 'is-mashup' : 'is-base'}>
-  <span class="node">
-    {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
-    {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
-    <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
-    {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
-  </span>
-  {kids.length > 0 && <ul>{kids.map((k) => <Astro.self node={k} children={children} parentsOf={parentsOf} from={node.id} />)}</ul>}
+  {kids.length > 0 ? (
+    <details open>
+      <summary><span class="node">
+        {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
+        {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
+        <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
+        {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
+        <span class="small muted">· {kids.length} built on it</span>
+      </span></summary>
+      <ul>{kids.map((k) => <Astro.self node={k} children={children} parentsOf={parentsOf} from={node.id} />)}</ul>
+    </details>
+  ) : (
+    <span class="node">
+      {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
+      {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
+      <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
+      {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
+    </span>
+  )}
 </li>
