@@ -29,7 +29,7 @@ for (const f of readdirSync(mashupDir)) {
   // How it was made must be stated, and an unconfirmed claim needs something to point at.
   const origin = src.match(/^origin: (\S+)/m)?.[1];
   if (!origin) errors.push(`${f}: needs origin (ai-built, conventional-mod or unverified)`);
-  if (origin === 'unverified' && !/^(sources|seenOn):/m.test(src)) errors.push(`${f}: unverified entries need sources or seenOn`);
+  if (origin === 'unverified' && !/^(repo|sources|seenOn):/m.test(src)) errors.push(`${f}: unverified entries need a repo, sources or seenOn`);
   for (const m of src.matchAll(/https?:\/\/[^\s"')\]]+/g)) urls.add(m[0]);
 }
 
