@@ -39,15 +39,16 @@ const h = (type: string, style: Record<string, unknown>, children?: unknown) => 
 
 export async function GET({ props }: { props: Card }) {
   const { kicker, title, text, tags } = props;
-  const tree = h('div', { width: 1200, height: 630, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '64px 72px', background: '#0f1014', color: '#eceef3', fontFamily: 'Inter', borderTop: '14px solid #ff5a3c' }, [
-    h('div', { display: 'flex', flexDirection: 'column', gap: 18 }, [
-      h('div', { fontSize: 26, fontWeight: 700, color: '#ff5a3c', textTransform: 'uppercase', letterSpacing: 3 }, kicker),
-      h('div', { fontFamily: 'Archivo Black', fontSize: title.length > 48 ? 58 : 70, lineHeight: 1.08 }, title),
-      h('div', { fontSize: 30, color: '#9aa0ae', lineHeight: 1.35 }, text.length > 150 ? `${text.slice(0, 147)}…` : text),
+  const W = 1056; // content width inside the 72px side padding
+  const tree = h('div', { width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#0f1014', color: '#eceef3', fontFamily: 'Inter', borderTop: '14px solid #ff5a3c' }, [
+    h('div', { position: 'absolute', top: 60, left: 72, width: W, display: 'flex', flexDirection: 'column' }, [
+      h('div', { display: 'flex', fontSize: 26, fontWeight: 700, color: '#ff5a3c', textTransform: 'uppercase', letterSpacing: 3, marginBottom: 18 }, kicker),
+      h('div', { display: 'flex', width: W, fontFamily: 'Archivo Black', fontSize: title.length > 48 ? 58 : 70, lineHeight: 1.08, marginBottom: 22 }, title),
+      h('div', { display: 'flex', width: W, fontSize: 30, color: '#9aa0ae', lineHeight: 1.35 }, text.length > 150 ? `${text.slice(0, 147)}…` : text),
     ]),
-    h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center' }, [
-      h('div', { display: 'flex', gap: 12 }, tags.slice(0, 4).map((t) => h('div', { fontSize: 22, fontWeight: 700, padding: '8px 16px', borderRadius: 999, background: '#1f222a', color: '#eceef3' }, t))),
-      h('div', { display: 'flex', fontFamily: 'Archivo Black', fontSize: 30 }, [h('span', {}, 'AIGame'), h('span', { color: '#ff5a3c' }, 'Mashups')]),
+    h('div', { position: 'absolute', bottom: 52, left: 72, width: W, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }, [
+      h('div', { display: 'flex' }, tags.slice(0, 4).map((t) => h('div', { display: 'flex', fontSize: 22, fontWeight: 700, padding: '8px 16px', marginRight: 12, borderRadius: 999, background: '#1f222a', color: '#eceef3' }, t))),
+      h('div', { display: 'flex', fontFamily: 'Archivo Black', fontSize: 30 }, [h('span', { color: '#eceef3' }, 'AIGame'), h('span', { color: '#ff5a3c' }, 'Mashups')]),
     ]),
   ]);
   const svg = await satori(tree as never, { width: 1200, height: 630, fonts });

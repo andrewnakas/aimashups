@@ -167,8 +167,8 @@ th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lin
 /* explorer filters (/mashups/) */
 .filters { display: grid; gap: 10px; margin: 20px 0 8px; }
 .filters .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.filters .row > span { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); min-width: 84px; }
-.filters select { font: inherit; font-size: .875rem; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+.filters .row > span:first-child { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); min-width: 84px; }
+.filters select { max-width: 220px; font: inherit; font-size: .875rem; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
 .count { font-size: .875rem; color: var(--muted); }
 
 /* latest feed */
