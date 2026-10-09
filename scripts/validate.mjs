@@ -1,5 +1,5 @@
 // Content checks that the schema can't express. Run in CI on every PR.
-//   - every mashup's tribute names a real preset
+//   - every mashup's tribute names a real preset, and every mashup states its origin
 //   - every repo / source / builtOn URL is reachable (with --links)
 //   - no retail game file types anywhere in the repo
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -26,6 +26,10 @@ for (const f of readdirSync(mashupDir)) {
   const tribute = src.match(/^tribute: (\S+)/m)?.[1];
   if (tribute && !presets.has(tribute)) errors.push(`${f}: tribute "${tribute}" is not a preset`);
   if (!/^sources:/m.test(src) && !/^repo:/m.test(src)) errors.push(`${f}: needs a repo or at least one source`);
+  // How it was made must be stated, and an unconfirmed claim needs something to point at.
+  const origin = src.match(/^origin: (\S+)/m)?.[1];
+  if (!origin) errors.push(`${f}: needs origin (ai-built, conventional-mod or unverified)`);
+  if (origin === 'unverified' && !/^(sources|seenOn):/m.test(src)) errors.push(`${f}: unverified entries need sources or seenOn`);
   for (const m of src.matchAll(/https?:\/\/[^\s"')\]]+/g)) urls.add(m[0]);
 }
 

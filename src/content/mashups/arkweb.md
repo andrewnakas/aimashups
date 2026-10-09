@@ -4,6 +4,7 @@ summary: "Spider-Man Remastered's web-swinging inside Batman: Arkham Knight's Go
 games: [spider-man-remastered, batman-arkham-knight]
 creators: [{ name: luki-1, url: "https://github.com/luki-1" }]
 technique: passthrough
+origin: ai-built
 date: 2026-10-02
 status: source-only
 repo: "https://github.com/luki-1/ArkWeb"

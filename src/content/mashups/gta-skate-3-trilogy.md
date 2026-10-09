@@ -4,6 +4,7 @@ summary: "Skate 3 skating merged into the reVC and re3 source rewrites of Vice C
 games: [skate-3, gta-vice-city]
 creators: [{ name: irregularnetwork, url: "https://github.com/irregularnetwork" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/irregularnetwork/GTA-Skate-3-Trilogy"

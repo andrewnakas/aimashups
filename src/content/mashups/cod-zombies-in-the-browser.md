@@ -4,6 +4,7 @@ summary: "Call of Duty: World at War's first zombies map, ported to the web by O
 games: [cod-world-at-war]
 creators: [{ name: P.E. Cooper, url: "https://x.com/p_e_cooper" }]
 technique: decompile-port
+origin: ai-built
 date: 2026-09-29
 status: video-only
 checked: 2026-10-08

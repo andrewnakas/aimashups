@@ -4,6 +4,7 @@ summary: "Escape from Tarkov's guns, inventory and UI inside Skyrim. One of the 
 games: [escape-from-tarkov, skyrim]
 creators: [{ name: Cydonyx }]
 technique: undisclosed
+origin: unverified
 date: 2026-09-30
 status: video-only
 reach: "14,000+ likes on X in a week"

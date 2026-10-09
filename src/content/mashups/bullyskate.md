@@ -4,6 +4,7 @@ summary: "Jimmy skating around Bullworth with the Skate 3 Rust rewrite, with con
 games: [skate-3, bully]
 creators: [{ name: Faiqie, url: "https://github.com/Faiqie" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-10-01
 status: downloadable
 repo: "https://github.com/Faiqie/BullySkate"

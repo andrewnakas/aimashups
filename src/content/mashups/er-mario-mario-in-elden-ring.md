@@ -4,6 +4,7 @@ summary: "Play Elden Ring as Mario with Super Mario 64's real movement: triple j
 games: [super-mario-64, elden-ring]
 creators: [{ name: deltarooo, url: "https://github.com/deltarooo" }]
 technique: library-import
+origin: ai-built
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/deltarooo/er-mario"

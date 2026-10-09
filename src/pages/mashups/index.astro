@@ -2,26 +2,81 @@
 import Base from '../../layouts/Base.astro';
 import MashupCard from '../../components/MashupCard.astro';
 import { getCollection } from 'astro:content';
+import { ORIGINS } from '../../lib/site';
 
 const all = (await getCollection('mashups')).sort((a, b) => +b.data.date - +a.data.date);
-const groups = [
-  ['downloadable', 'Downloadable', 'Released builds you can install, with your own copies of the games.'],
-  ['source-only', 'Source only', 'Code is public but there is no packaged release: you build it yourself.'],
-  ['video-only', 'Video only', 'Viral clips with no released code.'],
-  ['unreleased', 'Announced, unreleased', 'Promised by their creators, not yet out.'],
-] as const;
+const [games, techniques] = await Promise.all([getCollection('games'), getCollection('techniques')]);
+const count = <T extends string>(f: (m: (typeof all)[number]) => T[]) => (v: T) => all.filter((m) => f(m).includes(v)).length;
+const byOrigin = count((m) => [m.data.origin]);
+const byStatus = count((m) => [m.data.status]);
+const usedGames = games.filter((g) => all.some((m) => m.data.games.some((x) => x.id === g.id))).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const usedTechniques = techniques.filter((t) => all.some((m) => m.data.technique.id === t.id)).sort((a, b) => a.data.order - b.data.order);
+const statuses = [['downloadable', 'Downloadable'], ['source-only', 'Source only'], ['video-only', 'Video only'], ['unreleased', 'Unreleased']] as const;
 ---
-<Base title="Every Notable AI Game Mashup" description="A verified directory of AI game mashups: SkyCraft, the MW2 × Skate 3 × Minecraft rewrite, Mario in Elden Ring, ArkWeb and more, with status, creator, technique and download links." crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
-  <h1>Every notable AI game mashup</h1>
-  <p class="lede">Each entry is checked against its source repository: who made it, how it works, whether you can actually play it, and what you need. Star and download counts are dated.</p>
-  {groups.map(([status, label, blurb]) => {
-    const list = all.filter((m) => m.data.status === status);
-    return list.length > 0 && (
-      <section class="section">
-        <h2>{label} <span class="muted small">({list.length})</span></h2>
-        <p class="muted">{blurb}</p>
-        <ul class="grid">{list.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
-      </section>
-    );
-  })}
+<Base title="Every Notable Game Mashup, AI-Built and Otherwise" description="A verified, filterable directory of game mashups: SkyCraft, the MW2 × Skate 3 × Minecraft rewrite, Mario in Elden Ring, ArkWeb and more, with status, creator, technique, how it was made and download links." crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
+  <h1>Every notable game mashup</h1>
+  <p class="lede">Each entry is checked against its source: who made it, how it works, whether an AI agent built it, whether you can actually play it, and what you need. Star and download counts are dated.</p>
+
+  <form class="filters" aria-label="Filter mashups" onsubmit="return false">
+    <div class="row" role="group" aria-label="How it was made"><span>Made by</span>
+      <button type="button" class="chip" data-f="origin" data-v="" aria-pressed="true">All</button>
+      {(Object.keys(ORIGINS) as (keyof typeof ORIGINS)[]).filter((o) => byOrigin(o) > 0).map((o) => <button type="button" class="chip" data-f="origin" data-v={o} aria-pressed="false">{ORIGINS[o].label} ({byOrigin(o)})</button>)}
+    </div>
+    <div class="row" role="group" aria-label="Status"><span>Status</span>
+      <button type="button" class="chip" data-f="status" data-v="" aria-pressed="true">All</button>
+      {statuses.filter(([s]) => byStatus(s) > 0).map(([s, label]) => <button type="button" class="chip" data-f="status" data-v={s} aria-pressed="false">{label} ({byStatus(s)})</button>)}
+    </div>
+    <div class="row"><span>Narrow</span>
+      <label class="sr-only" for="f-game">Game</label>
+      <select id="f-game" data-f="games"><option value="">Any game</option>{usedGames.map((g) => <option value={g.id}>{g.data.name}</option>)}</select>
+      <label class="sr-only" for="f-tech">Technique</label>
+      <select id="f-tech" data-f="technique"><option value="">Any technique</option>{usedTechniques.map((t) => <option value={t.id}>{t.data.name}</option>)}</select>
+      <label class="sr-only" for="f-sort">Sort</label>
+      <select id="f-sort"><option value="date">Newest first</option><option value="stars">Most stars</option><option value="title">A to Z</option></select>
+      <span class="count" aria-live="polite"><b id="shown">{all.length}</b> of {all.length}</span>
+    </div>
+  </form>
+
+  <ul class="grid" id="mashup-grid">{all.map((e) => <li><MashupCard entry={e} /></li>)}</ul>
+  <p id="none" class="muted" hidden>Nothing matches. <a href="/mashups/">Clear the filters</a>.</p>
+
+  <script>
+    const grid = document.getElementById('mashup-grid')!;
+    const items = [...grid.children] as HTMLLIElement[];
+    const state: Record<string, string> = { origin: '', status: '', games: '', technique: '' };
+    const sortSel = document.getElementById('f-sort') as HTMLSelectElement;
+    // ?games=a+b (from the homepage matrix) shows mashups that include every listed game.
+    const q = new URLSearchParams(location.search);
+    for (const k of Object.keys(state)) state[k] = q.get(k) ?? '';
+    const apply = () => {
+      const want = state.games.split(/[ +]/).filter(Boolean);
+      let shown = 0;
+      for (const li of items) {
+        const c = li.firstElementChild as HTMLElement;
+        const has = (c.dataset.games ?? '').split(' ');
+        const ok = (!state.origin || c.dataset.origin === state.origin)
+          && (!state.status || c.dataset.status === state.status)
+          && (!state.technique || c.dataset.technique === state.technique)
+          && want.every((g) => has.includes(g));
+        li.hidden = !ok;
+        if (ok) shown++;
+      }
+      const key = sortSel.value;
+      const val = (li: HTMLLIElement) => (li.firstElementChild as HTMLElement).dataset;
+      items.sort((a, b) => key === 'stars' ? +val(b).stars! - +val(a).stars!
+        : key === 'title' ? a.querySelector('h3')!.textContent!.localeCompare(b.querySelector('h3')!.textContent!)
+        : val(b).date!.localeCompare(val(a).date!));
+      grid.append(...items);
+      document.getElementById('shown')!.textContent = String(shown);
+      document.getElementById('none')!.hidden = shown > 0;
+      for (const b of document.querySelectorAll<HTMLButtonElement>('button[data-f]')) b.setAttribute('aria-pressed', String(state[b.dataset.f!] === b.dataset.v));
+      for (const s of document.querySelectorAll<HTMLSelectElement>('select[data-f]')) s.value = state[s.dataset.f!].split(/[ +]/)[0] ?? '';
+      const params = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
+      history.replaceState(null, '', params.size ? `?${params}` : location.pathname);
+    };
+    for (const b of document.querySelectorAll<HTMLButtonElement>('button[data-f]')) b.addEventListener('click', () => { state[b.dataset.f!] = b.dataset.v!; apply(); });
+    for (const s of document.querySelectorAll<HTMLSelectElement>('select[data-f]')) s.addEventListener('change', () => { state[s.dataset.f!] = s.value; apply(); });
+    sortSel.addEventListener('change', apply);
+    apply();
+  </script>
 </Base>

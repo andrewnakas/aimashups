@@ -4,6 +4,7 @@ summary: "Steve gliding an elytra over Los Santos and the Nether spreading throu
 games: [minecraft, gta-v]
 creators: [{ name: Rehan Sheikh, url: "https://github.com/rehan-remade" }]
 technique: passthrough
+origin: ai-built
 date: 2026-09-30
 status: source-only
 repo: "https://github.com/rehan-remade/universal-modder"

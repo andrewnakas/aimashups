@@ -4,6 +4,7 @@ summary: "Skate 3's skating inside GTA: San Andreas through a C++ ASI plugin and
 games: [skate-3, gta-san-andreas]
 creators: [{ name: ryglizzy, url: "https://github.com/ryglizzy" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-10-02
 status: downloadable
 repo: "https://github.com/ryglizzy/GTA-San-AnSkateas"

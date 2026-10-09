@@ -15,7 +15,7 @@ const mashups = (await getCollection('mashups')).filter((m) => m.data.games.some
 const presets = PAIRS.filter((p) => p.modes.some((m) => g.modes.includes(m))).slice(0, 6);
 const others = new Set(mashups.flatMap((m) => m.data.games.map((x) => x.id)).filter((id) => id !== entry.id));
 ---
-<Base title={`${g.name} Mashups: Every AI Mashup With ${g.name}`} description={`${g.summary} ${mashups.length} documented AI mashup${mashups.length === 1 ? '' : 's'}.`}
+<Base title={`${g.name} Mashups: Every Mashup and Crossover With ${g.name}`} description={`${g.summary} ${mashups.length} documented mashup${mashups.length === 1 ? "" : "s"}.`} image={`/og/games/${entry.id}.png`}
   crumbs={[{ name: 'Games', path: '/games/' }, { name: g.name, path: `/games/${entry.id}/` }]}>
   <h1>{g.name} mashups</h1>
   <p class="lede">{g.summary}</p>

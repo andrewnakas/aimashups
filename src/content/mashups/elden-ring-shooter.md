@@ -4,6 +4,7 @@ summary: "Eight other games' mechanics and weapons inside Elden Ring, from DOOM 
 games: [elden-ring]
 creators: [{ name: Huberticus }]
 technique: undisclosed
+origin: unverified
 date: 2026-10-05
 status: video-only
 reach: "270,000 views"

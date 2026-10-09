@@ -4,6 +4,7 @@ summary: "Modern Warfare 2, Skate 3 and an endless Minecraft world in one Rust g
 games: [modern-warfare-2, skate-3, minecraft]
 creators: [{ name: chasmlol, url: "https://github.com/chasmlol" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-09-27
 status: downloadable
 repo: "https://github.com/chasmlol/2010-rust-rewrite-mashup"

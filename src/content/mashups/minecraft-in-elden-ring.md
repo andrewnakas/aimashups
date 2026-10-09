@@ -4,6 +4,7 @@ summary: "The most-viewed clip of the wave, reported at 22.5 million views, show
 games: [minecraft, elden-ring]
 creators: [{ name: Tobyn Jacobs }]
 technique: undisclosed
+origin: unverified
 date: 2026-09-29
 status: video-only
 reach: "22.5M views (VGTimes); 308,000+ likes on the original X post (Know Your Meme)"

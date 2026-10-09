@@ -4,6 +4,7 @@ summary: "Play Skyrim as a Minecraft player: Minecraft's physics, inventory, blo
 games: [minecraft, skyrim]
 creators: [{ name: chasmlol, url: "https://github.com/chasmlol" }]
 technique: passthrough
+origin: ai-built
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/chasmlol/SkyCraft"

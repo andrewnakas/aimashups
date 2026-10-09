@@ -4,6 +4,7 @@ summary: "Land on a planet, press F6 and you're playing real Minecraft on its su
 games: [minecraft, outer-wilds]
 creators: [{ name: Yaekai, url: "https://github.com/Yaekai" }]
 technique: passthrough
+origin: ai-built
 date: 2026-10-02
 status: downloadable
 repo: "https://github.com/Yaekai/OWCraft"

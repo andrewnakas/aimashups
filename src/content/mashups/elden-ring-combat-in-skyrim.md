@@ -4,6 +4,7 @@ summary: "Elden Ring's player movement and combat rewritten in Rust from the gam
 games: [elden-ring, skyrim]
 creators: [{ name: Funny-Bones, url: "https://github.com/Funny-Bones" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-10-05
 status: unreleased
 repo: "https://github.com/Funny-Bones/ELDEN-RING-Combat-Rewrite"
