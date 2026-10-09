@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, abs } from '../lib/site';
+import { SITE, GA_ID, abs } from '../lib/site';
 import { breadcrumbs, type Crumb } from '../lib/schema';
 
 interface Props {
@@ -48,6 +48,19 @@ const here = Astro.url.pathname;
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
     <slot name="head" />
+    {GA_ID && (
+      <Fragment>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline define:vars={{ gaId: GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          // Automated browsers (CI, smoke tests) are kept out of the data.
+          if (!navigator.webdriver) gtag('config', gaId);
+        </script>
+      </Fragment>
+    )}
   </head>
   <body>
     <header class="site-header">

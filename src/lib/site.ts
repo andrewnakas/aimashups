@@ -8,6 +8,9 @@ export const SITE = {
 // Game binaries are served from a separate origin (R2 behind play.aigamemashups.com).
 export const PLAYER_ORIGIN = (import.meta.env.PUBLIC_PLAYER_ORIGIN ?? 'https://play.aigamemashups.com').replace(/\/$/, '');
 
+// Google Analytics 4: property aigamemashups.com in the treesixty account.
+export const GA_ID: string = import.meta.env.PUBLIC_GA_ID || 'G-Q0L5GT4GL6';
+
 export const GISCUS = {
   repo: import.meta.env.PUBLIC_GISCUS_REPO as string | undefined,
   repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID as string | undefined,
