@@ -9,9 +9,9 @@ date: 2026-10-07
 status: downloadable
 repo: "https://github.com/cabcrab/Granny-Minecraft-Passthrough"
 stars: 4
-downloads: 748
+downloads: 1147
 license: "MIT"
-checked: 2026-10-09
+checked: 2026-10-10
 tribute: blockrealm
 ---
 A passthrough mod that blends real Minecraft into Granny Legacy, DVloper's horror game, so you can build and dig inside Granny's house. The author describes it as "very buggy." Its commits credit Claude as co-author, and release v0.1.1 had nearly 750 downloads by 9 October 2026.

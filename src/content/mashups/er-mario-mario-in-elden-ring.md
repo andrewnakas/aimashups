@@ -8,11 +8,11 @@ origin: ai-built
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/deltarooo/er-mario"
-stars: 168
-downloads: 1925
+stars: 177
+downloads: 2077
 license: MIT
 parents: [libsm64]
-checked: 2026-10-09
+checked: 2026-10-10
 builtOn:
   - { label: "libsm64", url: "https://github.com/libsm64/libsm64" }
   - { label: "me3 mod loader", url: "https://me3.help" }

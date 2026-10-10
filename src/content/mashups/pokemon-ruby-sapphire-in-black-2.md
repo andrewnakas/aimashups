@@ -8,9 +8,9 @@ origin: ai-built
 date: 2026-10-09
 status: downloadable
 repo: "https://github.com/logdog2325/pokemon-ruby-sapphire-nds"
-stars: 5
-downloads: 569
-checked: 2026-10-09
+stars: 9
+downloads: 1261
+checked: 2026-10-10
 builtOn:
   - { label: "pret pokeruby / pokeemerald decompilations", url: "https://github.com/pret" }
   - { label: "pokebw2 decompilation", url: "https://github.com/fuddlesworth/pokebw2" }

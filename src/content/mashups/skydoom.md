@@ -9,9 +9,9 @@ date: 2026-10-07
 status: downloadable
 repo: "https://github.com/Caffs/SkyDoom"
 stars: 3
-downloads: 32
+downloads: 50
 license: "GPL-3.0"
-checked: 2026-10-09
+checked: 2026-10-10
 parents: [skse]
 ---
 SkyDoom runs DOOM inside Skyrim, using an SKSE plugin and the Chocolate Doom source port. It says it was inspired by [SkyCraft](/mashups/skycraft-minecraft-in-skyrim/), and needs Skyrim 1.7.104, SKSE 2.3.1 and Address Library, plus your own DOOM data. The repository doesn't mention AI, so it's marked unverified.

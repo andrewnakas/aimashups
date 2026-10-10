@@ -9,9 +9,9 @@ date: 2026-10-05
 status: downloadable
 repo: "https://github.com/DaffyDabz/bo2-minecraft-zombies"
 stars: 3
-downloads: 25
+downloads: 38
 license: "Apache-2.0"
-checked: 2026-10-09
+checked: 2026-10-10
 parents: [iw4l, 2010-rust-rewrite-mashup]
 ---
 A fan mod built on the [2010 Rust Rewrite Mashup](/mashups/2010-rust-rewrite-mashup/): every night in its Minecraft world turns into a round of Black Ops II-style Zombies. Its commits credit Claude as co-author.

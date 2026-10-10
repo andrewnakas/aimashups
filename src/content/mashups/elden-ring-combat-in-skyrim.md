@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-05
 status: unreleased
 repo: "https://github.com/Funny-Bones/ELDEN-RING-Combat-Rewrite"
-stars: 149
+stars: 162
 license: MIT
 parents: [bevy]
-checked: 2026-10-09
+checked: 2026-10-10
 sources:
   - { title: "Skyrim modder forgoes trend of AI-powered crossovers, brings Elden Ring's combat to the RPG himself", publisher: "GamesRadar+", url: "https://www.gamesradar.com/games/the-elder-scrolls/skyrim-modder-forgoes-trend-of-ai-powered-crossovers-brings-elden-rings-combat-to-the-rpg-himself-and-earns-rave-reviews-holy-peak/" }
   - { title: "Elden Ring Combat Reportedly Playable in Skyrim Through Rust Rewrite Mod", publisher: "HappyGamer", url: "https://happygamer.com/elden-ring-combat-skyrim-mod-rust-167028/" }
@@ -22,7 +22,9 @@ faqs:
 On 5 October Funny-Bones published a Rust/Bevy sandbox that recreates how Elden Ring's player moves and fights: walk, run and sprint with their braking animations, lock-on strafing, the full set of jumps and landings, rolls that come out on release, and the attack chains. The timings and animations aren't tuned by eye. They're read from the player's own copy of the game, so the repository holds only code.
 
 ## Into Skyrim
-Because the controller is a standalone Rust program, it can be attached to another game. A day later a clip showed Skyrim's Dragonborn fighting with Elden Ring's timing and weight, and chasm shared it as "Elden Ring combat is now FULLY playable in Skyrim". Replies called it "holy peak". The Skyrim build hasn't been released yet.
+Because the controller is a standalone Rust program, it can be attached to another game. A day later a clip showed Skyrim's Dragonborn fighting with Elden Ring's timing and weight, and chasm shared it as "Elden Ring combat is now FULLY playable in Skyrim". Replies called it "holy peak". The Skyrim build hasn't been released yet. chasm forked the rewrite on 6 October as ELDEN-RING-Playermodel-Rust; the fork's README describes the same sandbox, so it isn't a separate project.
+
+Funny-Bones has since posted the rewrite in the chasm Discord's project showcase, alongside a second rewrite of the same kind: [White Knuckle's climbing mechanics](https://github.com/Funny-Bones/White-Knuckle-Climbing-Rust) in Rust (7 October). As of 10 October the rewrite supports 24 weapon classes, each one- or two-handed.
 
 ## Why it stands out
 The clip went viral in the same week the backlash peaked, and it got a far warmer reception than the two-game clips, because it moves the way the original does. GamesRadar contrasted it with the AI crossovers, though the rewrite's own commit history credits Claude as co-author. It's built the way the trend's best-received projects were: a [Rust rewrite](/techniques/rust-rewrite/) of one game's rules that can be dropped into another.

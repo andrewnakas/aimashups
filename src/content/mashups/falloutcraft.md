@@ -8,11 +8,11 @@ origin: ai-built
 date: 2026-10-01
 status: downloadable
 repo: "https://github.com/zeyvu/FalloutCraft"
-stars: 6
-downloads: 267
+stars: 7
+downloads: 289
 license: MIT
 parents: [skycraft-minecraft-in-skyrim]
-checked: 2026-10-09
+checked: 2026-10-10
 builtOn:
   - { label: "SkyCraft (chasmlol)", url: "https://github.com/chasmlol/SkyCraft" }
 tribute: blockrealm
