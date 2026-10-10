@@ -1,0 +1,7 @@
+---
+// How a mashup was made, as its creator describes it. Shown on cards and mashup pages.
+import { ORIGINS, type Origin } from '../lib/site';
+interface Props { origin: Origin; }
+const { origin } = Astro.props;
+---
+<span class={`origin ${origin}`} title={ORIGINS[origin].title}>{ORIGINS[origin].label}</span>

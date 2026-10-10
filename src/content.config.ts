@@ -15,6 +15,8 @@ const mashups = defineCollection({
     games: z.array(reference('games')).min(1),
     creators: z.array(person).min(1),
     technique: reference('techniques'),
+    // How it was made: an AI coding agent (creator says so), ordinary modding, or not yet known.
+    origin: z.enum(['ai-built', 'conventional-mod', 'unverified']),
     date: z.coerce.date(), // first public release or first clip
     status: z.enum(['downloadable', 'source-only', 'video-only', 'unreleased']),
     needsOwnCopy: z.boolean().default(true),
@@ -26,6 +28,7 @@ const mashups = defineCollection({
     builtOn: z.array(link).default([]),
     links: z.array(link).default([]),
     sources: z.array(source).default([]),
+    seenOn: z.array(link).default([]), // where we first spotted it, e.g. an @recompiledgames reel
     reach: z.string().optional(), // for clips: "22.5M views on X", as reported by the cited source
     parents: z.array(z.string()).default([]), // lineage ids (src/data/lineage.ts) this was built on
     tribute: z.string().optional(), // preset slug on /play/
@@ -52,7 +55,15 @@ const techniques = defineCollection({
 
 const guides = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guides' }),
-  schema: z.object({ title: z.string(), summary: z.string(), date: z.coerce.date() }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    mashup: reference('mashups').optional(), // a how-to-play guide for this mashup
+    difficulty: z.enum(['easy', 'medium', 'hard']).optional(),
+    time: z.string().optional(), // "15 minutes"
+  }),
 });
 
 // Everything else that shaped the history: engines, model launches, tools, clips,

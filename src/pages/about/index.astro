@@ -7,6 +7,14 @@ import { SITE } from '../../lib/site';
   <div class="prose">
     <p>AI Game Mashups does two things: it hosts game mashups you can play instantly in a browser, and it documents the AI game mashup trend as it happens, checking every entry against its source code.</p>
     <p>It's made by <a href="https://nak.as">Andrew Nakas</a>, who also runs <a href="https://decompgames.com">Decomp Games</a> (decompilations and engine recreations in the browser) and <a href="https://skatemods.com">Skate Mods</a>. The site and GameMash are open source.</p>
+    <h2>What gets listed</h2>
+    <p>Any project or clip that puts one game's mechanics, characters or world inside another. Every entry is tagged with how it was made, based on what the creator or the code says:</p>
+    <ul>
+      <li><strong>AI-built:</strong> the creator says an AI coding agent wrote most of it, or the commit history credits one.</li>
+      <li><strong>Conventional mod:</strong> made with ordinary modding tools, with no AI agent credited.</li>
+      <li><strong>Unverified:</strong> we couldn't confirm how it was made, usually because it's a clip with no creator credit or code.</li>
+    </ul>
+    <p>New leads come from GitHub, mod sites, press coverage, and accounts that follow the scene, like <a href="https://www.instagram.com/recompiledgames/">@recompiledgames</a>. A lead is only listed once it's been checked against the project itself; entries we can't trace say so.</p>
     <h2>Contribute</h2>
     <p>Everything happens on GitHub. To add a mashup to the history, fix a fact or propose a preset, <a href={`${SITE.repo}/issues/new/choose`}>open an issue</a> or send a pull request. See <a href={`${SITE.repo}/blob/main/CONTRIBUTING.md`}>CONTRIBUTING.md</a>.</p>
     <h2>Takedowns and corrections</h2>

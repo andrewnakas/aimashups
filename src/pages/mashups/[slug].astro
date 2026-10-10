@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PresetCard from '../../components/PresetCard.astro';
 import MashupCard from '../../components/MashupCard.astro';
 import Comments from '../../components/Comments.astro';
+import OriginBadge from '../../components/OriginBadge.astro';
 import { getCollection, getEntry, getEntries, render, type CollectionEntry } from 'astro:content';
 import { ALL_PRESETS, presetSlug } from '../../data/presets';
 import { fmtDate } from '../../lib/site';
@@ -23,6 +24,7 @@ const gameIds = d.games.map((g) => g.id);
 const related = (await getCollection('mashups')).filter((m) => m.id !== entry.id && m.data.games.some((g) => gameIds.includes(g.id))).slice(0, 3);
 const path = `/mashups/${entry.id}/`;
 // Lineage, timeline mentions, and neighbours in time.
+const guide = (await getCollection('guides')).find((g) => g.data.mashup?.id === entry.id);
 const tree = await lineage();
 const builtOn = tree.parentsOf(entry.id);
 const ledTo = tree.children(entry.id);
@@ -37,13 +39,14 @@ const statusText = {
   'unreleased': 'Announced, not released',
 }[d.status];
 ---
-<Base title={d.title} description={d.summary}
+<Base title={d.title} description={d.summary} image={`/og/mashups/${entry.id}.png`}
   crumbs={[{ name: 'Mashups', path: '/mashups/' }, { name: d.title, path }]}
   jsonld={[article({ headline: d.title, description: d.summary, path, published: d.checked, about: games.map((g) => g.data.name) }), ...(d.faqs.length ? [faqPage(d.faqs)] : [])]}>
   <h1>{d.title}</h1>
   <p class="lede">{d.summary}</p>
   <div class="layout-2">
     <article class="prose">
+      {guide && <p class="howto"><strong>How to try it</strong><a href={`/guides/${guide.id}/`}>{guide.data.title}</a>{guide.data.time && <span class="muted"> · about {guide.data.time}</span>}</p>}
       <Content />
       {(builtOn.length > 0 || ledTo.length > 0) && (<>
         <h2>Lineage</h2>
@@ -64,6 +67,7 @@ const statusText = {
     <aside>
       <dl class="facts">
         <dt>Status</dt><dd><span class={`status ${d.status}`}>{statusText}</span></dd>
+        <dt>Made by</dt><dd><OriginBadge origin={d.origin} /></dd>
         <dt>Games</dt><dd>{games.map((g, i) => <>{i > 0 && ', '}<a href={`/games/${g.id}/`}>{g.data.name}</a></>)}</dd>
         <dt>Creator</dt><dd>{d.creators.map((c, i) => <>{i > 0 && ', '}{c.url ? <a href={c.url}>{c.name}</a> : c.name}</>)}</dd>
         <dt>Technique</dt><dd><a href={`/techniques/${technique.id}/`}>{technique.data.name}</a></dd>
@@ -77,6 +81,7 @@ const statusText = {
         <dt>Checked</dt><dd>{fmtDate(d.checked)}</dd>
       </dl>
       {d.builtOn.length > 0 && (<><h3>Built on</h3><ul class="small">{d.builtOn.map((l) => <li><a href={l.url}>{l.label}</a></li>)}</ul></>)}
+      {d.seenOn.length > 0 && (<><h3>Spotted via</h3><ul class="small">{d.seenOn.map((l) => <li><a href={l.url} rel="nofollow">{l.label}</a></li>)}</ul></>)}
       {d.links.length > 0 && (<><h3>Links</h3><ul class="small">{d.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}</ul></>)}
       {tribute && (<>
         <h3>Play something like it now</h3>

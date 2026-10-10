@@ -4,9 +4,10 @@ summary: "Call of Duty: World at War's first zombies map, ported to the web by O
 games: [cod-world-at-war]
 creators: [{ name: P.E. Cooper, url: "https://x.com/p_e_cooper" }]
 technique: decompile-port
+origin: ai-built
 date: 2026-09-29
 status: video-only
-checked: 2026-10-08
+checked: 2026-10-09
 sources:
   - { title: "Call of Duty fan creates insane Zombies crossovers with Wii Sports, Portal & Fortnite", publisher: "Dexerto", url: "https://www.dexerto.com/call-of-duty/call-of-duty-fan-creates-insane-zombies-crossovers-with-wii-sports-portal-fortnite-3414983/" }
   - { title: "The Wild AI Mashups That Broke the Internet: What's Real and What You Can Download", publisher: "VGTimes", url: "https://vgtimes.com/articles/169886-how-ai-game-mashups-work.html" }

@@ -1,0 +1,36 @@
+---
+// Game × game grid: a filled cell means at least one documented mashup combines the two.
+// One mashup links straight to it; several link to the explorer filtered to that pair.
+import { getCollection } from 'astro:content';
+const [mashups, games] = await Promise.all([getCollection('mashups'), getCollection('games')]);
+const pairs = new Map<string, typeof mashups>();
+const key = (a: string, b: string) => [a, b].sort().join('|');
+for (const m of mashups) {
+  const ids = m.data.games.map((g) => g.id);
+  for (const a of ids) for (const b of ids) if (a < b) pairs.set(key(a, b), [...(pairs.get(key(a, b)) ?? []), m]);
+}
+// Most-mashed games first, so the dense corner of the grid is top-left.
+const degree = (id: string) => mashups.filter((m) => m.data.games.some((g) => g.id === id)).length;
+const used = games.filter((g) => degree(g.id) > 0).sort((a, b) => degree(b.id) - degree(a.id) || a.data.name.localeCompare(b.data.name));
+---
+<div class="matrix-wrap">
+  <table class="matrix">
+    <caption class="sr-only">Which games have been mashed together</caption>
+    <thead><tr><th></th>{used.map((g) => <th scope="col"><span>{g.data.name}</span></th>)}</tr></thead>
+    <tbody>
+      {used.map((row) => (
+        <tr>
+          <th scope="row"><a href={`/games/${row.id}/`}>{row.data.name}</a></th>
+          {used.map((col) => {
+            if (row.id === col.id) return <td class="self"></td>;
+            const list = pairs.get(key(row.id, col.id)) ?? [];
+            if (!list.length) return <td></td>;
+            const href = list.length === 1 ? `/mashups/${list[0].id}/` : `/mashups/?games=${[row.id, col.id].sort().join('+')}`;
+            const label = `${row.data.name} × ${col.data.name}: ${list.map((m) => m.data.title).join('; ')}`;
+            return <td><a class={list.length === 1 ? 'n1' : ''} href={href} title={label} aria-label={label}>{list.length > 1 ? list.length : ''}</a></td>;
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

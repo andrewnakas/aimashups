@@ -4,15 +4,16 @@ summary: "Modern Warfare 2, Skate 3 and an endless Minecraft world in one Rust g
 games: [modern-warfare-2, skate-3, minecraft]
 creators: [{ name: chasmlol, url: "https://github.com/chasmlol" }]
 technique: rust-rewrite
+origin: ai-built
 date: 2026-09-27
 status: downloadable
 repo: "https://github.com/chasmlol/2010-rust-rewrite-mashup"
-stars: 812
-downloads: 13130
+stars: 830
+downloads: 13513
 license: Apache-2.0
 reach: "29,000+ likes on the launch post on X (Know Your Meme)"
 parents: [iw4l, skate-3-rust-engine, minecraftoss]
-checked: 2026-10-08
+checked: 2026-10-09
 builtOn:
   - { label: "IW4L (vladtrc): Rust/Bevy MW2 runtime", url: "https://github.com/vladtrc/iw4L" }
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
