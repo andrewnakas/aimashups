@@ -15,6 +15,11 @@ export interface Preset extends Launch {
   title: string; // H1 / search phrasing
   pitch: string; // one-sentence description (meta description)
   combos: string[]; // what actually happens when these modes meet
+  // Standalone games that differ from the GameMash tributes (renderer, provenance, controls).
+  renderer?: string; // facts box; default 'WebGPU, WebGL2 fallback'
+  madeFrom?: string; // answers "Is it made from the original games?"
+  controlsNote?: string; // under the facts box; default 'Press Tab in-game for the controls.'
+  desktop?: boolean; // has desktop releases (default true for games)
 }
 
 const P = (modes: string[], p: Omit<Preset, 'modes'>): Preset => ({ modes, ...p });
@@ -245,6 +250,26 @@ export const TRIBUTES: Preset[] = [
 ];
 
 TRIBUTES.push(
+  P(['shooter', 'skate'], {
+    slug: 'mw2-x-skate',
+    game: { repo: 'andrewnakas/skate3-mw2', url: 'https://andrewnakas.github.io/skate3-mw2/' },
+    tributeTo: '2010-rust-rewrite-mashup',
+    worldName: 'The clean-room Skate 3 parks (Industrial by default)',
+    name: 'MW2 x Skate',
+    title: 'MW2 x Skate: a Modern Warfare 2 Match You Can Skate, in the Browser',
+    pitch: 'An MW2 match against bots with real MW2 movement from IW4L, on the clean-room Skate 3 engine: press J to drop onto a board, the bots keep hunting you. No game files.',
+    combos: [
+      'On foot you move with IW4L’s Rust rewrite of MW2’s player movement: sprint, jump, crouch, prone, mantle.',
+      'Create-a-Class: ACR, M4A1, UMP45 or Intervention, USP .45 or SPAS-12, and a perk from each tier.',
+      'MW2’s default controls, frags and smoke, a UAV after a 3-kill streak, enemies on the minimap when they fire.',
+      'J (or both sticks) drops you onto the Skate 3 engine’s board mid-match; get shot while skating and you are back on foot.',
+    ],
+    renderer: 'WebGPU (Chrome or Edge)',
+    desktop: false,
+    controlsNote: 'MW2’s default controls; the main menu and the page list them. Esc pauses.',
+    madeFrom:
+      'It contains no game files. On foot you move with IW4L’s open-source Rust rewrite of MW2’s player movement (Apache-2.0); the skating is the Skate 3 Rust engine (GPL-3.0) with its clean-room asset pack, where every texture, mesh and sound was regenerated. Guns use published MW2 numbers, menus and HUD are original, and gun sounds are synthesised.',
+  }),
   P(['skate', 'shooter', 'voxel'], {
     slug: 'kickflip-ops',
     game: { repo: 'andrewnakas/kickflip-ops', url: `${PLAYER_ORIGIN}/kickflip-ops/` },
