@@ -1,0 +1,5 @@
+# The HaloSkate 3 player embeds a cross-origin-isolated game (/embed/, worker.js).
+# credentialless keeps third-party scripts (analytics, fonts) loading.
+/play/haloskate-3/
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless

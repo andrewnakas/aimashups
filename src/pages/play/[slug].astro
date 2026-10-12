@@ -47,7 +47,7 @@ const faqs = [
   <h1>{preset.title}</h1>
   <p class="lede">{preset.pitch}</p>
   {tributeOf && <p class="muted">A clean-room tribute to <a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a> by {tributeOf.data.creators.map((c) => c.name).join(', ')}.</p>}
-  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} src={preset.game?.url} newTab={preset.newTab} />
+  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} src={preset.game?.url} embed={preset.embed} />
 
   <div class="layout-2 section">
     <div class="prose">

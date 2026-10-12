@@ -4,10 +4,11 @@
 import { PLAYER_ORIGIN } from '../lib/site';
 import { modeBySlug, playUrl, type Launch } from '../data/modes';
 
-interface Props { modes: string[]; title: string; launch?: Launch; src?: string; newTab?: boolean; }
-const { modes, title, launch = {}, newTab = false } = Astro.props;
+interface Props { modes: string[]; title: string; launch?: Launch; src?: string; embed?: string; }
+const { modes, title, launch = {}, embed } = Astro.props;
 // Standalone games pass their own URL; presets boot GameMash with their modes.
-const src = Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(PLAYER_ORIGIN, modes, launch);
+// `embed` is a same-origin proxy of the game (worker.js) for builds that need cross-origin isolation.
+const src = embed ?? (Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(PLAYER_ORIGIN, modes, launch));
 const colors = modes.map((m) => modeBySlug(m).color);
 const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
 ---
@@ -15,16 +16,15 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
   <div class="poster">
     <div class="bg" style={`background:${bg}`}></div>
     <h2>{title}</h2>
-    {newTab
-      ? <a class="btn" href={Astro.props.src} target="_blank" rel="noopener" data-newtab>▶ Play in a new tab</a>
-      : <button class="btn" type="button" data-play>▶ Play in browser</button>}
+    <button class="btn" type="button" data-play>▶ Play in browser</button>
     <p class="small" style="margin:0;opacity:.85">First load downloads the game (~60–120 MB), then it's cached.<br />Needs a desktop browser with WebGPU or WebGL2. Keyboard + mouse.</p>
   </div>
 </div>
-{!newTab && <div class="player-bar">
+<div class="player-bar">
   <button type="button" data-fullscreen>⛶ Fullscreen</button>
   <span>{Astro.props.src ? 'Tab shows the controls' : 'Tab opens the mode panel · F1–F8 toggle modes live'}</span>
-</div>}
+  {embed && Astro.props.src && <a href={Astro.props.src} target="_blank" rel="noopener">Won't start? Open it on its own page ↗</a>}
+</div>
 <noscript><p>The game needs JavaScript. <a href={src}>Open it directly</a>.</p></noscript>
 
 <script>
@@ -43,8 +43,6 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
       f.focus();
     };
     el.querySelector('[data-play]')?.addEventListener('click', start);
-    el.querySelector('[data-newtab]')?.addEventListener('click', () =>
-      (window as any).gtag?.('event', 'game_start', { game: el.dataset.title, page: location.pathname }));
     el.nextElementSibling?.querySelector('[data-fullscreen]')?.addEventListener('click', () => {
       start();
       el.requestFullscreen?.();

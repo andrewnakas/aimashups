@@ -22,7 +22,7 @@ export interface Preset extends Launch {
   desktop?: boolean; // has desktop releases (default true for games)
   engine?: string; // facts box; default 'Rust + Bevy → WebAssembly'
   build?: string; // facts box; default links the clean-room page
-  newTab?: boolean; // needs cross-origin isolation (threads), which a cross-origin iframe can't get
+  embed?: string; // same-origin proxy path (worker.js EMBEDS) for builds that need cross-origin isolation
 }
 
 const P = (modes: string[], p: Omit<Preset, 'modes'>): Preset => ({ modes, ...p });
@@ -269,9 +269,9 @@ TRIBUTES.push(
     engine: 'C++ (OpenCE) → WebAssembly',
     renderer: 'WebGL 2',
     desktop: false,
-    newTab: true,
+    embed: '/embed/haloskate3wasm/',
     build: 'Clean-room art and sound',
-    controlsNote: 'B gets on and off the board; arrows flick tricks; H shows the controls strip. Opens in a new tab: the game uses threads, which need their own page.',
+    controlsNote: 'B gets on and off the board; arrows flick tricks; H shows the controls strip.',
     madeFrom:
       'Partly. The engine is OpenCE, a CC0 decompilation of Halo CE, and the maps come from halo-cleanroom: every texture, sound and voice is regenerated from CC0 sources, while level geometry, collision, scripts and tuning are the original level data. The skating is a C++ port of skate-core from the Skate 3 Rust engine; no Skate 3 animations, meshes, textures or sounds ship. You don’t need any game files.',
   }),
