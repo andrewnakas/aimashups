@@ -4,10 +4,11 @@
 import { PLAYER_ORIGIN } from '../lib/site';
 import { modeBySlug, playUrl, type Launch } from '../data/modes';
 
-interface Props { modes: string[]; title: string; launch?: Launch; src?: string; }
-const { modes, title, launch = {} } = Astro.props;
+interface Props { modes: string[]; title: string; launch?: Launch; src?: string; embed?: string; }
+const { modes, title, launch = {}, embed } = Astro.props;
 // Standalone games pass their own URL; presets boot GameMash with their modes.
-const src = Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(PLAYER_ORIGIN, modes, launch);
+// `embed` is a same-origin proxy of the game (worker.js) for builds that need cross-origin isolation.
+const src = embed ?? (Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(PLAYER_ORIGIN, modes, launch));
 const colors = modes.map((m) => modeBySlug(m).color);
 const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
 ---
@@ -22,6 +23,7 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
 <div class="player-bar">
   <button type="button" data-fullscreen>⛶ Fullscreen</button>
   <span>{Astro.props.src ? 'Tab shows the controls' : 'Tab opens the mode panel · F1–F8 toggle modes live'}</span>
+  {embed && Astro.props.src && <a href={Astro.props.src} target="_blank" rel="noopener">Won't start? Open it on its own page ↗</a>}
 </div>
 <noscript><p>The game needs JavaScript. <a href={src}>Open it directly</a>.</p></noscript>
 
