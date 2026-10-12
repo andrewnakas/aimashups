@@ -25,7 +25,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.na
 
   <section class="section">
     <div class="section-head"><h2>Play now</h2><a href="/play/">All {ALL_PRESETS.length} mashups →</a></div>
-    <ul class="grid">{[...TRIBUTES, FEATURED[0], PAIRS[1], PAIRS[14]].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
+    <ul class="grid">{[...TRIBUTES.filter((p) => p.slug === 'haloskate-3'), ...TRIBUTES.filter((p) => p.slug !== 'haloskate-3'), FEATURED[0], PAIRS[1], PAIRS[14]].map((p) => <li><PresetCard preset={p} /></li>)}</ul>
   </section>
 
   <section class="section">
