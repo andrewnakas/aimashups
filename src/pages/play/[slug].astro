@@ -47,7 +47,7 @@ const faqs = [
   <h1>{preset.title}</h1>
   <p class="lede">{preset.pitch}</p>
   {tributeOf && <p class="muted">A clean-room tribute to <a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a> by {tributeOf.data.creators.map((c) => c.name).join(', ')}.</p>}
-  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} src={preset.game?.url} />
+  <GamePlayer modes={preset.modes} title={preset.name ?? names} launch={launch} src={preset.game?.url} newTab={preset.newTab} />
 
   <div class="layout-2 section">
     <div class="prose">
@@ -74,10 +74,10 @@ const faqs = [
         {preset.worldName && <><dt>World</dt><dd>{preset.worldName}</dd></>}
         {tributeOf && <><dt>Tribute to</dt><dd><a href={`/mashups/${tributeOf.id}/`}>{tributeOf.data.title}</a></dd></>}
         {!preset.game && <><dt>Modes</dt><dd>{modes.length} of {MODES.length}</dd></>}
-        <dt>Engine</dt><dd>Rust + Bevy → WebAssembly</dd>
+        <dt>Engine</dt><dd>{preset.engine ?? 'Rust + Bevy → WebAssembly'}</dd>
         <dt>Renderer</dt><dd>{preset.renderer ?? 'WebGPU, WebGL2 fallback'}</dd>
         <dt>Price</dt><dd>Free</dd>
-        <dt>Build</dt><dd><a href="/about/clean-room/">Clean room</a></dd>
+        <dt>Build</dt><dd>{preset.build ?? <a href="/about/clean-room/">Clean room</a>}</dd>
       </dl>
       <p class="small muted">{preset.game ? (preset.controlsNote ?? 'Press Tab in-game for the controls.') : `Press Tab in-game to add any of the other ${others.length} modes.`}</p>    </aside>
   </div>
