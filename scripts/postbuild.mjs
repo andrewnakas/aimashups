@@ -25,8 +25,9 @@ writeFileSync(new URL('_headers', dist), `/*
   Cache-Control: public, max-age=3600
 /play/haloskate-3/
   Cross-Origin-Opener-Policy: same-origin
-  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Embedder-Policy: require-corp
 `);
-// /play/haloskate-3/ embeds a cross-origin-isolated game (/embed/, worker.js); credentialless keeps
-// third-party scripts (analytics, fonts) loading.
+// /play/haloskate-3/ embeds a cross-origin-isolated game (/embed/, worker.js). require-corp, not
+// credentialless: Safari only supports require-corp, and every third-party file on the page
+// (gtag, Google Fonts) already sends Cross-Origin-Resource-Policy: cross-origin.
 console.log(`postbuild: ${lines.length} redirects`);
