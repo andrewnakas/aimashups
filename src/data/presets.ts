@@ -269,7 +269,7 @@ TRIBUTES.push(
     engine: 'C++ (OpenCE) → WebAssembly',
     renderer: 'WebGL 2',
     desktop: false,
-    embed: '/embed/haloskate3wasm/',
+    embed: '/embed/haloskate3wasm/?launch=1',
     build: 'Clean-room art and sound',
     controlsNote: 'B gets on and off the board; arrows flick tricks; H shows the controls strip.',
     madeFrom:
