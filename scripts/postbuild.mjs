@@ -23,5 +23,10 @@ writeFileSync(new URL('_headers', dist), `/*
   Cache-Control: public, max-age=31536000, immutable
 /pagefind/*
   Cache-Control: public, max-age=3600
+/play/haloskate-3/
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
 `);
+// /play/haloskate-3/ embeds a cross-origin-isolated game (/embed/, worker.js); credentialless keeps
+// third-party scripts (analytics, fonts) loading.
 console.log(`postbuild: ${lines.length} redirects`);
