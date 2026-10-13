@@ -12,7 +12,7 @@ const src = embed ?? (Astro.props.src ? `${Astro.props.src}?panel=0` : playUrl(P
 const colors = modes.map((m) => modeBySlug(m).color);
 const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i / Math.max(1, colors.length - 1)) * 100)}%`).join(', ')})`;
 ---
-<div class="player" data-player data-src={src} data-title={title}>
+<div class="player" data-player data-src={src} data-title={title} data-direct={embed && Astro.props.src}>
   <div class="poster">
     <div class="bg" style={`background:${bg}`}></div>
     <h2>{title}</h2>
@@ -31,6 +31,12 @@ const bg = `linear-gradient(135deg, ${colors.map((c, i) => `${c} ${Math.round((i
   for (const el of document.querySelectorAll<HTMLElement>('[data-player]')) {
     const start = () => {
       if (el.querySelector('iframe')) return;
+      // An embedded build that needs threads can't run if this browser didn't isolate the page: open it on its own.
+      if (el.dataset.direct && !window.crossOriginIsolated) {
+        (window as any).gtag?.('event', 'game_start', { game: el.dataset.title, page: location.pathname, direct: true });
+        window.open(el.dataset.direct, '_blank', 'noopener');
+        return;
+      }
       const f = document.createElement('iframe');
       f.src = el.dataset.src!;
       f.title = el.dataset.title || 'Game';
