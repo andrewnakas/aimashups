@@ -1,8 +1,11 @@
 ---
 // Game × game grid: a filled cell means at least one documented mashup combines the two.
 // One mashup links straight to it; several link to the explorer filtered to that pair.
+// Orange: a mashup in the cell has a how-to-play guide. Green dot: a version is playable on this site
+// (the mashup's `tribute` names a /play/ preset).
 import { getCollection } from 'astro:content';
-const [mashups, games] = await Promise.all([getCollection('mashups'), getCollection('games')]);
+const [mashups, games, guides] = await Promise.all([getCollection('mashups'), getCollection('games'), getCollection('guides')]);
+const guided = new Set(guides.flatMap((g) => (g.data.mashup ? [g.data.mashup.id] : [])));
 const pairs = new Map<string, typeof mashups>();
 const key = (a: string, b: string) => [a, b].sort().join('|');
 for (const m of mashups) {
@@ -26,11 +29,19 @@ const used = games.filter((g) => degree(g.id) > 0).sort((a, b) => degree(b.id) -
             const list = pairs.get(key(row.id, col.id)) ?? [];
             if (!list.length) return <td></td>;
             const href = list.length === 1 ? `/mashups/${list[0].id}/` : `/mashups/?games=${[row.id, col.id].sort().join('+')}`;
-            const label = `${row.data.name} × ${col.data.name}: ${list.map((m) => m.data.title).join('; ')}`;
-            return <td><a class={list.length === 1 ? 'n1' : ''} href={href} title={label} aria-label={label}>{list.length > 1 ? list.length : ''}</a></td>;
+            const guide = list.some((m) => guided.has(m.id));
+            const play = list.some((m) => m.data.tribute);
+            const label = `${row.data.name} × ${col.data.name}: ${list.map((m) => m.data.title).join('; ')}${guide ? ' · has a guide' : ''}${play ? ' · playable here' : ''}`;
+            const cls = [list.length === 1 && 'n1', guide && 'guide', play && 'play'].filter(Boolean).join(' ');
+            return <td><a class={cls} href={href} title={label} aria-label={label}>{list.length > 1 ? list.length : ''}</a></td>;
           })}
         </tr>
       ))}
     </tbody>
   </table>
 </div>
+<p class="matrix-legend small muted">
+  <span><i class="sw"></i>Mashed</span>
+  <span><i class="sw guide"></i>Has a guide</span>
+  <span><i class="sw dot"></i>Playable on this site</span>
+</p>

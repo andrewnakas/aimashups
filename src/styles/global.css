@@ -9,6 +9,8 @@
   --accent-ink: #ffffff;
   --link: #b8321f;
   --ok: #2f8a4c;
+  --guide: #ee8a1f; /* matrix: has a guide */
+  --play: #1fae55; /* matrix: playable here */
   --warn: #a8690b;
   --radius: 10px;
   --wrap: 1120px;
@@ -193,6 +195,16 @@ th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lin
 .matrix td a { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 5px; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; transition: transform .12s; }
 .matrix td a.n1 { background: color-mix(in srgb, var(--accent) 55%, var(--panel)); }
 .matrix td a:hover { transform: scale(1.18); }
+.matrix td a { position: relative; background: color-mix(in srgb, var(--muted) 75%, var(--panel)); color: var(--panel); }
+.matrix td a.n1 { background: color-mix(in srgb, var(--muted) 45%, var(--panel)); }
+.matrix td a.guide, .matrix td a.n1.guide { background: var(--guide); color: #fff; }
+.matrix td a.play::after { content: ''; position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--play); box-shadow: 0 0 0 1.5px var(--panel); }
+.matrix-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 6px; }
+.matrix-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.matrix-legend .sw { position: relative; display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: color-mix(in srgb, var(--muted) 45%, var(--panel)); }
+.matrix-legend .sw.guide { background: var(--guide); }
+.matrix-legend .sw.dot { background: transparent; }
+.matrix-legend .sw.dot::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--play); }
 .matrix-wrap { overflow-x: auto; padding-bottom: 8px; }
 
 /* collapsible family tree */
