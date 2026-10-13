@@ -16,7 +16,7 @@ builtOn:
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
   - { label: "halo-cleanroom: regenerated Halo CE maps", url: "https://github.com/andrewnakas/halo-cleanroom" }
 links:
-  - { label: "Play in the browser", url: "https://aigamemashups.com/play/haloskate-3/" }
+  - { label: "Standalone page (GitHub Pages)", url: "https://andrewnakas.github.io/haloskate3wasm/" }
 tribute: haloskate-3
 faqs:
   - { q: "Do I need to own Halo or Skate 3?", a: "No. It loads the clean-room maps from halo-cleanroom, where every texture, sound and voice is regenerated from CC0 sources; level geometry, collision and scripts are the original level data. No Skate 3 files ship." }
