@@ -291,6 +291,17 @@
   links:
     - { label: "ai-game-modding-guides (Internet Archive, 7 Oct 2026)", url: "https://web.archive.org/web/20261007054335/https://github.com/trevaintdead/ai-game-modding-guides" }
 
+- id: oot-mods-reel
+  date: 2026-10-09
+  kind: clip
+  title: "\"Ocarina of Time mods are unhinged\": pre-AI mods resurface"
+  text: "An Instagram reel by @_gmedley compiles Ocarina of Time mods \"from 2024 BVC (before vibe coding)\", among them notCHase's unreleased Pikmin mod, and asks fans to get him to release it. It showed about 24,700 likes and 241 comments by 13 October, as the AI mashup wave renewed interest in hand-made crossovers."
+  who: [{ name: "Gabe (@_gmedley)", url: "https://www.instagram.com/_gmedley/" }, { name: "notCHase", url: "https://www.youtube.com/@notchase" }]
+  mashup: pikmin-in-ocarina-of-time
+  links:
+    - { label: "Reel", url: "https://www.instagram.com/reel/DeSRsiui3E2/" }
+    - { label: "Original Pikmin video", url: "https://www.youtube.com/watch?v=6VtNgz5-tsI" }
+
 - id: rewrite-wave
   date: 2026-10-08
   kind: port
