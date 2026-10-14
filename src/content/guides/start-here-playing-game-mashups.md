@@ -66,4 +66,4 @@ Every guide lists where the mod writes its log. When you report a problem, open 
 - [SkateIV: Skate 3 in GTA IV](/guides/how-to-play-skate-iv/)
 
 ## Want to build one?
-The chasm Discord's moderators maintain [ai-game-modding-guides](https://github.com/trevaintdead/ai-game-modding-guides), beginner guides to making passthrough mods and Rust rewrites with a coding agent. Start with its [start-here page](https://github.com/trevaintdead/ai-game-modding-guides/blob/main/guides/00-start-here.md) and the [mod loaders guide](https://github.com/trevaintdead/ai-game-modding-guides/blob/main/guides/08-mod-loaders-and-script-extenders.md).
+A chasm Discord moderator published [ai-game-modding-guides](https://web.archive.org/web/20261007054335/https://github.com/trevaintdead/ai-game-modding-guides), beginner guides to making passthrough mods and Rust rewrites with a coding agent. The GitHub repository has since been deleted; the link is the Internet Archive's copy from 7 October 2026.
