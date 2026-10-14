@@ -9,8 +9,8 @@ date: 2026-10-04
 status: downloadable
 repo: "https://github.com/Keel62155/Minecraft-X-Games"
 stars: 4
-downloads: 396
-checked: 2026-10-10
+downloads: 489
+checked: 2026-10-13
 builtOn:
   - { label: "SkyCraft", url: "https://github.com/chasmlol/SkyCraft" }
 links:

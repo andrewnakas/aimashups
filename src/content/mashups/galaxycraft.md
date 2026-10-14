@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-03
 status: downloadable
 repo: "https://github.com/M0uidev/GalaxyCraft"
-stars: 2
-downloads: 708
+stars: 3
+downloads: 1044
 license: "MIT"
-checked: 2026-10-10
+checked: 2026-10-13
 builtOn:
   - { label: "Dolphin emulator", url: "https://github.com/dolphin-emu/dolphin" }
   - { label: "Fabric", url: "https://fabricmc.net" }

@@ -9,10 +9,10 @@ date: 2026-10-02
 status: downloadable
 repo: "https://github.com/Yaekai/OWCraft"
 stars: 5
-downloads: 138
+downloads: 163
 license: MIT
 parents: [skycraft-minecraft-in-skyrim, owml]
-checked: 2026-10-10
+checked: 2026-10-13
 builtOn:
   - { label: "SkyCraft (chasmlol)", url: "https://github.com/chasmlol/SkyCraft" }
 tribute: voxel-x-portals

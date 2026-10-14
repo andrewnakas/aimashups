@@ -8,9 +8,9 @@ origin: ai-built
 date: 2026-10-02
 status: source-only
 repo: "https://github.com/luki-1/ArkWeb"
-stars: 161
+stars: 166
 parents: [skycraft-minecraft-in-skyrim]
-checked: 2026-10-10
+checked: 2026-10-13
 links:
   - { label: "Demo video", url: "https://www.youtube.com/watch?v=O6Mkm_NGCX8" }
 sources:

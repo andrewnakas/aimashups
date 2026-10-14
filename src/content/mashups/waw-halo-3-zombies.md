@@ -10,7 +10,7 @@ status: downloadable
 repo: "https://github.com/Mr-Joshh/World-at-War-Zombies-Halo-3-Mod"
 stars: 0
 downloads: 3
-checked: 2026-10-10
+checked: 2026-10-13
 links:
   - { label: "Releases", url: "https://github.com/Mr-Joshh/World-at-War-Zombies-Halo-3-Mod/releases" }
 ---

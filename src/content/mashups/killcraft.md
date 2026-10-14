@@ -9,9 +9,9 @@ date: 2026-10-04
 status: downloadable
 repo: "https://github.com/goonsn/Killcraft"
 stars: 1
-downloads: 239
+downloads: 299
 license: "MIT"
-checked: 2026-10-10
+checked: 2026-10-13
 builtOn:
   - { label: "SkyCraft", url: "https://github.com/chasmlol/SkyCraft" }
 links:

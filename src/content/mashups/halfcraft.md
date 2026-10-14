@@ -8,9 +8,9 @@ origin: unverified
 date: 2026-10-04
 status: downloadable
 repo: "https://github.com/whiskydumb/halfcraft"
-stars: 12
-downloads: 217
-checked: 2026-10-10
+stars: 14
+downloads: 328
+checked: 2026-10-13
 parents: [skycraft-minecraft-in-skyrim]
 tribute: blockrealm
 ---

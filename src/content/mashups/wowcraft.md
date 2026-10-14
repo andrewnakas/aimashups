@@ -8,11 +8,12 @@ origin: unverified
 date: 2026-10-01
 status: downloadable
 repo: "https://github.com/over825hp/wowcraft"
-stars: 61
-downloads: 690
+stars: 70
+downloads: 852
 license: "MIT"
 reach: "210,000+ views on the creator's YouTube video"
-checked: 2026-10-10
+checked: 2026-10-13
+parents: [fabric]
 links:
   - { label: "Demo video (YouTube)", url: "https://youtu.be/sX3lsLiPS2s" }
 tribute: blockrealm

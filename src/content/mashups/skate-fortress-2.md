@@ -9,7 +9,7 @@ date: 2026-10-05
 status: source-only
 repo: "https://github.com/Naitrate/SkateFortress2"
 stars: 0
-checked: 2026-10-10
+checked: 2026-10-13
 builtOn:
   - { label: "skate-3-rust-engine", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
   - { label: "Source SDK 2013", url: "https://github.com/ValveSoftware/source-sdk-2013" }

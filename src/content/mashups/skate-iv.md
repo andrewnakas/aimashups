@@ -8,9 +8,9 @@ origin: unverified
 date: 2026-10-10
 status: downloadable
 repo: "https://github.com/TheJasonMods/SkateIV"
-stars: 0
-downloads: 4
-checked: 2026-10-10
+stars: 1
+downloads: 51
+checked: 2026-10-13
 builtOn:
   - { label: "skate-3-rust-engine", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
 links:

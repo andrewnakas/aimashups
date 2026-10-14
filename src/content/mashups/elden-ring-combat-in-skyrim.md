@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-05
 status: unreleased
 repo: "https://github.com/Funny-Bones/ELDEN-RING-Combat-Rewrite"
-stars: 162
+stars: 194
 license: MIT
 parents: [bevy]
-checked: 2026-10-10
+checked: 2026-10-13
 sources:
   - { title: "Skyrim modder forgoes trend of AI-powered crossovers, brings Elden Ring's combat to the RPG himself", publisher: "GamesRadar+", url: "https://www.gamesradar.com/games/the-elder-scrolls/skyrim-modder-forgoes-trend-of-ai-powered-crossovers-brings-elden-rings-combat-to-the-rpg-himself-and-earns-rave-reviews-holy-peak/" }
   - { title: "Elden Ring Combat Reportedly Playable in Skyrim Through Rust Rewrite Mod", publisher: "HappyGamer", url: "https://happygamer.com/elden-ring-combat-skyrim-mod-rust-167028/" }

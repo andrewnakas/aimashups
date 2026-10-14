@@ -9,13 +9,13 @@ date: 2026-10-09
 status: downloadable
 repo: "https://github.com/buhhrad/MW2xRoR2"
 stars: 0
-downloads: 17
-checked: 2026-10-10
+downloads: 26
+checked: 2026-10-13
 builtOn:
   - { label: "IW4L", url: "https://github.com/vladtrc/iw4L" }
 links:
   - { label: "Releases", url: "https://github.com/buhhrad/MW2xRoR2/releases" }
-parents: [iw4l]
+parents: [iw4l, 2010-rust-rewrite-mashup]
 tribute: kickflip-ops
 ---
 MW2 x Risk of Rain 2 adds the MW2 Soldier as a Risk of Rain 2 survivor. Its movement, guns, viewmodel and animations, sounds, recoil, HUD and menus are read from your own copy of MW2, while Risk of Rain 2 handles damage, items and enemies, so RoR2 items stack on MW2 guns. MW2's Create-a-Class works through MW2's own menus, perks show up as RoR2 items, and all 15 killstreaks are in, from UAV to the AC-130.
