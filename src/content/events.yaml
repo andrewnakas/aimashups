@@ -286,10 +286,10 @@
   date: 2026-10-03
   kind: tool
   title: "Community guides for building mashups with AI agents"
-  text: "Trev, a moderator of the chasm Discord, published ai-game-modding-guides, beginner guides to passthrough mods, Rust rewrites, mod loaders and script extenders. Its advice: use a coding agent on your PC rather than a chat website, check the host game has a mod loader, start from an example project (SkyCraft for passthrough, hl2-rs for rewrites) and never commit game files. It passed 400 stars within a week."
-  who: [{ name: trevaintdead, url: "https://github.com/trevaintdead" }]
+  text: "Trev, a moderator of the chasm Discord, published ai-game-modding-guides, beginner guides to passthrough mods, Rust rewrites, mod loaders and script extenders. Its advice: use a coding agent on your PC rather than a chat website, check the host game has a mod loader, start from an example project (SkyCraft for passthrough, hl2-rs for rewrites) and never commit game files. It passed 400 stars within a week. By 13 October the GitHub account and repository had been deleted; an Internet Archive copy from 7 October survives."
+  who: [{ name: trevaintdead }]
   links:
-    - { label: "trevaintdead/ai-game-modding-guides", url: "https://github.com/trevaintdead/ai-game-modding-guides" }
+    - { label: "ai-game-modding-guides (Internet Archive, 7 Oct 2026)", url: "https://web.archive.org/web/20261007054335/https://github.com/trevaintdead/ai-game-modding-guides" }
 
 - id: rewrite-wave
   date: 2026-10-08
