@@ -8,11 +8,11 @@ origin: ai-built
 date: 2026-09-30
 status: downloadable
 repo: "https://github.com/chasmlol/SkyCraft"
-stars: 1109
-downloads: 24921
+stars: 1199
+downloads: 27076
 license: MIT
 parents: [skse, fabric]
-checked: 2026-10-09
+checked: 2026-10-13
 links:
   - { label: "Releases", url: "https://github.com/chasmlol/SkyCraft/releases" }
 sources:

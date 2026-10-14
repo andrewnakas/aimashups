@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-04
 status: downloadable
 repo: "https://github.com/alfr0762/ultracraft"
-stars: 59
-downloads: 5691
+stars: 63
+downloads: 7376
 license: "MIT"
-checked: 2026-10-09
+checked: 2026-10-13
 parents: [fabric]
 tribute: blockrealm
 ---

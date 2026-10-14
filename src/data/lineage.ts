@@ -9,12 +9,15 @@ export interface Foundation {
   url: string;
   what: string;
   parents?: string[];
+  // Shown on the tree like a mashup's status: whether the project itself ships a build you can run.
+  status?: 'downloadable' | 'source-only';
+  releases?: string; // where the builds are
 }
 
 export const FOUNDATIONS: Foundation[] = [
   { id: 'bevy', name: 'Bevy', url: 'https://bevyengine.org', what: 'The open-source Rust game engine the rewrites are built on.' },
-  { id: 'iw4l', name: 'IW4L', url: 'https://github.com/vladtrc/iw4L', what: 'Modern Warfare 2 runtime rewritten in Rust (13 Sep 2026).', parents: ['bevy'] },
-  { id: 'skate-3-rust-engine', name: 'skate-3-rust-engine', url: 'https://github.com/SK8-ENGINE/skate-3-rust-engine', what: 'Skate 3 skating rewritten in Rust (8 Sep 2026).', parents: ['bevy'] },
+  { id: 'iw4l', name: 'IW4L', url: 'https://github.com/vladtrc/iw4L', what: 'Modern Warfare 2 runtime rewritten in Rust (13 Sep 2026). Playable demo builds on its releases page; reads MW2 data from your own copy.', parents: ['bevy'], status: 'downloadable', releases: 'https://github.com/vladtrc/iw4L/releases' },
+  { id: 'skate-3-rust-engine', name: 'skate-3-rust-engine', url: 'https://github.com/SK8-ENGINE/skate-3-rust-engine', what: 'Skate 3 skating rewritten in Rust (8 Sep 2026). Experimental builds on its releases page; needs your own Skate 3 files.', parents: ['bevy'], status: 'downloadable', releases: 'https://github.com/SK8-ENGINE/skate-3-rust-engine/releases' },
   { id: 'minecraftoss', name: 'MinecraftOSS', url: 'https://github.com/chasmlol/2010-rust-rewrite-mashup/tree/main/third_party/minecraftoss', what: 'A Rust Minecraft engine: world, mobs and items.' },
   { id: 'revc', name: 're3 / reVC', url: 'https://github.com/mrxenginner/reVC', what: 'Long-standing reverse-engineered source for GTA III and Vice City.' },
   { id: 'gta-reversed', name: 'gta-reversed', url: 'https://github.com/gta-reversed/gta-reversed', what: 'Reverse-engineered GTA: San Andreas.' },

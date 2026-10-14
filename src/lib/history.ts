@@ -84,14 +84,14 @@ export async function stats() {
 
 // ---- Lineage ----
 
-export type Node = { id: string; name: string; url: string; what: string; mashup?: Mashup };
+export type Node = { id: string; name: string; url: string; what: string; mashup?: Mashup; status?: string; releases?: string };
 
 export async function lineage() {
   const mashups = await getCollection('mashups');
   const nodes = new Map<string, Node>();
   const parents = new Map<string, string[]>();
   for (const f of FOUNDATIONS) {
-    nodes.set(f.id, { id: f.id, name: f.name, url: f.url, what: f.what });
+    nodes.set(f.id, { id: f.id, name: f.name, url: f.url, what: f.what, status: f.status, releases: f.releases });
     parents.set(f.id, f.parents ?? []);
   }
   for (const m of mashups) {
@@ -102,9 +102,15 @@ export async function lineage() {
   const children = (id: string) =>
     [...parents].filter(([, ps]) => ps.includes(id)).map(([c]) => nodes.get(c)!).sort((a, b) => +(a.mashup?.data.date ?? 0) - +(b.mashup?.data.date ?? 0));
   const of = (id: string) => (parents.get(id) ?? []).map((p) => nodes.get(p)!);
+  // Everything built on a node at any depth (a mashup built on a mashup counts once).
+  const descendants = (id: string, seen = new Set<string>()): Set<string> => {
+    for (const k of children(id)) if (!seen.has(k.id)) { seen.add(k.id); descendants(k.id, seen); }
+    return seen;
+  };
+  const allCount = (id: string) => descendants(id).size;
   // Mashups that credit nothing on the tree: built from scratch, or undisclosed.
   const standalone = mashups.filter((m) => m.data.parents.length === 0).sort((a, b) => +a.data.date - +b.data.date);
-  return { roots: ROOTS.map((r) => nodes.get(r)!), children, parentsOf: of, standalone };
+  return { roots: ROOTS.map((r) => nodes.get(r)!), children, parentsOf: of, allCount, standalone };
 }
 
 export const foundation = (id: string): Foundation | undefined => FOUNDATIONS.find((f) => f.id === id);

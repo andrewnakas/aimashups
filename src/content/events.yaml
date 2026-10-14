@@ -39,9 +39,10 @@
   date: 2026-09-19
   kind: clip
   title: "chasm: \"I rewrote Skate 3 in Rust\""
-  text: "The earliest known viral post of the trend. chasm (chasmlol on GitHub) shows Skate 3's skating running in a Rust rewrite, built with what they called a human-and-AI development loop. It passed 6,000 likes within a month."
+  text: "The earliest known post of the trend. chasm (chasmlol on GitHub) shows Skate 3's skating running in a Rust rewrite, built with what they called a human-and-AI development loop. The post itself showed about 6,000 likes and 137,000 views by 13 October."
   who: [{ name: chasm, url: "https://github.com/chasmlol" }]
   sources:
+    - { title: "I rewrote Skate 3 in Rust", publisher: "X (@chasmmmmmmmmmmm)", url: "https://x.com/chasmmmmmmmmmmm/status/2101375411867255131" }
     - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
 
 - id: opus-5-5
@@ -96,11 +97,67 @@
     - { title: "You can now play Halo: Combat Evolved in a web browser, and it even has multiplayer", publisher: "PC Gamer", url: "https://www.pcgamer.com/hardware/you-can-now-play-halo-combat-evolved-in-a-web-browser-and-it-even-has-multiplayer/" }
     - { title: "Free Halo: Combat Evolved browser version adds 128-player multiplayer", publisher: "Generation Amiga", url: "https://www.generationamiga.com/2026/09/30/free-halo-combat-evolved-browser-version-adds-128-player-multiplayer/" }
 
+- id: faze-scope-mw2-skate
+  date: 2026-09-26
+  kind: clip
+  title: "FaZe Scope: \"New MW2 update in 2026 is crazy\""
+  text: "FaZe Scope posts a 17-second clip of a Modern Warfare 2 soldier on Terminal with an on-screen \"SKATE … J: return to MW2\" bar, the skate mode later released in the 2010 Rust Rewrite Mashup. It went up more than a day before chasm's launch post and before any skate-mode code was public, and doesn't say who made the footage. The post itself showed about 2.4 million views and 24,600 likes by 13 October."
+  who: [{ name: "FaZe Scope", url: "https://x.com/FaZeScope" }]
+  sources:
+    - { title: "New MW2 update in 2026 is crazy", publisher: "X (@FaZeScope)", url: "https://x.com/FaZeScope/status/2103913856808673354" }
+
+- id: zomm-claude-code
+  date: 2026-09-27
+  kind: clip
+  title: "\"Claude code hit this community like crack\""
+  text: "zom quotes FaZe Scope's MW2 skating clip and credits Claude Code, and replies start asking whether it is a real Skate 3 physics port. The quote post itself showed about 1.1 million views and 21,800 likes by 13 October. chasm's launch post and the repository followed that evening."
+  who: [{ name: "zom", url: "https://x.com/zomm" }]
+  sources:
+    - { title: "claude code hit this community like crack", publisher: "X (@zomm)", url: "https://x.com/zomm/status/2104035647317225598" }
+
+- id: mw2-skate-fan-clips
+  date: 2026-09-28
+  kind: clip
+  title: "Fan clips of Skate 3 in MW2"
+  text: "Within a day of the release, players post their own clips, among them tvllerr's \"Minecraft x Skate 3 x MW2\", LordHeap's \"Skate 3 in MW2 is pure nostalgia\" and KiyyDumb's Minecraft-in-MW2 clip, each showing roughly 470,000 to 590,000 views on the posts by 13 October. LordHeap credited the mod to vtroc7 (IW4L) and chasm."
+  who: [{ name: "tvllerr", url: "https://x.com/tvllerr" }, { name: "LordHeap", url: "https://x.com/LordHeap" }, { name: "KiyyDumb", url: "https://x.com/KiyyDumb" }]
+  links:
+    - { label: "tvllerr on X", url: "https://x.com/tvllerr/status/2104672268995424582" }
+    - { label: "LordHeap on X", url: "https://x.com/LordHeap/status/2104674644079092054" }
+    - { label: "LordHeap credits vtroc7 and chasm", url: "https://x.com/LordHeap/status/2104793032721605043" }
+    - { label: "KiyyDumb on X", url: "https://x.com/KiyyDumb/status/2104657092359356464" }
+  sources:
+    - { title: "Modern Warfare 2 Players Spot Skate and Minecraft Mods", publisher: "Insider Gaming", url: "https://insider-gaming.com/modern-warfare-2-players-spot-skate-and-minecraft-mods/" }
+
+- id: mw2-skate-trickshot
+  date: 2026-09-29
+  kind: clip
+  title: "\"First MW2 x Skate trickshot\""
+  text: "codthugger posts the first MW2 skate trickshot clip, and skating in MW2 becomes an X trending topic, \"Modders Add Skateboarding to 2009 Modern Warfare 2\". The trickshot post showed about 429,000 views by 13 October; Kotaku later embedded it."
+  who: [{ name: "codthugger", url: "https://x.com/codthugger" }]
+  links:
+    - { label: "codthugger on X", url: "https://x.com/codthugger/status/2104768336361816327" }
+  sources:
+    - { title: "Modders, Please Stop Putting Games Inside Other Games With AI", publisher: "Kotaku", url: "https://kotaku.com/i-dont-want-to-play-your-ai-generated-mod-that-puts-skate-3-inside-of-modern-warfare-2-inside-of-minecraft-2000738660" }
+
+- id: mw2-skate-press
+  date: 2026-09-29
+  kind: press
+  title: "Gaming press covers skating in MW2"
+  text: "Dexerto, Insider Gaming, Operation Sports and MakeUseOf write up the MW2 skate and Minecraft clips; MakeUseOf identifies the base as IW4L, a Rust rewrite of MW2, with MinecraftOSS for the world. GameSpot and Held Games follow on 30 September, and Held Games reports chasm's clip at 6.7 million views."
+  sources:
+    - { title: "Minecraft & Skate 2 modded into Modern Warfare 2 in wildest combo yet", publisher: "Dexerto", url: "https://www.dexerto.com/call-of-duty/minecraft-skate-2-modded-into-modern-warfare-2-in-wildest-combo-yet-3413312/" }
+    - { title: "Modern Warfare 2 Players Spot Skate and Minecraft Mods", publisher: "Insider Gaming", url: "https://insider-gaming.com/modern-warfare-2-players-spot-skate-and-minecraft-mods/" }
+    - { title: "Call of Duty modders somehow turned Modern Warfare 2 into Skate", publisher: "Operation Sports", url: "https://www.operationsports.com/call-of-duty-modders-somehow-turned-modern-warfare-2-into-skate/" }
+    - { title: "Quick-scope cows, blow up blocks, then kickflip away in the internet's wildest game mashup", publisher: "MakeUseOf", url: "https://www.makeuseof.com/rust-game-mashup-brings-mw2-gunplay-into-minecraft-while-doing-skate-3-tricks/" }
+    - { title: "Call Of Duty Modders Add Skateboarding And Minecraft To Modern Warfare 2", publisher: "GameSpot", url: "https://www.gamespot.com/articles/call-of-duty-modders-add-skateboarding-and-minecraft-to-modern-warfare-2/" }
+    - { title: "The Skate and Minecraft Modern Warfare 2 Videos Are Real. It Is Not a Mod, and You Can Download It.", publisher: "Held Games", url: "https://heldgames.com/guides/mw2-skate-minecraft-rust-rewrite" }
+
 - id: videocardz
   date: 2026-10-01
   kind: press
   title: "Tech press picks it up"
-  text: "VideoCardz runs one of the first news write-ups, collecting the X clips from Minecraft in Elden Ring to Mario Kart in CoD Zombies. TweakTown and others follow within days."
+  text: "After the MW2 skating coverage, VideoCardz runs one of the first write-ups on the wider trend, collecting the X clips from Minecraft in Elden Ring to Mario Kart in CoD Zombies. TweakTown and others follow within days."
   sources:
     - { title: "Modders are now merging entire games, from Minecraft in Elden Ring to Mario Kart in COD Zombies", publisher: "VideoCardz", url: "https://videocardz.com/newz/modders-are-now-merging-entire-games-from-minecraft-in-elden-ring-to-mario-kart-in-cod-zombies" }
     - { title: "Minecraft runs inside Elden Ring as modders mash up entire games", publisher: "TweakTown", url: "https://www.tweaktown.com/news/113855/minecraft-runs-inside-elden-ring-as-modders-mash-up-entire-games/index.html" }
@@ -212,6 +269,59 @@
   date: 2026-10-09
   kind: counter
   title: "Step-by-step guides for every downloadable mashup"
-  text: "This site publishes install-and-play guides for SkyCraft, FalloutCraft, OWCraft, the 2010 Rust Rewrite Mashup, ER Mario, BullySkate, GTA San AnSkateas and GTA Skate, built from each project's own README and release notes, plus a start-here page on game versions, loaders and checking downloads. Disclosure: this site wrote them."
+  text: "This site publishes install-and-play guides for SkyCraft, FalloutCraft, OWCraft, the 2010 Rust Rewrite Mashup, ER Mario, BullySkate, GTA San AnSkateas and GTA Skate (then, on 10 October, Killcraft, Minecraft X Games, WaW Halo, MW2 x Risk of Rain 2 and SkateIV), built from each project's own README and release notes, plus a start-here page on game versions, loaders and checking downloads. Disclosure: this site wrote them."
   links:
     - { label: "Guides", url: "https://aigamemashups.com/guides/" }
+
+- id: chasm-discord
+  date: 2026-09-27
+  kind: platform
+  title: "chasm opens a Discord server, which becomes the trend's workshop"
+  text: "chasm's Discord server, opened the day the 2010 Rust Rewrite Mashup came out, became where most of the second wave was built and shared. Its share-your-projects forum, added the next day, held more than 200 project posts by 10 October 2026, and a curated project-showcase forum followed on 6 October."
+  who: [{ name: chasm, url: "https://github.com/chasmlol" }]
+  links:
+    - { label: "share-your-projects forum (Discord members only)", url: "https://discord.com/channels/1553823769460613140/1554228730120114339" }
+
+- id: ai-game-modding-guides
+  date: 2026-10-03
+  kind: tool
+  title: "Community guides for building mashups with AI agents"
+  text: "Trev, a moderator of the chasm Discord, published ai-game-modding-guides, beginner guides to passthrough mods, Rust rewrites, mod loaders and script extenders. Its advice: use a coding agent on your PC rather than a chat website, check the host game has a mod loader, start from an example project (SkyCraft for passthrough, hl2-rs for rewrites) and never commit game files. It passed 400 stars within a week. By 13 October the GitHub account and repository had been deleted; an Internet Archive copy from 7 October survives."
+  who: [{ name: trevaintdead }]
+  links:
+    - { label: "ai-game-modding-guides (Internet Archive, 7 Oct 2026)", url: "https://web.archive.org/web/20261007054335/https://github.com/trevaintdead/ai-game-modding-guides" }
+
+- id: oot-mods-reel
+  date: 2026-10-09
+  kind: clip
+  title: "\"Ocarina of Time mods are unhinged\": pre-AI mods resurface"
+  text: "An Instagram reel by @_gmedley compiles Ocarina of Time mods \"from 2024 BVC (before vibe coding)\", among them notCHase's unreleased Pikmin mod, and asks fans to get him to release it. It showed about 24,700 likes and 241 comments by 13 October, as the AI mashup wave renewed interest in hand-made crossovers."
+  who: [{ name: "Gabe (@_gmedley)", url: "https://www.instagram.com/_gmedley/" }, { name: "notCHase", url: "https://www.youtube.com/@notchase" }]
+  mashup: pikmin-in-ocarina-of-time
+  links:
+    - { label: "Reel", url: "https://www.instagram.com/reel/DeSRsiui3E2/" }
+    - { label: "Original Pikmin video", url: "https://www.youtube.com/watch?v=6VtNgz5-tsI" }
+
+- id: rewrite-wave
+  date: 2026-10-08
+  kind: port
+  title: "A wave of single-game Rust rewrites"
+  text: "Alongside the crossovers, the chasm Discord filled with AI-assisted Rust and Bevy rewrites of single games that read data from your own copy, the raw material for the next mashups. Among the public ones: Fallout: New Vegas (nv-rs), Mirror's Edge movement (faith-runner), Forza Horizon, Need for Speed: Most Wanted, Assassin's Creed, Counter-Strike: Source, Half-Life 2 (hl2-rs) and White Knuckle's climbing. Most of their commits are co-authored by Claude."
+  links:
+    - { label: "slaterain/nv-rs", url: "https://github.com/slaterain/nv-rs" }
+    - { label: "tnrjns/faith-runner", url: "https://github.com/tnrjns/faith-runner" }
+    - { label: "Sm1jjj/fh1_rewrite", url: "https://github.com/Sm1jjj/fh1_rewrite" }
+    - { label: "47PADO47/nfs-mw", url: "https://github.com/47PADO47/nfs-mw" }
+    - { label: "Banned445/AC1-Movement-Rewritten", url: "https://github.com/Banned445/AC1-Movement-Rewritten" }
+    - { label: "r0pi0x/LuckerParty", url: "https://github.com/r0pi0x/LuckerParty" }
+    - { label: "kvalls/hl2-rs", url: "https://github.com/kvalls/hl2-rs" }
+    - { label: "Funny-Bones/White-Knuckle-Climbing-Rust", url: "https://github.com/Funny-Bones/White-Knuckle-Climbing-Rust" }
+
+- id: awesome-game-mashups
+  date: 2026-10-01
+  kind: tool
+  title: "awesome-game-mashups, a community index"
+  text: "bailo167 started awesome-game-mashups, a CC0 curated list of games rebuilt inside other games with a JSON export, and shared it in the chasm Discord."
+  who: [{ name: bailo167, url: "https://github.com/bailo167" }]
+  links:
+    - { label: "bailo167/awesome-game-mashups", url: "https://github.com/bailo167/awesome-game-mashups" }

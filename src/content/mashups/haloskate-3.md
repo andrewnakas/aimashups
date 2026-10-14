@@ -9,7 +9,8 @@ date: 2026-10-11
 status: downloadable
 needsOwnCopy: false
 repo: "https://github.com/andrewnakas/haloskate3wasm"
-checked: 2026-10-12
+stars: 0
+checked: 2026-10-13
 parents: [skate-3-rust-engine]
 builtOn:
   - { label: "OpenCE: Halo CE decompilation (CC0)", url: "https://github.com/OpenCommunityEdition/OpenCE" }

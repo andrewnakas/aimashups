@@ -1,6 +1,7 @@
 ---
 title: "Start here: how to install and play game mashups safely"
 summary: "What every downloadable mashup needs: your own copies of the games, the right game versions, mod loaders, and how to check a release before you run it."
+updated: 2026-10-10
 date: 2026-10-09
 difficulty: easy
 time: "5 minutes to read"
@@ -58,3 +59,11 @@ Every guide lists where the mod writes its log. When you report a problem, open 
 - [BullySkate: Skate 3 in Bully](/guides/how-to-play-bullyskate/)
 - [GTA San AnSkateas: Skate 3 in San Andreas](/guides/how-to-play-gta-san-anskateas/)
 - [GTA Skate: Skate 3 in GTA III and Vice City](/guides/how-to-play-gta-skate/)
+- [Killcraft: Minecraft in ULTRAKILL](/guides/how-to-play-killcraft/)
+- [Minecraft X Games: Minecraft in RDR2, Cyberpunk 2077, GTA V, PEAK and Ready or Not](/guides/how-to-play-minecraft-x-games/)
+- [WaW Halo: Halo 3 in World at War Zombies](/guides/how-to-play-waw-halo-3-zombies/)
+- [MW2 x Risk of Rain 2](/guides/how-to-play-mw2-x-risk-of-rain-2/)
+- [SkateIV: Skate 3 in GTA IV](/guides/how-to-play-skate-iv/)
+
+## Want to build one?
+A chasm Discord moderator published [ai-game-modding-guides](https://web.archive.org/web/20261007054335/https://github.com/trevaintdead/ai-game-modding-guides), beginner guides to making passthrough mods and Rust rewrites with a coding agent. The GitHub repository has since been deleted; the link is the Internet Archive's copy from 7 October 2026.
