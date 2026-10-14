@@ -306,7 +306,7 @@
   date: 2026-10-08
   kind: port
   title: "A wave of single-game Rust rewrites"
-  text: "Alongside the crossovers, the chasm Discord filled with AI-assisted Rust and Bevy rewrites of single games that read data from your own copy, the raw material for the next mashups. Among the public ones: Fallout: New Vegas (nv-rs), Mirror's Edge movement (faith-runner), Forza Horizon, Need for Speed: Most Wanted, Assassin's Creed, Counter-Strike: Source, Half-Life 2 (hl2-rs) and White Knuckle's climbing. Most of their commits are co-authored by Claude."
+  text: "Alongside the crossovers, the chasm Discord filled with AI-assisted Rust and Bevy rewrites of single games that read data from your own copy, the raw material for the next mashups. Among the public ones: Fallout: New Vegas (nv-rs), Mirror's Edge movement (faith-runner), Forza Horizon, Need for Speed: Most Wanted, Assassin's Creed, Counter-Strike: Source, Half-Life 2 (hl2-rs) and White Knuckle's climbing, followed by ULTRAKILL (ultrakrust), two Sekiro combat rewrites, Max Payne 2's combat and Portal 2's logic by 13 October. Most of their commits are co-authored by Claude."
   links:
     - { label: "slaterain/nv-rs", url: "https://github.com/slaterain/nv-rs" }
     - { label: "tnrjns/faith-runner", url: "https://github.com/tnrjns/faith-runner" }
@@ -315,6 +315,11 @@
     - { label: "Banned445/AC1-Movement-Rewritten", url: "https://github.com/Banned445/AC1-Movement-Rewritten" }
     - { label: "r0pi0x/LuckerParty", url: "https://github.com/r0pi0x/LuckerParty" }
     - { label: "kvalls/hl2-rs", url: "https://github.com/kvalls/hl2-rs" }
+    - { label: "Gamekour/ultrakrust", url: "https://github.com/Gamekour/ultrakrust" }
+    - { label: "AKJama/sekiro-rs", url: "https://github.com/AKJama/sekiro-rs" }
+    - { label: "FFwLo/RustSekiro", url: "https://github.com/FFwLo/RustSekiro" }
+    - { label: "Geljic/MAX-PAYNE-2-Combat-Rewrite", url: "https://github.com/Geljic/MAX-PAYNE-2-Combat-Rewrite" }
+    - { label: "Stink-O/Portal2-rust-engine", url: "https://github.com/Stink-O/Portal2-rust-engine" }
     - { label: "Funny-Bones/White-Knuckle-Climbing-Rust", url: "https://github.com/Funny-Bones/White-Knuckle-Climbing-Rust" }
 
 - id: awesome-game-mashups
