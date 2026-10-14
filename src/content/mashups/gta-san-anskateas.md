@@ -8,10 +8,10 @@ origin: ai-built
 date: 2026-10-02
 status: downloadable
 repo: "https://github.com/ryglizzy/GTA-San-AnSkateas"
-stars: 14
-downloads: 194
+stars: 16
+downloads: 268
 parents: [skate-3-rust-engine, 2010-rust-rewrite-mashup, gta-reversed]
-checked: 2026-10-09
+checked: 2026-10-10
 builtOn:
   - { label: "skate-3-rust-engine (SK8-ENGINE)", url: "https://github.com/SK8-ENGINE/skate-3-rust-engine" }
 tribute: skate-x-open-world

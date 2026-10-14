@@ -212,6 +212,48 @@
   date: 2026-10-09
   kind: counter
   title: "Step-by-step guides for every downloadable mashup"
-  text: "This site publishes install-and-play guides for SkyCraft, FalloutCraft, OWCraft, the 2010 Rust Rewrite Mashup, ER Mario, BullySkate, GTA San AnSkateas and GTA Skate, built from each project's own README and release notes, plus a start-here page on game versions, loaders and checking downloads. Disclosure: this site wrote them."
+  text: "This site publishes install-and-play guides for SkyCraft, FalloutCraft, OWCraft, the 2010 Rust Rewrite Mashup, ER Mario, BullySkate, GTA San AnSkateas and GTA Skate (then, on 10 October, Killcraft, Minecraft X Games, WaW Halo, MW2 x Risk of Rain 2 and SkateIV), built from each project's own README and release notes, plus a start-here page on game versions, loaders and checking downloads. Disclosure: this site wrote them."
   links:
     - { label: "Guides", url: "https://aigamemashups.com/guides/" }
+
+- id: chasm-discord
+  date: 2026-09-27
+  kind: platform
+  title: "chasm opens a Discord server, which becomes the trend's workshop"
+  text: "chasm's Discord server, opened the day the 2010 Rust Rewrite Mashup came out, became where most of the second wave was built and shared. Its share-your-projects forum, added the next day, held more than 200 project posts by 10 October 2026, and a curated project-showcase forum followed on 6 October."
+  who: [{ name: chasm, url: "https://github.com/chasmlol" }]
+  links:
+    - { label: "share-your-projects forum (Discord members only)", url: "https://discord.com/channels/1553823769460613140/1554228730120114339" }
+
+- id: ai-game-modding-guides
+  date: 2026-10-03
+  kind: tool
+  title: "Community guides for building mashups with AI agents"
+  text: "Trev, a moderator of the chasm Discord, published ai-game-modding-guides, beginner guides to passthrough mods, Rust rewrites, mod loaders and script extenders. Its advice: use a coding agent on your PC rather than a chat website, check the host game has a mod loader, start from an example project (SkyCraft for passthrough, hl2-rs for rewrites) and never commit game files. It passed 400 stars within a week."
+  who: [{ name: trevaintdead, url: "https://github.com/trevaintdead" }]
+  links:
+    - { label: "trevaintdead/ai-game-modding-guides", url: "https://github.com/trevaintdead/ai-game-modding-guides" }
+
+- id: rewrite-wave
+  date: 2026-10-08
+  kind: port
+  title: "A wave of single-game Rust rewrites"
+  text: "Alongside the crossovers, the chasm Discord filled with AI-assisted Rust and Bevy rewrites of single games that read data from your own copy, the raw material for the next mashups. Among the public ones: Fallout: New Vegas (nv-rs), Mirror's Edge movement (faith-runner), Forza Horizon, Need for Speed: Most Wanted, Assassin's Creed, Counter-Strike: Source, Half-Life 2 (hl2-rs) and White Knuckle's climbing. Most of their commits are co-authored by Claude."
+  links:
+    - { label: "slaterain/nv-rs", url: "https://github.com/slaterain/nv-rs" }
+    - { label: "tnrjns/faith-runner", url: "https://github.com/tnrjns/faith-runner" }
+    - { label: "Sm1jjj/fh1_rewrite", url: "https://github.com/Sm1jjj/fh1_rewrite" }
+    - { label: "47PADO47/nfs-mw", url: "https://github.com/47PADO47/nfs-mw" }
+    - { label: "Banned445/AC1-Movement-Rewritten", url: "https://github.com/Banned445/AC1-Movement-Rewritten" }
+    - { label: "r0pi0x/LuckerParty", url: "https://github.com/r0pi0x/LuckerParty" }
+    - { label: "kvalls/hl2-rs", url: "https://github.com/kvalls/hl2-rs" }
+    - { label: "Funny-Bones/White-Knuckle-Climbing-Rust", url: "https://github.com/Funny-Bones/White-Knuckle-Climbing-Rust" }
+
+- id: awesome-game-mashups
+  date: 2026-10-01
+  kind: tool
+  title: "awesome-game-mashups, a community index"
+  text: "bailo167 started awesome-game-mashups, a CC0 curated list of games rebuilt inside other games with a JSON export, and shared it in the chasm Discord."
+  who: [{ name: bailo167, url: "https://github.com/bailo167" }]
+  links:
+    - { label: "bailo167/awesome-game-mashups", url: "https://github.com/bailo167/awesome-game-mashups" }
