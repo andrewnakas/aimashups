@@ -4,8 +4,9 @@
 import type { Node } from '../lib/history';
 import { fmtDate } from '../lib/site';
 
-interface Props { node: Node; children: (id: string) => Node[]; parentsOf: (id: string) => Node[]; from?: string; }
-const { node, children, parentsOf, from } = Astro.props;
+interface Props { node: Node; children: (id: string) => Node[]; parentsOf: (id: string) => Node[]; allCount: (id: string) => number; from?: string; }
+const { node, children, parentsOf, allCount, from } = Astro.props;
+const total = allCount(node.id);
 const kids = children(node.id);
 const m = node.mashup;
 const others = from ? parentsOf(node.id).filter((p) => p.id !== from) : [];
@@ -16,16 +17,18 @@ const others = from ? parentsOf(node.id).filter((p) => p.id !== from) : [];
       <summary><span class="node">
         {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
         {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
+        {!m && node.status && <a class={`status ${node.status}`} href={node.releases ?? node.url} rel="nofollow">{node.status.replace('-', ' ')}</a>}
         <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
         {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
-        <span class="small muted">· {kids.length} built on it</span>
+        <span class="small muted">· {kids.length} built directly on it{total > kids.length && `, ${total} in all`}</span>
       </span></summary>
-      <ul>{kids.map((k) => <Astro.self node={k} children={children} parentsOf={parentsOf} from={node.id} />)}</ul>
+      <ul>{kids.map((k) => <Astro.self node={k} children={children} parentsOf={parentsOf} allCount={allCount} from={node.id} />)}</ul>
     </details>
   ) : (
     <span class="node">
       {m ? <a href={node.url}><strong>{node.name}</strong></a> : <a href={node.url} rel="nofollow">{node.name}</a>}
       {m && <span class={`status ${m.data.status}`}>{m.data.status.replace('-', ' ')}</span>}
+      {!m && node.status && <a class={`status ${node.status}`} href={node.releases ?? node.url} rel="nofollow">{node.status.replace('-', ' ')}</a>}
       <span class="small muted">{m ? fmtDate(m.data.date) : node.what}</span>
       {others.length > 0 && <span class="small muted"> · also built on {others.map((o) => o.name).join(', ')}</span>}
     </span>
