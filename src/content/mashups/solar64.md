@@ -11,6 +11,8 @@ checked: 2026-10-14
 links:
   - { label: "Play in your browser", url: "https://solarfren.com/solar64/play/" }
   - { label: "Windows and Linux downloads", url: "https://solarfren.com/solar64/" }
+sources:
+  - { title: "SOLAR64", publisher: "SolarFren", url: "https://solarfren.com/solar64/" }
 seenOn:
   - { label: "chasm Discord #share-your-projects", url: "https://discord.com/channels/1553823769460613140/1554228730120114339" }
 faqs:
