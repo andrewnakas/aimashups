@@ -37,7 +37,8 @@ The mashup stands on two AI-assisted Rust rewrites that already existed. [IW4L](
 Because both were Rust/Bevy codebases, they could be merged into **one program**. Press **J** on any map and you drop onto a board with Skate 3's physics, tricks and grinds. A third piece, MinecraftOSS, a Rust Minecraft engine, supplies an endless Minecraft world with its own world generation, day/night cycle and vanilla mobs.
 
 ## Timeline
-- **27 September 2026:** repository created.
+- **26 September 2026:** [FaZe Scope](https://x.com/FaZeScope/status/2103913856808673354) posts "New MW2 update in 2026 is crazy", a clip of the skate mode (its on-screen bar reads "J: return to MW2") before any of the code was public. The post itself showed about 2.4 million views by 13 October.
+- **27 September, 23:15 UTC:** chasm's launch post, "AI hackers have put skateboarding in Call of Duty Modern Warfare 2!" The repository was created 32 minutes later, with the skate mode in a single commit.
 - **28–29 September:** first three Windows builds.
 - **2 October:** v0.4.0. By then clips had spread across X, and coverage pointed out that, unlike many viral clips, this one was real and downloadable.
 

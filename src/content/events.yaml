@@ -39,9 +39,10 @@
   date: 2026-09-19
   kind: clip
   title: "chasm: \"I rewrote Skate 3 in Rust\""
-  text: "The earliest known viral post of the trend. chasm (chasmlol on GitHub) shows Skate 3's skating running in a Rust rewrite, built with what they called a human-and-AI development loop. It passed 6,000 likes within a month."
+  text: "The earliest known post of the trend. chasm (chasmlol on GitHub) shows Skate 3's skating running in a Rust rewrite, built with what they called a human-and-AI development loop. The post itself showed about 6,000 likes and 137,000 views by 13 October."
   who: [{ name: chasm, url: "https://github.com/chasmlol" }]
   sources:
+    - { title: "I rewrote Skate 3 in Rust", publisher: "X (@chasmmmmmmmmmmm)", url: "https://x.com/chasmmmmmmmmmmm/status/2101375411867255131" }
     - { title: "AI Video Game Merging", publisher: "Know Your Meme", url: "https://knowyourmeme.com/memes/cultures/ai-video-game-merging" }
 
 - id: opus-5-5
@@ -96,11 +97,67 @@
     - { title: "You can now play Halo: Combat Evolved in a web browser, and it even has multiplayer", publisher: "PC Gamer", url: "https://www.pcgamer.com/hardware/you-can-now-play-halo-combat-evolved-in-a-web-browser-and-it-even-has-multiplayer/" }
     - { title: "Free Halo: Combat Evolved browser version adds 128-player multiplayer", publisher: "Generation Amiga", url: "https://www.generationamiga.com/2026/09/30/free-halo-combat-evolved-browser-version-adds-128-player-multiplayer/" }
 
+- id: faze-scope-mw2-skate
+  date: 2026-09-26
+  kind: clip
+  title: "FaZe Scope: \"New MW2 update in 2026 is crazy\""
+  text: "FaZe Scope posts a 17-second clip of a Modern Warfare 2 soldier on Terminal with an on-screen \"SKATE … J: return to MW2\" bar, the skate mode later released in the 2010 Rust Rewrite Mashup. It went up more than a day before chasm's launch post and before any skate-mode code was public, and doesn't say who made the footage. The post itself showed about 2.4 million views and 24,600 likes by 13 October."
+  who: [{ name: "FaZe Scope", url: "https://x.com/FaZeScope" }]
+  sources:
+    - { title: "New MW2 update in 2026 is crazy", publisher: "X (@FaZeScope)", url: "https://x.com/FaZeScope/status/2103913856808673354" }
+
+- id: zomm-claude-code
+  date: 2026-09-27
+  kind: clip
+  title: "\"Claude code hit this community like crack\""
+  text: "zom quotes FaZe Scope's MW2 skating clip and credits Claude Code, and replies start asking whether it is a real Skate 3 physics port. The quote post itself showed about 1.1 million views and 21,800 likes by 13 October. chasm's launch post and the repository followed that evening."
+  who: [{ name: "zom", url: "https://x.com/zomm" }]
+  sources:
+    - { title: "claude code hit this community like crack", publisher: "X (@zomm)", url: "https://x.com/zomm/status/2104035647317225598" }
+
+- id: mw2-skate-fan-clips
+  date: 2026-09-28
+  kind: clip
+  title: "Fan clips of Skate 3 in MW2"
+  text: "Within a day of the release, players post their own clips, among them tvllerr's \"Minecraft x Skate 3 x MW2\", LordHeap's \"Skate 3 in MW2 is pure nostalgia\" and KiyyDumb's Minecraft-in-MW2 clip, each showing roughly 470,000 to 590,000 views on the posts by 13 October. LordHeap credited the mod to vtroc7 (IW4L) and chasm."
+  who: [{ name: "tvllerr", url: "https://x.com/tvllerr" }, { name: "LordHeap", url: "https://x.com/LordHeap" }, { name: "KiyyDumb", url: "https://x.com/KiyyDumb" }]
+  links:
+    - { label: "tvllerr on X", url: "https://x.com/tvllerr/status/2104672268995424582" }
+    - { label: "LordHeap on X", url: "https://x.com/LordHeap/status/2104674644079092054" }
+    - { label: "LordHeap credits vtroc7 and chasm", url: "https://x.com/LordHeap/status/2104793032721605043" }
+    - { label: "KiyyDumb on X", url: "https://x.com/KiyyDumb/status/2104657092359356464" }
+  sources:
+    - { title: "Modern Warfare 2 Players Spot Skate and Minecraft Mods", publisher: "Insider Gaming", url: "https://insider-gaming.com/modern-warfare-2-players-spot-skate-and-minecraft-mods/" }
+
+- id: mw2-skate-trickshot
+  date: 2026-09-29
+  kind: clip
+  title: "\"First MW2 x Skate trickshot\""
+  text: "codthugger posts the first MW2 skate trickshot clip, and skating in MW2 becomes an X trending topic, \"Modders Add Skateboarding to 2009 Modern Warfare 2\". The trickshot post showed about 429,000 views by 13 October; Kotaku later embedded it."
+  who: [{ name: "codthugger", url: "https://x.com/codthugger" }]
+  links:
+    - { label: "codthugger on X", url: "https://x.com/codthugger/status/2104768336361816327" }
+  sources:
+    - { title: "Modders, Please Stop Putting Games Inside Other Games With AI", publisher: "Kotaku", url: "https://kotaku.com/i-dont-want-to-play-your-ai-generated-mod-that-puts-skate-3-inside-of-modern-warfare-2-inside-of-minecraft-2000738660" }
+
+- id: mw2-skate-press
+  date: 2026-09-29
+  kind: press
+  title: "Gaming press covers skating in MW2"
+  text: "Dexerto, Insider Gaming, Operation Sports and MakeUseOf write up the MW2 skate and Minecraft clips; MakeUseOf identifies the base as IW4L, a Rust rewrite of MW2, with MinecraftOSS for the world. GameSpot and Held Games follow on 30 September, and Held Games reports chasm's clip at 6.7 million views."
+  sources:
+    - { title: "Minecraft & Skate 2 modded into Modern Warfare 2 in wildest combo yet", publisher: "Dexerto", url: "https://www.dexerto.com/call-of-duty/minecraft-skate-2-modded-into-modern-warfare-2-in-wildest-combo-yet-3413312/" }
+    - { title: "Modern Warfare 2 Players Spot Skate and Minecraft Mods", publisher: "Insider Gaming", url: "https://insider-gaming.com/modern-warfare-2-players-spot-skate-and-minecraft-mods/" }
+    - { title: "Call of Duty modders somehow turned Modern Warfare 2 into Skate", publisher: "Operation Sports", url: "https://www.operationsports.com/call-of-duty-modders-somehow-turned-modern-warfare-2-into-skate/" }
+    - { title: "Quick-scope cows, blow up blocks, then kickflip away in the internet's wildest game mashup", publisher: "MakeUseOf", url: "https://www.makeuseof.com/rust-game-mashup-brings-mw2-gunplay-into-minecraft-while-doing-skate-3-tricks/" }
+    - { title: "Call Of Duty Modders Add Skateboarding And Minecraft To Modern Warfare 2", publisher: "GameSpot", url: "https://www.gamespot.com/articles/call-of-duty-modders-add-skateboarding-and-minecraft-to-modern-warfare-2/" }
+    - { title: "The Skate and Minecraft Modern Warfare 2 Videos Are Real. It Is Not a Mod, and You Can Download It.", publisher: "Held Games", url: "https://heldgames.com/guides/mw2-skate-minecraft-rust-rewrite" }
+
 - id: videocardz
   date: 2026-10-01
   kind: press
   title: "Tech press picks it up"
-  text: "VideoCardz runs one of the first news write-ups, collecting the X clips from Minecraft in Elden Ring to Mario Kart in CoD Zombies. TweakTown and others follow within days."
+  text: "After the MW2 skating coverage, VideoCardz runs one of the first write-ups on the wider trend, collecting the X clips from Minecraft in Elden Ring to Mario Kart in CoD Zombies. TweakTown and others follow within days."
   sources:
     - { title: "Modders are now merging entire games, from Minecraft in Elden Ring to Mario Kart in COD Zombies", publisher: "VideoCardz", url: "https://videocardz.com/newz/modders-are-now-merging-entire-games-from-minecraft-in-elden-ring-to-mario-kart-in-cod-zombies" }
     - { title: "Minecraft runs inside Elden Ring as modders mash up entire games", publisher: "TweakTown", url: "https://www.tweaktown.com/news/113855/minecraft-runs-inside-elden-ring-as-modders-mash-up-entire-games/index.html" }
