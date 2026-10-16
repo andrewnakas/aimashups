@@ -18,7 +18,7 @@ const mashups = defineCollection({
     // How it was made: an AI coding agent (creator says so), ordinary modding, or not yet known.
     origin: z.enum(['ai-built', 'conventional-mod', 'unverified']),
     date: z.coerce.date(), // first public release or first clip
-    status: z.enum(['downloadable', 'source-only', 'video-only', 'unreleased']),
+    status: z.enum(['downloadable', 'source-only', 'video-only', 'unreleased', 'taken-down']), // taken-down: was public, creator removed it
     needsOwnCopy: z.boolean().default(true),
     repo: z.url().optional(),
     stars: z.number().int().optional(), // as of `checked`
