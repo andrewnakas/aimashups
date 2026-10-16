@@ -11,7 +11,7 @@ const byOrigin = count((m) => [m.data.origin]);
 const byStatus = count((m) => [m.data.status]);
 const usedGames = games.filter((g) => all.some((m) => m.data.games.some((x) => x.id === g.id))).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const usedTechniques = techniques.filter((t) => all.some((m) => m.data.technique.id === t.id)).sort((a, b) => a.data.order - b.data.order);
-const statuses = [['downloadable', 'Downloadable'], ['source-only', 'Source only'], ['video-only', 'Video only'], ['unreleased', 'Unreleased']] as const;
+const statuses = [['downloadable', 'Downloadable'], ['source-only', 'Source only'], ['video-only', 'Video only'], ['unreleased', 'Unreleased'], ['taken-down', 'Taken down']] as const;
 ---
 <Base title="Every Notable Game Mashup, AI-Built and Otherwise" description="A verified, filterable directory of game mashups: SkyCraft, the MW2 × Skate 3 × Minecraft rewrite, Mario in Elden Ring, ArkWeb and more, with status, creator, technique, how it was made and download links." crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
   <h1>Every notable game mashup</h1>
