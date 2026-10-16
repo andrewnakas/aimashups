@@ -11,6 +11,7 @@ stars: 63
 downloads: 7376
 license: "MIT"
 checked: 2026-10-16
+sources: [{ title: "alfr0762/ultracraft (archived 6 October 2026)", url: "https://web.archive.org/web/20261006220523/https://github.com/alfr0762/ultracraft", publisher: "Internet Archive" }]
 parents: [fabric]
 tribute: blockrealm
 ---

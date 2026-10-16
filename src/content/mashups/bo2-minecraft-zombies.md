@@ -11,6 +11,7 @@ stars: 5
 downloads: 49
 license: "Apache-2.0"
 checked: 2026-10-16
+sources: [{ title: "SIGFAI/bo2mc: the v2026.10.05 release repackaged with credit to DaffyDabz", url: "https://github.com/SIGFAI/bo2mc", publisher: "GitHub" }]
 parents: [iw4l, 2010-rust-rewrite-mashup]
 ---
 A fan mod built on the [2010 Rust Rewrite Mashup](/mashups/2010-rust-rewrite-mashup/): every night in its Minecraft world turns into a round of Black Ops II-style Zombies. Its commits credit Claude as co-author.
