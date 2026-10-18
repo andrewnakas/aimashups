@@ -253,48 +253,6 @@ export const TRIBUTES: Preset[] = [
 ];
 
 TRIBUTES.push(
-  P(['shooter', 'skate'], {
-    slug: 'haloskate-3',
-    game: { repo: 'andrewnakas/haloskate3wasm', url: 'https://andrewnakas.github.io/haloskate3wasm/' },
-    worldName: 'The Halo CE campaign, plus Blood Gulch',
-    name: 'HaloSkate 3',
-    title: 'HaloSkate 3: Skate the Halo CE Campaign in the Browser',
-    pitch: 'The Halo: Combat Evolved campaign running in your browser, with a Skate 3 board you can drop anywhere: push down the Pillar of Autumn, kickflip off the Silent Cartographer and keep shooting mid-trick.',
-    combos: [
-      'Press B (Y on a gamepad) to get on the board anywhere in the campaign; Master Chief stays the rider.',
-      'Flick-it tricks on the arrow keys or right stick: ollie, kickflip, heelflip, shove-its, nollie, hardflip, 360 flip, plus manuals, grabs and powerslides.',
-      'Grind rails are found automatically in each level’s collision; rails near you glow faintly.',
-      'Kills from the board land in your combo as “<trick> Kill” or “Airborne Kill”; on a gamepad, hold LB to aim and fire while riding.',
-    ],
-    engine: 'C++ (OpenCE) → WebAssembly',
-    renderer: 'WebGL 2',
-    desktop: false,
-    embed: '/embed/haloskate3wasm/?launch=1',
-    build: 'Clean-room art and sound',
-    controlsNote: 'B gets on and off the board; arrows flick tricks; H shows the controls strip.',
-    madeFrom:
-      'Partly. The engine is OpenCE, a CC0 decompilation of Halo CE, and the maps come from halo-cleanroom: every texture, sound and voice is regenerated from CC0 sources, while level geometry, collision, scripts and tuning are the original level data. The skating is a C++ port of skate-core from the Skate 3 Rust engine; no Skate 3 animations, meshes, textures or sounds ship. You don’t need any game files.',
-  }),
-  P(['shooter', 'skate'], {
-    slug: 'mw2-x-skate',
-    game: { repo: 'andrewnakas/skate3-mw2', url: 'https://andrewnakas.github.io/skate3-mw2/' },
-    tributeTo: '2010-rust-rewrite-mashup',
-    worldName: 'The clean-room Skate 3 parks (Industrial by default)',
-    name: 'MW2 x Skate',
-    title: 'MW2 x Skate: a Modern Warfare 2 Match You Can Skate, in the Browser',
-    pitch: 'An MW2 match against bots with real MW2 movement from IW4L, on the clean-room Skate 3 engine: press J to drop onto a board, the bots keep hunting you. No game files.',
-    combos: [
-      'On foot you move with IW4L’s Rust rewrite of MW2’s player movement: sprint, jump, crouch, prone, mantle.',
-      'Create-a-Class: ACR, M4A1, UMP45 or Intervention, USP .45 or SPAS-12, and a perk from each tier.',
-      'MW2’s default controls, frags and smoke, a UAV after a 3-kill streak, enemies on the minimap when they fire.',
-      'J (or both sticks) drops you onto the Skate 3 engine’s board mid-match; get shot while skating and you are back on foot.',
-    ],
-    renderer: 'WebGPU (Chrome or Edge)',
-    desktop: false,
-    controlsNote: 'MW2’s default controls; the main menu and the page list them. Esc pauses.',
-    madeFrom:
-      'It contains no game files. On foot you move with IW4L’s open-source Rust rewrite of MW2’s player movement (Apache-2.0); the skating is the Skate 3 Rust engine (GPL-3.0) with its clean-room asset pack, where every texture, mesh and sound was regenerated. Guns use published MW2 numbers, menus and HUD are original, and gun sounds are synthesised.',
-  }),
   P(['skate', 'shooter', 'voxel'], {
     slug: 'kickflip-ops',
     game: { repo: 'andrewnakas/kickflip-ops', url: `${PLAYER_ORIGIN}/kickflip-ops/` },

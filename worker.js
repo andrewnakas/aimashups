@@ -4,7 +4,6 @@
 // headers for; the game still loads its maps and data straight from GitHub.
 // Everything else, including _headers and _redirects, is handled by the assets layer.
 const EMBEDS = {
-  haloskate3wasm: 'https://andrewnakas.github.io/haloskate3wasm/',
 };
 
 async function embed(request, game, rest) {

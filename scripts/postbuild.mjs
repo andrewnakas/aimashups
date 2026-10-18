@@ -13,6 +13,7 @@ for (const slug of readdirSync(play)) {
   }
 }
 lines.push('/timeline/ /history/#timeline 301');
+lines.push('/play/haloskate-3/ /play/ 302', '/play/mw2-x-skate/ /play/ 302', '/mashups/haloskate-3/ /mashups/ 302', '/embed/* /play/ 302');
 writeFileSync(new URL('_redirects', dist), lines.join('\n') + '\n');
 
 writeFileSync(new URL('_headers', dist), `/*
@@ -23,11 +24,5 @@ writeFileSync(new URL('_headers', dist), `/*
   Cache-Control: public, max-age=31536000, immutable
 /pagefind/*
   Cache-Control: public, max-age=3600
-/play/haloskate-3/
-  Cross-Origin-Opener-Policy: same-origin
-  Cross-Origin-Embedder-Policy: require-corp
 `);
-// /play/haloskate-3/ embeds a cross-origin-isolated game (/embed/, worker.js). require-corp, not
-// credentialless: Safari only supports require-corp, and every third-party file on the page
-// (gtag, Google Fonts) already sends Cross-Origin-Resource-Policy: cross-origin.
 console.log(`postbuild: ${lines.length} redirects`);
