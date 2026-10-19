@@ -235,7 +235,6 @@
   title: "Passthrough mods spread past Minecraft-in-X"
   text: "In the week after SkyCraft, the same design is pointed at new hosts and guests almost daily: ULTRAKILL inside Minecraft (ULTRACRAFT), Minecraft in Half-Life 2, World of Warcraft 1.12, Arknights: Endfield, Granny Legacy and GTA San Andreas, DOOM in Skyrim, and Team Fortress 2 in Minecraft. ULTRACRAFT passes 5,600 release downloads by 9 October."
   links:
-    - { label: "alfr0762/ultracraft", url: "https://github.com/alfr0762/ultracraft" }
     - { label: "over825hp/wowcraft", url: "https://github.com/over825hp/wowcraft" }
     - { label: "whiskydumb/halfcraft", url: "https://github.com/whiskydumb/halfcraft" }
 

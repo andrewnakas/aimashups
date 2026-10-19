@@ -13,7 +13,7 @@ for (const slug of readdirSync(play)) {
   }
 }
 lines.push('/timeline/ /history/#timeline 301');
-lines.push('/play/haloskate-3/ /play/ 302', '/play/mw2-x-skate/ /play/ 302', '/mashups/haloskate-3/ /mashups/ 302', '/embed/* /play/ 302');
+lines.push('/play/haloskate-3/ /play/ 302', '/play/mw2-x-skate/ /play/ 302', '/mashups/haloskate-3/ /mashups/ 302', '/embed/* /play/ 302', '/mashups/bo2-minecraft-zombies/ /mashups/ 302');
 writeFileSync(new URL('_redirects', dist), lines.join('\n') + '\n');
 
 writeFileSync(new URL('_headers', dist), `/*
