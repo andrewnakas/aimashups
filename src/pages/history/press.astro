@@ -19,13 +19,13 @@ for (const m of mashups) for (const s of m.data.sources) add(s, { label: m.data.
 const list = [...rows.values()].sort((a, b) => a.publisher.localeCompare(b.publisher) || a.title.localeCompare(b.title));
 const byPublisher = new Map<string, Row[]>();
 for (const r of list) byPublisher.set(r.publisher, [...(byPublisher.get(r.publisher) ?? []), r]);
-const desc = `Every article, video and post about the 2026 AI game mashup trend cited on this site: ${list.length} sources from ${byPublisher.size} publishers, from Kotaku and VGC to Know Your Meme, with what each one covered.`;
+const desc = `Every article, video and post about the 2026 AI game mashup trend cited here, ${list.length} in all: Kotaku, VGC, PC Gamer, VGTimes, Know Your Meme and more.`;
 ---
-<Base title="AI Game Mashups in the Press: Every Source" description={desc}
+<Base title="AI Game Mashups in the Press: Every Source" seoTitle={`AI Game Mashups Press Coverage: ${list.length} Articles, Videos, Posts`} description={desc}
   crumbs={[{ name: 'History', path: '/history/' }, { name: 'Press', path: '/history/press/' }]}
   jsonld={[article({ headline: 'AI game mashups in the press', description: desc, path: '/history/press/', published: new Date('2026-10-08') })]}>
   <h1>AI game mashups in the press</h1>
-  <p class="lede">{list.length} sources from {byPublisher.size} publishers, each linked to the part of the history it supports. Dates are shown for coverage that was itself part of the story.</p>
+  <p class="lede">Kotaku, VGC, PC Gamer, VGTimes, Know Your Meme and others covered the 2026 AI game mashup trend. This page lists all {list.length} sources from {byPublisher.size} publishers cited on this site, each linked to the part of the history it supports. Dates are shown for coverage that was itself part of the story.</p>
   <div class="table-scroll">
     <table>
       <thead><tr><th>Publisher</th><th>Headline</th><th>Cited for</th></tr></thead>

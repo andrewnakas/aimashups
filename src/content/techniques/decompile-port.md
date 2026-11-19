@@ -1,6 +1,8 @@
 ---
 name: AI decompilation port
-summary: An agent decompiles or recompiles a game's own code into a new program, often a PC or browser port, that still needs the original game's data.
+seoTitle: "AI Decompilation Ports Explained: Recomps and Slopcomps"
+summary: "An AI decompilation port is a game's own compiled code, decompiled or statically recompiled by an AI coding agent into a new program, often a PC or browser port. It still needs the original game's data."
+description: "An AI decompilation port is a game's own code, decompiled or recompiled by an AI agent into a PC or browser port, and why critics call some slopcomps."
 order: 3.5
 ---
 Here the agent doesn't rebuild a game from observation. It works from the game's compiled code: decompiling it to readable source or statically recompiling it for a new platform, then fixing what breaks. Once the game exists as source, other games can be grafted onto it. That's how [P.E. Cooper's World at War zombies](/mashups/cod-zombies-in-the-browser/) ended up in a browser and then collided with half a dozen other games.

@@ -39,7 +39,7 @@ const statusText = {
   'unreleased': 'Announced, not released',
 }[d.status];
 ---
-<Base title={d.title} description={d.summary} image={`/og/mashups/${entry.id}.png`}
+<Base title={d.title} seoTitle={d.seoTitle} description={d.description ?? d.summary} image={`/og/mashups/${entry.id}.png`}
   crumbs={[{ name: 'Mashups', path: '/mashups/' }, { name: d.title, path }]}
   jsonld={[article({ headline: d.title, description: d.summary, path, published: d.checked, about: games.map((g) => g.data.name) }), ...(d.faqs.length ? [faqPage(d.faqs)] : [])]}>
   <h1>{d.title}</h1>

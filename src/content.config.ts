@@ -11,7 +11,9 @@ const mashups = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/mashups' }),
   schema: z.object({
     title: z.string(), // "Minecraft in Skyrim (SkyCraft)"
+    seoTitle: z.string().max(60).optional(), // the whole <title> for search results, if `title` doesn't match what people search
     summary: z.string().max(200),
+    description: z.string().max(155).optional(), // meta description; defaults to `summary`
     games: z.array(reference('games')).min(1),
     creators: z.array(person).min(1),
     technique: reference('techniques'),
@@ -50,14 +52,23 @@ const games = defineCollection({
 
 const techniques = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/techniques' }),
-  schema: z.object({ name: z.string(), summary: z.string(), order: z.number() }),
+  schema: z.object({
+    name: z.string(),
+    seoTitle: z.string().max(60).optional(), // the whole <title>; defaults to "<name>: How AI Game Mashups Work"
+    summary: z.string(),
+    description: z.string().max(155).optional(), // meta description; defaults to `summary`
+    order: z.number(),
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+  }),
 });
 
 const guides = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guides' }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().max(60).optional(), // the whole <title>, if `title` is too long for search results
     summary: z.string(),
+    description: z.string().max(155).optional(), // meta description; defaults to `summary`
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     mashup: reference('mashups').optional(), // a how-to-play guide for this mashup

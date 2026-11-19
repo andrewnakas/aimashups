@@ -5,15 +5,18 @@ import { breadcrumbs, type Crumb } from '../lib/schema';
 
 interface Props {
   title: string; // page title without the site name
+  seoTitle?: string; // the whole <title>, used as is (keep it under 60 characters)
   description: string;
   crumbs?: Crumb[];
   jsonld?: object[];
   image?: string;
   noindex?: boolean;
 }
-const { title, description, crumbs = [], jsonld = [], image = '/og/default.png', noindex = false } = Astro.props;
+const { title, seoTitle, description, crumbs = [], jsonld = [], image = '/og/default.png', noindex = false } = Astro.props;
 const canonical = abs(Astro.url.pathname);
-const fullTitle = Astro.url.pathname === '/' ? `${SITE.name}: ${title}` : `${title} | ${SITE.name}`;
+// The site name is added once: not again when the title already says "AI Game Mashups".
+const fullTitle = seoTitle ?? (Astro.url.pathname === '/' ? `${SITE.name}: ${title}`
+  : title.toLowerCase().includes(SITE.name.toLowerCase()) ? title : `${title} | ${SITE.name}`);
 const ld = crumbs.length ? [breadcrumbs([{ name: 'Home', path: '/' }, ...crumbs]), ...jsonld] : jsonld;
 const nav = [
   ['/latest/', 'Latest'],

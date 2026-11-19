@@ -1,6 +1,8 @@
 ---
 title: "Start here: how to install and play game mashups safely"
-summary: "What every downloadable mashup needs: your own copies of the games, the right game versions, mod loaders, and how to check a release before you run it."
+seoTitle: "How to Install and Play Game Mashups Safely (2026)"
+summary: "To play a downloadable game mashup you need your own copy of every game in it, the exact game version it expects, its mod loader, and a release you've checked before running it."
+description: "What every game mashup mod needs before you install it: your own copies of the games, the right game versions and mod loaders, and how to check a release."
 updated: 2026-10-10
 date: 2026-10-09
 difficulty: easy
