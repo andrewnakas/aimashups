@@ -13,7 +13,7 @@ const path = `/guides/${entry.id}/`;
 const d = entry.data;
 const mashup = d.mashup ? await getEntry(d.mashup) : undefined;
 ---
-<Base title={entry.data.title} description={entry.data.summary} image={`/og/guides/${entry.id}.png`} crumbs={[{ name: 'Guides', path: '/guides/' }, { name: entry.data.title, path }]}
+<Base title={entry.data.title} seoTitle={d.seoTitle} description={d.description ?? d.summary} image={`/og/guides/${entry.id}.png`} crumbs={[{ name: 'Guides', path: '/guides/' }, { name: entry.data.title, path }]}
   jsonld={[article({ headline: entry.data.title, description: entry.data.summary, path, published: d.date, modified: d.updated })]}>
   <h1>{entry.data.title}</h1>
   <p class="lede">{entry.data.summary}</p>

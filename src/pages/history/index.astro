@@ -10,7 +10,7 @@ const s = await stats();
 const tree = await lineage();
 const n = (x: number) => x.toLocaleString('en-US');
 const first = items[0].date;
-const desc = 'The complete history of AI game mashups: the Rust rewrites that made them possible, the Opus 5.5 launch, every released mashup and viral clip, the tools, the press, the backlash and what came next. Dated and sourced.';
+const desc = `AI game mashups took off in late September 2026, after Claude Opus 5.5 launched. A dated, sourced timeline of all ${s.mashups} mashups, clips, press and backlash.`;
 
 // Timeline grouped by month, newest month last so it reads as a story.
 const months = new Map<string, typeof items>();
@@ -30,10 +30,10 @@ const faqs = [
   { q: 'Why was there a backlash?', a: 'Established modders and outlets including Kotaku and VGC argued that most viral clips were made for engagement rather than play, that the combined mechanics rarely interact, and that AI ports built on years of human reverse-engineering work were unmaintainable "slopcomps".' },
 ];
 ---
-<Base title="The History of AI Game Mashups (2026): Complete Timeline" description={desc} crumbs={[{ name: 'History', path: '/history/' }]}
+<Base title="The History of AI Game Mashups (2026): Complete Timeline" seoTitle="History of AI Game Mashups: How the 2026 Trend Began" description={desc} crumbs={[{ name: 'History', path: '/history/' }]}
   jsonld={[article({ headline: 'The history of AI game mashups', description: desc, path: '/history/', published: new Date('2026-10-06'), modified: s.checked }), faqPage(faqs)]}>
   <h1>The history of AI game mashups</h1>
-  <p class="lede">How putting one game inside another went from two Rust rewrites to the biggest modding story of 2026 in about two weeks. Every entry is dated and sourced, and repository facts are re-checked (last on {fmtDate(s.checked)}).</p>
+  <p class="lede">AI game mashups took off in late September 2026: Claude Opus 5.5 launched on 22 September, chasm released the wave's first mashup, the 2010 Rust Rewrite Mashup, on 27 September, and SkyCraft and ER Mario followed three days later. This is how putting one game inside another went from two Rust rewrites to the biggest modding story of 2026 in about two weeks. Every entry is dated and sourced, and repository facts are re-checked (last on {fmtDate(s.checked)}).</p>
 
   <ul class="stats" aria-label="By the numbers">
     <li><strong>{s.mashups}</strong><span>mashups and clips documented</span></li>

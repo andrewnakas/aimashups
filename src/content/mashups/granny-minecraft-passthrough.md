@@ -1,6 +1,8 @@
 ---
 title: "Minecraft in Granny Legacy"
-summary: "Real Minecraft blended into the horror game Granny Legacy with a passthrough mod. The author calls it very buggy."
+seoTitle: "Minecraft in Granny Legacy: Passthrough Mod Download"
+summary: "Minecraft in Granny Legacy is a passthrough mod that blends real Minecraft into DVloper's horror game. Releases are on GitHub; the author calls it very buggy."
+description: "A passthrough mod that blends real Minecraft into Granny Legacy so you can build and dig in Granny's house. Free on GitHub; the author calls it very buggy."
 games: [minecraft, granny]
 creators: [{ name: "cabcrab", url: "https://github.com/cabcrab" }]
 technique: passthrough

@@ -12,10 +12,11 @@ const byStatus = count((m) => [m.data.status]);
 const usedGames = games.filter((g) => all.some((m) => m.data.games.some((x) => x.id === g.id))).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const usedTechniques = techniques.filter((t) => all.some((m) => m.data.technique.id === t.id)).sort((a, b) => a.data.order - b.data.order);
 const statuses = [['downloadable', 'Downloadable'], ['source-only', 'Source only'], ['video-only', 'Video only'], ['unreleased', 'Unreleased']] as const;
+const playable = byStatus('downloadable');
 ---
-<Base title="Every Notable Game Mashup, AI-Built and Otherwise" description="A verified, filterable directory of game mashups: SkyCraft, the MW2 × Skate 3 × Minecraft rewrite, Mario in Elden Ring, ArkWeb and more, with status, creator, technique, how it was made and download links." crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
+<Base title={`${all.length} Game Mashups, ${playable} Downloadable (2026)`} description={`All ${all.length} game mashups we've verified, ${playable} downloadable today: SkyCraft, ER Mario, SK8V and more, with creators, GitHub repos, status and what you need.`} crumbs={[{ name: 'Mashups', path: '/mashups/' }]}>
   <h1>Every notable game mashup</h1>
-  <p class="lede">Each entry is checked against its source: who made it, how it works, whether an AI agent built it, whether you can actually play it, and what you need. Star and download counts are dated.</p>
+  <p class="lede">This directory lists {all.length} game mashups, and {playable} of them can be downloaded today, from SkyCraft (Minecraft in Skyrim) to ER Mario (Mario in Elden Ring) and SK8V (Skate 3 in GTA V). Each entry is checked against its source: who made it, how it works, whether an AI agent built it, whether you can actually play it, and what you need. Star and download counts are dated.</p>
 
   <form class="filters" aria-label="Filter mashups" onsubmit="return false">
     <div class="row" role="group" aria-label="How it was made"><span>Made by</span>
